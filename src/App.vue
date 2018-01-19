@@ -1,0 +1,82 @@
+<template>
+  <div id="app">
+    <NavBar />
+    <router-view></router-view>
+    <FootBar />
+  </div>
+</template>
+
+<script>
+import NavBar from './components/NavBar'
+import FootBar from './components/FootBar'
+
+export default {
+  name: "App",
+  components: {
+    NavBar,
+    FootBar
+  },
+  created() {
+    this.$store.dispatch("getTeamRatings");
+    this.$store.dispatch("getGames");
+  }
+}
+</script>
+
+<style lang="scss">
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+$etsu-blue: #0A2145;
+$etsu-gold: #FFC425;
+
+// Set your own custom variables
+$modal-content-width: 980px;
+$navbar-background-color: $etsu-blue;
+$navbar-item-color: $white;
+$navbar-item-hover-color: $etsu-gold;
+$navbar-item-hover-background-color: transparent;
+$navbar-item-active-color: $etsu-gold;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
+
+body, html {
+}
+#app {
+  background-color: #F7F7F7;
+  font-family: 'Oswald', sans-serif;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+  }
+
+  .title, .subtitle {
+    //text-align: center;
+  }
+}
+
+.navbar {
+  background-color: darken($etsu-blue, 5%);
+}
+
+.hero {
+  background-color: $etsu-blue;
+
+  .hero-body {
+
+    .title, .subtitle {
+      color: #fff;
+    }
+  }
+}
+
+.footer {
+  background-color: $etsu-blue;
+}
+.footer-bottom {
+  background-color: darken($etsu-blue, 5%);
+
+}
+</style>
