@@ -27,16 +27,8 @@ export default {
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 
-$etsu-blue: #0A2145;
-$etsu-gold: #FFC425;
-
-// Set your own custom variables
-$modal-content-width: 980px;
-$navbar-background-color: $etsu-blue;
-$navbar-item-color: $white;
-$navbar-item-hover-color: $etsu-gold;
-$navbar-item-hover-background-color: transparent;
-$navbar-item-active-color: $etsu-gold;
+// Site custom variables
+@import "./styles/style-vars";
 
 // Import Bulma and Buefy styles
 @import "~bulma";
@@ -46,10 +38,10 @@ body, html {
 }
 #app {
   background-color: #F7F7F7;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Ubuntu Condensed', sans-serif;
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
   }
 
   .title, .subtitle {

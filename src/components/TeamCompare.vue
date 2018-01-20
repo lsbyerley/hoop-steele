@@ -15,7 +15,8 @@
 
       <div class="container">
         <div class="columns">
-          <div class="column is-6">
+
+          <div class="column is-half">
             <div class="box">
               <b-field label="Team One">
                 <b-autocomplete
@@ -25,15 +26,18 @@
                   v-model="teamOne"
                   placeholder="enter team name"
                   :loading="!ratingsLoaded"
-                  :data="filteredTeamOneRatingsArray"
+                  :data="filteredTeamRatings('teamOne')"
                   field="team"
                   @select="selectTeamOne">
                 </b-autocomplete>
               </b-field>
             </div>
+            <hr>
+            <p class="has-text-centered" v-if="!selectedTeamOne">Pick team one..</p>
+            <TeamRatings :team="selectedTeamOne"></TeamRatings>
           </div>
 
-          <div class="column is-6">
+          <div class="column is-half">
             <div class="box">
               <b-field label="Team Two">
                 <b-autocomplete
@@ -43,27 +47,17 @@
                   v-model="teamTwo"
                   placeholder="enter team name"
                   :loading="!ratingsLoaded"
-                  :data="filteredTeamTwoRatingsArray"
+                  :data="filteredTeamRatings('teamTwo')"
                   field="team"
                   @select="selectTeamTwo">
                 </b-autocomplete>
               </b-field>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <hr>
-
-      <div class="container">
-        <p class="has-text-centered" v-if="!selectedTeamOne && !selectedTeamTwo">Pick a team..</p>
-        <div class="columns">
-          <div class="column is-half">
-            <TeamRatings :team="selectedTeamOne"></TeamRatings>
-          </div>
-          <div class="column is-half">
+            <hr>
+            <p class="has-text-centered" v-if="!selectedTeamTwo">Pick team two..</p>
             <TeamRatings :team="selectedTeamTwo"></TeamRatings>
           </div>
+
         </div>
       </div>
 
@@ -79,7 +73,7 @@ import TeamRatings from './TeamRatings'
 //import { TimelineMax, TweenMax } from 'gsap'
 
 export default {
-  name: "Dashboard",
+  name: "TeamCompare",
   components: {
     TeamRatings
   },
@@ -95,46 +89,22 @@ export default {
       "selectedTeamOne",
       "selectedTeamTwo",
       "teamRatings"
-    ]),
-    filteredTeamOneRatingsArray() {
-      if (this.ratingsLoaded) {
-        return this.teamRatings.ratings.filter(option => {
-          return (
-            option.team
-              .toString()
-              .toLowerCase()
-              .indexOf(this.teamOne.toLowerCase()) >= 0
-          );
-        });
-      }
-    },
-    filteredTeamTwoRatingsArray() {
-      if (this.ratingsLoaded) {
-        return this.teamRatings.ratings.filter(option => {
-          return (
-            option.team
-              .toString()
-              .toLowerCase()
-              .indexOf(this.teamTwo.toLowerCase()) >= 0
-          );
-        });
-      }
-    },
-    sortedTeamRatings() {
-      return this.$store.state.teamRatings.sort((a, b) => {
-        const teamA = a.team.toUpperCase();
-        const teamB = b.team.toUpperCase();
-
-        if (teamA > teamB) {
-          return 1;
-        } else if (teamA < teamB) {
-          return -1;
-        }
-        return 0;
-      });
-    }
+    ])
   },
   methods: {
+    filteredTeamRatings(type) {
+      if (this.ratingsLoaded) {
+        const team = (type === 'teamOne') ? this.teamOne : this.teamTwo
+        return this.teamRatings.ratings.filter(option => {
+          return (
+            option.team
+              .toString()
+              .toLowerCase()
+              .indexOf(team.toLowerCase()) >= 0
+          );
+        });
+      }
+    },
     selectTeamOne(option) {
       if (option) {
         this.$store.commit("setTeamSelected", { team: option, type: 'one' })

@@ -22,7 +22,9 @@
 </template>
 
 <script>
-
+export default {
+  name: "FootBar"
+}
 </script>
 
 <style scoped lang="scss">

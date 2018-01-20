@@ -100,7 +100,57 @@ selectTeam(team, type) {
 },
 
 
-
+statColumnDesc: {
+  rank: {
+    "abbrev": "KenPom",
+    "desc": "KenPom Rank"
+  },
+  record: {
+    "abbrev": "Record",
+    "desc": "Win-Loss Record"
+  },
+  conf: {
+    "abbrev": "Conference",
+    "desc": "Conference Affiliation"
+  },
+  adjEM: {
+    "abbrev": "Efficiency Margin",
+    "desc": "Adjusted Efficiency Margin"
+  },
+  adjO: {
+    "abbrev": "Offensive Efficiency",
+    "desc": "Adjusted Offensive Efficiency: Points scored per 100 possessions (adjusted for opponent)"
+  },
+  adjD: {
+    "abbrev": "Defensive Efficiency",
+    "desc": "Adjusted Defensive Efficiency: Points allowed per 100 possessions (adjusted for opponent)"
+  },
+  adjT: {
+    "abbrev": "Tempo",
+    "desc": "Adjusted Tempo: Possessions per 40 minutes (adjusted for opponent)"
+  },
+  luck: {
+    "abbrev": "Luck",
+    "desc": "Luck Rating"
+  },
+  sosAdjEM: {
+    "abbrev": "SoS Rating",
+    "desc": "Strength of Schedule Rating"
+  },
+  sosOppO: {
+    "abbrev": "SoS Offensive Efficiency",
+    "desc": "Average Adjusted Offensive Efficiency of Opposing Offenses"
+  },
+  sosOppD: {
+    "abbrev": "SoS Defensive Efficiency",
+    "desc": "Average Adjusted Defensive Efficiency of Opposing Defenses"
+  },
+  nonConfAdjEM: {
+    "abbrev": "Non-Conf SoS",
+    "desc": "Non-Conference Strength of Schedule Rating"
+  }
+}
+}
 
 
 

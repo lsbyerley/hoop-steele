@@ -1,25 +1,49 @@
 <template>
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <!-- navbar items, navbar burger... -->
-      <router-link to="/" class="navbar-item"><h1>Hoop Steele</h1></router-link>
+      <router-link to="/" class="navbar-item" @click.native="showNav = false"><h1>Hoop Steele</h1></router-link>
+      <div class="navbar-burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-    <div class="navbar-menu">
+    <div class="navbar-menu" :class="{ 'is-active': showNav }">
       <div class="navbar-start"></div>
       <div class="navbar-end">
-        <router-link to="/scoreboard" class="navbar-item" active-class="is-active">Scoreboard</router-link>
-        <router-link to="/team-compare" class="navbar-item" active-class="is-active">Team Compare</router-link>
+        <router-link to="/scoreboard" class="navbar-item" active-class="is-active" @click.native="showNav = false">Scoreboard</router-link>
+        <router-link to="/team-compare" class="navbar-item" active-class="is-active" @click.native="showNav = false">Team Compare</router-link>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-
+export default {
+  name: "NavBar",
+  data() {
+    return {
+      showNav: false
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
 .navbar {
-
+  .navbar-burger {
+    span {
+      background-color: #bdbdbd;
+    }
+    &:hover {
+      background-color: transparent;
+    }
+    &.is-active span {
+      background-color: #bdbdbd;
+    }
+  }
+  .navbar-menu.is-active {
+    background-color: #0A2145;
+  }
 }
 </style>

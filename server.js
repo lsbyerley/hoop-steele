@@ -107,9 +107,8 @@ function normalizeTeam(obj, gameOdds) {
 // define api routes
 router.get('/games', cache(100), (req, res) => {
 
-	//const scoresDateParam = moment().format('YYYYMMDD')
-	const scoresDateParam = moment().subtract(1, "day").format('YYYYMMDD') //for testing
-
+	const scoresDateParam = moment().format('YYYYMMDD')
+	//const scoresDateParam = moment().subtract(1, "day").format('YYYYMMDD') //for testing
 	const scoresDateReadable = moment(scoresDateParam).format('MMMM Do')
 
 	const url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300&dates='+scoresDateParam;

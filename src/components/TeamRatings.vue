@@ -13,64 +13,54 @@
         </div>
       </div>
       <div class="content">
-        <div class="level is-mobile">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">{{ statColumnDesc.rank.abbrev }}</p>
-              <p class="title">
-                {{ team.rank }}
-                <sup class="ordinal">{{ getOrdinal(team.rank) }}</sup>
-              </p>
-            </div>
+
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <p class="heading">KenPom</p>
+            <p class="title">
+              {{ team.rank }}
+              <sup class="ordinal">{{ getOrdinal(team.rank) }}</sup>
+            </p>
           </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Offense</p>
-              <p class="title">
-                {{ team.adjORank }}
-                <sup class="ordinal">{{ getOrdinal(team.adjORank) }}</sup>
-              </p>
-            </div>
+          <div class="column has-text-centered">
+            <p class="heading">Offense</p>
+            <p class="title">
+              {{ team.adjORank }}
+              <sup class="ordinal">{{ getOrdinal(team.adjORank) }}</sup>
+            </p>
           </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Defense</p>
-              <p class="title">
-                {{ team.adjDRank }}
-                <sup class="ordinal">{{ getOrdinal(team.adjDRank) }}</sup>
-              </p>
-            </div>
+          <div class="column has-text-centered">
+            <p class="heading">Defense</p>
+            <p class="title">
+              {{ team.adjDRank }}
+              <sup class="ordinal">{{ getOrdinal(team.adjDRank) }}</sup>
+            </p>
           </div>
         </div>
-        <div class="level is-mobile">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Tempo</p>
-              <p class="title">
-                {{ team.adjTRank }}
-                <sup class="ordinal">{{ getOrdinal(team.adjTRank) }}</sup>
-              </p>
-            </div>
+
+        <div class="columns is-mobile">
+          <div class="column has-text-centered">
+            <p class="heading">Tempo</p>
+            <p class="title">
+              {{ team.adjTRank }}
+              <sup class="ordinal">{{ getOrdinal(team.adjTRank) }}</sup>
+            </p>
           </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">SoS Rank</p>
-              <p class="title">
-                {{ team.sosAdjEMRank }}
-                <sup class="ordinal">{{ getOrdinal(team.sosAdjEMRank) }}</sup>
-              </p>
-            </div>
+          <div class="column has-text-centered">
+            <p class="heading">SoS Rank</p>
+            <p class="title">
+              {{ team.sosAdjEMRank }}
+              <sup class="ordinal">{{ getOrdinal(team.sosAdjEMRank) }}</sup>
+            </p>
           </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Non-Conf SoS Rank</p>
-              <p class="title">
-                {{ team.nonConfAdjEMRank }}
-                <sup class="ordinal">{{ getOrdinal(team.nonConfAdjEMRank) }}</sup>
-              </p>
-            </div>
+          <div class="column has-text-centered">
+            <p class="heading">Non-Conf SoS</p>
+            <p class="title">
+              {{ team.nonConfAdjEMRank }}
+              <sup class="ordinal">{{ getOrdinal(team.nonConfAdjEMRank) }}</sup>
+            </p>
           </div>
-          <!--<div class="level-item has-text-centered">
+          <!--<div class="column has-text-centered">
             <div>
               <p class="heading">Luck</p>
               <p class="title">
@@ -80,6 +70,7 @@
             </div>
           </div>-->
         </div>
+
       </div>
     </div>
   </div>
@@ -92,58 +83,7 @@ export default {
   name: "TeamRatings",
   data() {
     return {
-      teamData: teamData,
-      tooltipActive: true,
-      statColumnDesc: {
-        rank: {
-          "abbrev": "KenPom Rank",
-          "desc": "KenPom Rank"
-        },
-        record: {
-          "abbrev": "Record",
-          "desc": "Win-Loss Record"
-        },
-        conf: {
-          "abbrev": "Conference",
-          "desc": "Conference Affiliation"
-        },
-        adjEM: {
-          "abbrev": "Efficiency Margin",
-          "desc": "Adjusted Efficiency Margin"
-        },
-        adjO: {
-          "abbrev": "Offensive Efficiency",
-          "desc": "Adjusted Offensive Efficiency: Points scored per 100 possessions (adjusted for opponent)"
-        },
-        adjD: {
-          "abbrev": "Defensive Efficiency",
-          "desc": "Adjusted Defensive Efficiency: Points allowed per 100 possessions (adjusted for opponent)"
-        },
-        adjT: {
-          "abbrev": "Tempo",
-          "desc": "Adjusted Tempo: Possessions per 40 minutes (adjusted for opponent)"
-        },
-        luck: {
-          "abbrev": "Luck",
-          "desc": "Luck Rating"
-        },
-        sosAdjEM: {
-          "abbrev": "SoS Rating",
-          "desc": "Strength of Schedule Rating"
-        },
-        sosOppO: {
-          "abbrev": "SoS Offensive Efficiency",
-          "desc": "Average Adjusted Offensive Efficiency of Opposing Offenses"
-        },
-        sosOppD: {
-          "abbrev": "SoS Defensive Efficiency",
-          "desc": "Average Adjusted Defensive Efficiency of Opposing Defenses"
-        },
-        nonConfAdjEM: {
-          "abbrev": "Non-Conf SoS",
-          "desc": "Non-Conference Strength of Schedule Rating"
-        }
-      }
+      teamData: teamData
     }
   },
   props: {
@@ -166,6 +106,7 @@ export default {
       }
     },
     getOrdinal(n) {
+      //TODO: issue with 112th, 212th, 312th
     	return n < 11 || n > 13 ? [ 'st', 'nd', 'rd', 'th' ][ Math.min(( n - 1 ) % 10, 3 )] : 'th';
     },
     teamStatClass(teamOneRank, teamTwoRank) {
@@ -181,11 +122,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '~bulma/sass/utilities/mixins';
 
 .card.team-rating {
 
-  .content .level-item {
-    width: 33%;
+  .content .column {
+
+    @include mobile() {
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+
   }
 
   .media {

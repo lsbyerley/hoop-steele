@@ -10,6 +10,13 @@
         </div>
       </div>
       <div class="level-right">
+
+        <div class="level-item team-compare" v-if="game.away.predictions && game.home.predictions">
+          <span class="icon" v-on:click="loadTeamCompare(game)">
+            <i class="fa fa-lg fa-exchange"></i>
+          </span>
+        </div>
+
         <div class="level-item">{{ game.statusText }}</div>
 
         <div class="level-item prediction-result" v-if="game.state === 'post' && game.away.predictions && game.home.predictions">
@@ -40,6 +47,11 @@ export default {
     }
   },
   methods: {
+    loadTeamCompare(game) {
+      this.$store.commit("setTeamSelected", { team: game.away.kenPomRating, type: 'one' })
+      this.$store.commit("setTeamSelected", { team: game.home.kenPomRating, type: 'two' })
+      this.$router.push({ path: 'team-compare' })
+    },
     predictionClass(game) {
       const awayPredicted = game.away.predictions.expectedOutput;
       const homePredicted = game.home.predictions.expectedOutput;
@@ -64,10 +76,21 @@ export default {
     border-bottom: 2px solid #ddd;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    font-size: .75rem;
+    font-size: .85rem;
     font-weight: bold;
     color: #fff;
     margin: 0;
+
+    .level-right .level-item:last-child {
+      margin-right: 0;
+    }
+
+    .team-compare .icon {
+      &:hover {
+        cursor: pointer;
+        color: red;
+      }
+    }
 
     .prediction-result {
       .fa-check {

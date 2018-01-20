@@ -70,7 +70,7 @@ export const store = new Vuex.Store({
     },
     gamesWithTeamRatings: state => {
       //https://gamepredict.us/games
-      //https://www.reddit.com/r/CollegeBasketball/comments/15d8wc/google_spreadsheet_to_generate_hypothetical/
+      //https://www.reddit.com/r/CollegeBasketball/comments/5xir8t/calculating_win_probability_and_margin_of_victory/
       if (state.scoreboardLoaded && state.ratingsLoaded) {
         return state.scoreboard.games.map((game) => {
 

@@ -49,7 +49,7 @@ import { mapState, mapGetters } from 'vuex'
 import Game from './game/Game'
 
 export default {
-  name: "Dashboard",
+  name: "Scoreboard",
   components: {
     Game
   },

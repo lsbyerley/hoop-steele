@@ -1,85 +1,89 @@
 <template>
-  <div class="level team is-mobile" v-bind:class="teamType">
+  <div class="level team-row is-mobile" v-bind:class="teamType">
+
     <div class="level-left">
-      <div class="level-item">
+
+      <div class="level-item team-logo">
         <figure class="image is-32x32">
           <img v-bind:src="team.logo">
         </figure>
       </div>
+
       <div class="level-item team-info">
         <div>
-          <p class="team-name">
+          <div class="team-name">
             <small class="rank" v-if="team.rank">{{ team.rank }}</small>
-            {{ team.shortName }}
-          </p>
-          <p class="team-record">{{ team.record }}</p>
+            <div class="short-name">{{ team.shortName }}</div>
+            <div class="abbrev">{{ team.abbrev }}</div>
+          </div>
+          <div class="team-record">{{ team.record }}</div>
         </div>
       </div>
+
     </div>
+
     <div class="level-right">
+
       <div class="level-item" v-if="team.kenPomRating">
         <div class="has-text-centered">
-          <b-tooltip :label="tooltipInfo(team.abbrev, 'KenPom Rank')"
-            :active="tooltipActive" animated type="is-success">
-            <span class="tag is-success">KP</span>
+          <b-tooltip :label="tooltipInfo(team.abbrev, 'KenPom Rank')" :active="true" animated type="is-normal">
+            <span class="tag is-normal">KP</span>
           </b-tooltip>
-          <p>{{ team.kenPomRating.rank }}</p>
+          <div class="stat-value">{{ team.kenPomRating.rank }}</div>
         </div>
       </div>
+
       <div class="level-item" v-if="team.teamSpread">
         <div class="has-text-centered">
-          <b-tooltip :label="tooltipInfo(team.abbrev, 'Current Spread')"
-            :active="tooltipActive" animated type="is-normal">
+          <b-tooltip :label="tooltipInfo(team.abbrev, 'Current Spread')" :active="true" animated type="is-normal">
             <span class="tag is-normal">ODDS</span>
           </b-tooltip>
-          <p>{{ team.teamSpread }}</p>
+          <div class="stat-value">{{ team.teamSpread }}</div>
         </div>
       </div>
 
       <!--<div class="level-item" v-if="team.predictions && team.predictions.expectedPointDiff">
         <div class="has-text-centered">
           <b-tooltip :label="tooltipInfo(team.abbrev, 'Expected Pt. Differential')"
-            :active="tooltipActive" animated type="is-normal">
+            :active="true" animated type="is-normal">
             <span class="tag is-normal">Pt. Diff</span>
           </b-tooltip>
-          <p>{{ team.predictions.expectedPointDiff }}</p>
+          <div>{{ team.predictions.expectedPointDiff }}</div>
         </div>
       </div>-->
 
       <div class="level-item" v-if="team.predictions && team.predictions.winProbability">
         <div class="has-text-centered">
-          <b-tooltip :label="tooltipInfo(team.abbrev, 'Win Probability')"
-            :active="tooltipActive" animated type="is-normal">
+          <b-tooltip :label="tooltipInfo(team.abbrev, 'Win Probability')" :active="true" animated type="is-normal">
             <span class="tag is-normal">%WIN</span>
           </b-tooltip>
-          <p>{{ team.predictions.winProbability }}</p>
+          <div class="stat-value">{{ team.predictions.winProbability }}</div>
         </div>
       </div>
 
       <div class="level-item" v-if="team.predictions && team.predictions.expectedOutput">
         <div class="has-text-centered">
-          <b-tooltip :label="tooltipInfo(team.abbrev, 'Predicted Score')"
-            :active="tooltipActive" animated type="is-normal">
+          <b-tooltip :label="tooltipInfo(team.abbrev, 'Predicted Score')" :active="true" animated type="is-normal">
             <span class="tag is-normal">PRED</span>
           </b-tooltip>
-          <p>{{ team.predictions.expectedOutput }}</p>
+          <div class="stat-value">{{ team.predictions.expectedOutput }}</div>
         </div>
       </div>
 
       <div class="level-item" v-if="game.state !== 'pre'">
         <div class="has-text-centered">
-          <b-tooltip v-if="game.state === 'in'" :label="tooltipInfo(team.abbrev, 'Live Score')"
-            :active="tooltipActive" animated type="is-danger">
+          <b-tooltip v-if="game.state === 'in'" :label="tooltipInfo(team.abbrev, 'Live Score')" :active="true" animated type="is-danger">
             <span class="tag is-danger">LIVE</span>
           </b-tooltip>
-          <b-tooltip v-if="game.state === 'post'" :label="tooltipInfo(team.abbrev, 'Final Score')"
-            :active="tooltipActive" animated type="is-info">
+          <b-tooltip v-if="game.state === 'post'" :label="tooltipInfo(team.abbrev, 'Final Score')" :active="true" animated type="is-info">
             <span class="tag is-info">FINAL</span>
           </b-tooltip>
-          <p>{{ team.score }}</p>
+          <div class="stat-value">{{ team.score }}</div>
         </div>
       </div>
+
     </div>
+
   </div>
 </template>
 
@@ -98,8 +102,7 @@ export default {
   },
   data() {
     return {
-      team: this.game[this.teamType],
-      tooltipActive: true
+      team: this.game[this.teamType]
     }
   },
   methods: {
@@ -111,32 +114,42 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.team {
+@import '~bulma/sass/utilities/mixins';
+
+.team-row {
   padding: .5rem 1rem;
   margin: 0;
 
-  .tag {
-    font-weight: bold;
-    font-size: .6rem;
-  }
+  .level-right {
 
-  p {
-    font-size: .9rem;
-  }
+    .tag {
+      font-weight: bold;
+      font-size: .75rem;
+      @include mobile() {
+        font-size: .6rem;
+      }
 
-  .tag.is-normal {
-    background-color: #eaeaea;
-    color: #383737;
-    font-size: .6rem;
-  }
-  .tooltip.is-normal:after {
-    background-color: #eaeaea;
-    color: #383737;
-  }
+      &.is-normal {
+        background-color: #eaeaea;
+        color: #383737;
+      }
+    }
 
-  .rank {
-    font-size: .75rem;
-    color: #6c6d6f;
+    .stat-value {
+      font-size: 1rem;
+      @include mobile() {
+        font-size: .75rem;
+      }
+    }
+
+    .tooltip.is-normal:after {
+      background-color: #eaeaea;
+      color: #383737;
+    }
+
+    .level-item:last-child {
+      margin-right: 0;
+    }
   }
 
   .team-info {
@@ -144,6 +157,27 @@ export default {
     .team-name {
       font-size: 1rem;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+
+      .rank {
+        font-size: .75rem;
+        color: #6c6d6f;
+        margin-right: 4px;
+      }
+
+      .short-name {
+
+      }
+      .abbrev {
+        display: none;
+      }
+
+      @include mobile() {
+        .short-name { display: none; }
+        .abbrev { display: block; }
+      }
+
     }
     .team-record {
       font-size: .75rem;
