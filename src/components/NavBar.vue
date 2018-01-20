@@ -31,6 +31,8 @@ export default {
 
 <style scoped lang="scss">
 .navbar {
+  z-index: 10;
+
   .navbar-burger {
     span {
       background-color: #bdbdbd;
@@ -42,8 +44,10 @@ export default {
       background-color: #bdbdbd;
     }
   }
+
   .navbar-menu.is-active {
     background-color: #0A2145;
+    box-shadow: inset 0px 0px 10px 5px rgba(0,0,0,0.5), 0px 10px 10px 0px rgba(0,0,0,0.3);
   }
 }
 </style>
