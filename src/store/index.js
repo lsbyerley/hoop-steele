@@ -21,7 +21,7 @@ export const store = new Vuex.Store({
   actions: {
     getTeamRatings: ({ commit }) => {
       const url = `${apiUrlBase}/api/team-ratings`
-      axios.get(url).then((res) => {
+      axios.get(url, { headers: { bucedup: 'hsclient198827' } }).then((res) => {
         commit('setTeamRatings', { teamRatings: res.data })
         commit('setRatingsLoaded', { ratingsLoaded: true })
       }).catch((err) => {
@@ -30,7 +30,7 @@ export const store = new Vuex.Store({
     },
     getGames: ({ commit }) => {
       const url = `${apiUrlBase}/api/games`
-      axios.get(url).then((res) => {
+      axios.get(url, { headers: { bucedup: 'hsclient198827' } }).then((res) => {
         commit('setScoreboard', { scoreboard: res.data })
         commit('setScoreboardLoaded', { scoreboardLoaded: true })
       }).catch((err) => {
