@@ -86,9 +86,9 @@ export default {
     }
 
     .team-compare .icon {
+      color: #36b14d;
       &:hover {
         cursor: pointer;
-        color: red;
       }
     }
 

@@ -9,7 +9,7 @@
         </div>
         <div class="media-content">
           <p class="title is-4">{{ team.team }}</p>
-          <p class="subtitle is-6">Conf: {{ team.conf }} Record: {{ team.record }}</p>
+          <p class="subtitle is-6"><strong>Conf</strong>: {{ team.conf }} <strong>Record</strong>: {{ team.record }}</p>
         </div>
       </div>
       <div class="content">
@@ -125,6 +125,15 @@ export default {
 @import '~bulma/sass/utilities/mixins';
 
 .card.team-rating {
+
+  @include mobile() {
+    box-shadow: none;
+
+    .card-content {
+      padding: 0
+    }
+
+  }
 
   .content .column {
 

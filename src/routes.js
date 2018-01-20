@@ -9,10 +9,16 @@ export default [
   },
   {
     path: '/scoreboard',
-    component: Scoreboard
+    component: Scoreboard,
+    meta: {
+      title: 'Hoop Steele: Scoreboard'
+    }
   },
   {
     path: '/team-compare',
-    component: TeamCompare
+    component: TeamCompare,
+    meta: {
+      title: 'Hoop Steele: Team Compare'
+    }
   }
 ]

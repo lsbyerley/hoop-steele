@@ -185,7 +185,7 @@ router.get('/games', cache(100), (req, res) => {
 
 })
 
-router.get('/team-ratings', cache(300), (req, res) => {
+router.get('/team-ratings', cache(1000), (req, res) => {
 
   const url = 'https://kenpom.com';
   axios.get(url).then((resp) => {

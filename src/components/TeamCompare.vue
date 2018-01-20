@@ -1,69 +1,73 @@
 <template>
 
-  <div class="team-compare">
+  <section class="page-content">
 
-    <section class="hero">
-      <div class="hero-body">
+    <div class="team-compare">
+
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Team Comparison</h1>
+            <h2 class="subtitle">Compare offense, defense, and other metrics</h2>
+          </div>
+        </div>
+      </section>
+
+      <section class="section team-select">
+
         <div class="container">
-          <h1 class="title">Team Comparison</h1>
-          <h2 class="subtitle">Compare offense, defense, and other metrics</h2>
-        </div>
-      </div>
-    </section>
+          <div class="columns">
 
-    <section class="section team-select">
-
-      <div class="container">
-        <div class="columns">
-
-          <div class="column is-half">
-            <div class="box">
-              <b-field label="Team One">
-                <b-autocomplete
-                  icon="search"
-                  icon-pack="fa"
-                  :maxResults="10"
-                  v-model="teamOne"
-                  placeholder="enter team name"
-                  :loading="!ratingsLoaded"
-                  :data="filteredTeamRatings('teamOne')"
-                  field="team"
-                  @select="selectTeamOne">
-                </b-autocomplete>
-              </b-field>
+            <div class="column is-half">
+              <div class="box">
+                <b-field>
+                  <b-autocomplete
+                    icon="search"
+                    icon-pack="fa"
+                    :maxResults="3"
+                    v-model="teamOne"
+                    placeholder="team one.."
+                    :loading="!ratingsLoaded"
+                    :data="filteredTeamRatings('teamOne')"
+                    field="team"
+                    @select="selectTeamOne">
+                  </b-autocomplete>
+                </b-field>
+                <hr>
+                <p class="has-text-centered" v-if="!selectedTeamOne">Pick a team..</p>
+                <TeamRatings :team="selectedTeamOne"></TeamRatings>
+              </div>
             </div>
-            <hr>
-            <p class="has-text-centered" v-if="!selectedTeamOne">Pick team one..</p>
-            <TeamRatings :team="selectedTeamOne"></TeamRatings>
-          </div>
 
-          <div class="column is-half">
-            <div class="box">
-              <b-field label="Team Two">
-                <b-autocomplete
-                  icon="search"
-                  icon-pack="fa"
-                  :maxResults="10"
-                  v-model="teamTwo"
-                  placeholder="enter team name"
-                  :loading="!ratingsLoaded"
-                  :data="filteredTeamRatings('teamTwo')"
-                  field="team"
-                  @select="selectTeamTwo">
-                </b-autocomplete>
-              </b-field>
+            <div class="column is-half">
+              <div class="box">
+                <b-field>
+                  <b-autocomplete
+                    icon="search"
+                    icon-pack="fa"
+                    :maxResults="3"
+                    v-model="teamTwo"
+                    placeholder="team two.."
+                    :loading="!ratingsLoaded"
+                    :data="filteredTeamRatings('teamTwo')"
+                    field="team"
+                    @select="selectTeamTwo">
+                  </b-autocomplete>
+                </b-field>
+                <hr>
+                <p class="has-text-centered" v-if="!selectedTeamTwo">Pick a team..</p>
+                <TeamRatings :team="selectedTeamTwo"></TeamRatings>
+              </div>
             </div>
-            <hr>
-            <p class="has-text-centered" v-if="!selectedTeamTwo">Pick team two..</p>
-            <TeamRatings :team="selectedTeamTwo"></TeamRatings>
+
           </div>
-
         </div>
-      </div>
 
-    </section>
+      </section>
 
-  </div>
+    </div>
+
+  </section>
 
 </template>
 
@@ -79,8 +83,8 @@ export default {
   },
   data() {
     return {
-      teamOne: '',
-      teamTwo: ''
+      teamOne: (this.selectedTeamOne) ? this.selectedTeamOne.team : '',
+      teamTwo: (this.selectedTeamTwo) ? this.selectedTeamOne.team : '',
     };
   },
   computed: {
@@ -128,10 +132,6 @@ export default {
 </script>
 
 <style lang="scss">
-.box.team-compare {
-  max-height: 0;
-  //display: none;
-}
 .column.compare {
   display: flex;
   vertical-align: middle;

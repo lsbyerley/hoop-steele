@@ -34,11 +34,18 @@ export default {
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 
-body, html {
+body, html, #app {
+  height: 100%;
 }
 #app {
   background-color: #F7F7F7;
   font-family: 'Ubuntu Condensed', sans-serif;
+  display: flex;
+  flex-direction: column;
+
+  .page-content {
+    flex: 1 0 auto;
+  }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Ubuntu', sans-serif;
@@ -47,6 +54,10 @@ body, html {
   .title, .subtitle {
     //text-align: center;
   }
+}
+
+body, button, input, select, textarea {
+  font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .navbar {
