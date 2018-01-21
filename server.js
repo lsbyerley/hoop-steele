@@ -112,14 +112,16 @@ function normalizeTeam(obj, gameOdds) {
 
 	let teamSpread = '';
 	if ( Object.keys(gameOdds).length > 0) {
-		const split = gameOdds.spread.split(' ')
-		const spreadTeam = split[0]
-		const spread = split[1]
+		if (gameOdds.spread) {
+			const split = gameOdds.spread.split(' ')
+			const spreadTeam = split[0]
+			const spread = split[1]
 
-		if (teamAbbrev.includes(spreadTeam) || spreadTeam.includes(teamAbbrev)) {
-			teamSpread = spread
-		} else {
-			teamSpread = `${spread.replace('-','+')}`
+			if (teamAbbrev.includes(spreadTeam) || spreadTeam.includes(teamAbbrev)) {
+				teamSpread = spread
+			} else {
+				teamSpread = `${spread.replace('-','+')}`
+			}
 		}
 	}
 
@@ -237,6 +239,7 @@ router.get('/games', checkHeader, cache(100), (req, res) => {
 
 	}).catch((err) => {
 		console.error(err)
+		res.status(500).json({'error': 'Something went wrong with game retrieval'})
 	})
 
 })
@@ -304,6 +307,7 @@ router.get('/team-ratings', checkHeader, cache(1000), (req, res) => {
 
   }).catch((err) => {
     console.error(err)
+		res.status(500).json({'error': 'Something went wrong with team ratings retrieval'})
   })
 
 });
