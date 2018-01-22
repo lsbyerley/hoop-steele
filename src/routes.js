@@ -11,14 +11,14 @@ export default [
     path: '/scoreboard',
     component: Scoreboard,
     meta: {
-      title: 'Hoop Steele: Scoreboard'
+      title: 'Steele Hoops: Scoreboard'
     }
   },
   {
     path: '/team-compare',
     component: TeamCompare,
     meta: {
-      title: 'Hoop Steele: Team Compare'
+      title: 'Steele Hoops: Team Compare'
     }
   }
 ]

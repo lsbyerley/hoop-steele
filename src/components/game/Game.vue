@@ -55,8 +55,8 @@ export default {
     predictionClass(game) {
       const awayPredicted = game.away.predictions.expectedOutput;
       const homePredicted = game.home.predictions.expectedOutput;
-      const predictedWinner = (awayPredicted > homePredicted) ? game.away : game.home;
-      const actualWinner = (game.away.score > game.home.score) ? game.away : game.home;
+      const predictedWinner = (awayPredicted > homePredicted) ? 'away' : 'home';
+      const actualWinner = (game.away.score > game.home.score) ? 'away' : 'home';
       return {
         "fa-check": predictedWinner === actualWinner,
         "fa-times": predictedWinner !== actualWinner

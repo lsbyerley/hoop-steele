@@ -83,8 +83,8 @@ export default {
   },
   data() {
     return {
-      teamOne: (this.selectedTeamOne) ? this.selectedTeamOne.team : '',
-      teamTwo: (this.selectedTeamTwo) ? this.selectedTeamOne.team : '',
+      teamOne: (this.$store.state.selectedTeamOne) ? this.$store.state.selectedTeamOne.team : '',
+      teamTwo: (this.$store.state.selectedTeamTwo) ? this.$store.state.selectedTeamTwo.team : '',
     };
   },
   computed: {

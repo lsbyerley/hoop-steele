@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import teamData from '../teamData'
+import { teamData } from '@/teamData'
 
 export default {
   name: "TeamRatings",

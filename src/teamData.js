@@ -1,4 +1,42 @@
-export default [
+export const midMajors = [
+  'America East',
+  'Atlantic Sun',
+  'Big Sky',
+  'Big South',
+  'Big West',
+  'Colonial',
+  'Horizon',
+  'Independents',
+  'Ivy',
+  'Metro Atlantic',
+  'Mid-American',
+  'Mid-Eastern',
+  'Missouri Valle',
+  'Northeast',
+  'Ohio Valley',
+  'Patriot',
+  'Southern',
+  'Southland',
+  'Southwestern',
+  'Summit',
+  'Sun Belt',
+  'West Coast',
+  'Western Athletic'
+]
+
+export const majorConfs = [
+  'ACC',
+  'American',
+  'A 10',
+  'Big 12',
+  'Big Ten',
+  'Big East',
+  'C-USA',
+  'SEC',
+  'Pac-12'
+]
+
+export const teamData = [
   {
     id: 2,
     location: "Auburn",

@@ -16,6 +16,15 @@ const router = new VueRouter({
   routes: routes
 });
 
+// https://alligator.io/vuejs/vue-router-modify-head/
+router.beforeEach((to, from, next) => {
+  const nearestWithTitle = to.matched.slice().reverse().find(r => r.meta && r.meta.title);
+  const nearestWithMeta = to.matched.slice().reverse().find(r => r.meta && r.meta.metaTags);
+  const previousNearestWithMeta = from.matched.slice().reverse().find(r => r.meta && r.meta.metaTags);
+  if(nearestWithTitle) document.title = nearestWithTitle.meta.title;
+  next();
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

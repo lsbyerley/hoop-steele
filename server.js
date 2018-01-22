@@ -99,6 +99,7 @@ const cache = function cache(duration) {
 function normalizeTeam(obj, gameOdds) {
 
 	const teamAbbrev = obj.team.abbreviation
+	const teamLocation = obj.team.location
 	let overallRecord, confRecord, record;
 	if (obj.records) {
 		overallRecord = obj.records.find((r) => {
@@ -125,9 +126,18 @@ function normalizeTeam(obj, gameOdds) {
 		}
 	}
 
-	let kpTeamNameMatch = obj.team.location
-	kpTeamNameMatch = kpTeamNameMatch.replace('St ', 'Saint ')
-	kpTeamNameMatch = kpTeamNameMatch.replace('State', 'St.')
+	let kpTeamNameMatch = teamLocation
+	if (teamLocation === 'Ole Miss') { kpTeamNameMatch = 'Mississippi' }
+	else if (teamLocation === 'Miami') { kpTeamNameMatch = 'Miami FL' }
+	else if (teamLocation === 'Miami (OH)') { kpTeamNameMatch = 'Miami OH' }
+	else if (teamLocation === 'NC State') { kpTeamNameMatch = 'North Carolina St.' }
+	else if (teamLocation === 'Gardner-Webb') { kpTeamNameMatch = 'Gardner Webb' }
+	else if (teamLocation === 'Loyola-Chicago') { kpTeamNameMatch = 'Loyola Chicago' }
+	else if (teamLocation === 'Maryland-Eastern Shore') { kpTeamNameMatch = 'Maryland Eastern Shore' }
+	else {
+		kpTeamNameMatch = kpTeamNameMatch.replace('St ', 'Saint ')
+		kpTeamNameMatch = kpTeamNameMatch.replace('State', 'St.')
+	}
 
 	let rank
 	if (obj.curatedRank && obj.curatedRank.current !== 99) {
@@ -166,7 +176,7 @@ router.get('/testheader', checkHeader, (req, res) => {
 router.get('/games', checkHeader, cache(100), (req, res) => {
 
 	const scoresDateParam = moment().format('YYYYMMDD')
-	//const scoresDateParam = moment().subtract(1, "day").format('YYYYMMDD') //for testing
+	//const scoresDateParam = moment().subtract(2, "day").format('YYYYMMDD') //for testing
 	const scoresDateReadable = moment(scoresDateParam).format('MMMM Do')
 
 	const url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300&dates='+scoresDateParam;

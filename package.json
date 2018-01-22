@@ -1,7 +1,7 @@
 {
-  "name": "hoop-steele",
+  "name": "steele-hoops",
   "version": "1.0.0",
-  "description": "Compare college basketball teams using KenPom",
+  "description": "College basketball game predictions and team ratings",
   "author": "lsbyerley <lsbyerley@gmail.com>",
   "private": true,
   "scripts": {

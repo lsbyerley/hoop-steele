@@ -11,10 +11,12 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   state: {
     scoreboardLoaded: false,
+    scoreboardError: false,
     ratingsLoaded: false,
     isComparisonActive: false,
     selectedTeamOne: undefined,
     selectedTeamTwo: undefined,
+    filterOptions: ['Top 25', 'Mid-Majors', 'NCAA-D1'],
     teamRatings: {},
     scoreboard: {}
   },
@@ -35,6 +37,8 @@ export const store = new Vuex.Store({
         commit('setScoreboardLoaded', { scoreboardLoaded: true })
       }).catch((err) => {
         console.error(err)
+        commit('setScoreboardLoaded', { scoreboardLoaded: true })
+        commit('scoreboardError', { scoreboardError: true })
       })
     }
   },
@@ -50,6 +54,9 @@ export const store = new Vuex.Store({
     },
     setScoreboardLoaded: (state, { scoreboardLoaded }) => {
       state.scoreboardLoaded = scoreboardLoaded
+    },
+    setScoreboardError: (state, { scoreboardError }) => {
+      state.scoreboardError = scoreboardError
     },
     setTeamSelected: (state, { team, type }) => {
       const teamToSelect = (type === 'one') ? 'selectedTeamOne' : 'selectedTeamTwo'
@@ -68,7 +75,24 @@ export const store = new Vuex.Store({
           return state.scoreboard.scoresDateReadable
         }
     },
-    gamesWithTeamRatings: state => {
+    filterOptions: state => {
+      if (state.scoreboardLoaded && state.ratingsLoaded) {
+        let addedFilterOptions = []
+        state.scoreboard.games.forEach((game) => {
+          if (game.conference && !addedFilterOptions.includes(game.conference)) {
+            addedFilterOptions.push(game.conference)
+          }
+        })
+        addedFilterOptions.sort((a, b) => {
+          if (a > b) { return 1 }
+          else if (a < b) { return -1 }
+          return 0;
+        })
+        const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
+        return sortedFilterOptions
+      }
+    },
+    games: state => {
       //https://gamepredict.us/games
       //https://www.reddit.com/r/CollegeBasketball/comments/5xir8t/calculating_win_probability_and_margin_of_victory/
       if (state.scoreboardLoaded && state.ratingsLoaded) {

@@ -4,7 +4,7 @@
       <nav class="navbar is-transparent footbar">
         <div class="navbar-brand">
           <!-- navbar items, navbar burger... -->
-          <router-link to="/" class="navbar-item"><h1>Hoop Steele</h1></router-link>
+          <router-link to="/" class="navbar-item"><h1>Steele Hoops</h1></router-link>
         </div>
         <div class="navbar-menu">
           <div class="navbar-start"></div>
@@ -16,7 +16,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>Copyright &copy; Hoop Steele</p>
+      <p>Copyright &copy; Steele Hoops</p>
     </div>
   </div>
 </template>
