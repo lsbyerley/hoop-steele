@@ -9,7 +9,13 @@ import routes from './routes.js';
 
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
 
-Vue.use(Buefy);
+//Vue.use(Buefy);
+Vue.component(Buefy.Autocomplete.name, Buefy.Autocomplete)
+Vue.component(Buefy.Select.name, Buefy.Select)
+Vue.component(Buefy.Field.name, Buefy.Field)
+Vue.component(Buefy.Input.name, Buefy.Input)
+Vue.component(Buefy.Tooltip.name, Buefy.Tooltip)
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({

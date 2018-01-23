@@ -25,17 +25,17 @@
                     icon="search"
                     icon-pack="fa"
                     :maxResults="3"
-                    v-model="teamOne"
+                    v-model="teamAway"
                     placeholder="team one.."
                     :loading="!ratingsLoaded"
-                    :data="filteredTeamRatings('teamOne')"
+                    :data="filteredTeamRatings('teamAway')"
                     field="team"
-                    @select="selectTeamOne">
+                    @select="selectTeamAway">
                   </b-autocomplete>
                 </b-field>
                 <hr>
-                <p class="has-text-centered" v-if="!selectedTeamOne">Pick a team..</p>
-                <TeamRatings :team="selectedTeamOne"></TeamRatings>
+                <p class="has-text-centered" v-if="!selectedAwayTeam">Pick a team..</p>
+                <TeamRatings :team="selectedAwayTeam"></TeamRatings>
               </div>
             </div>
 
@@ -46,21 +46,66 @@
                     icon="search"
                     icon-pack="fa"
                     :maxResults="3"
-                    v-model="teamTwo"
+                    v-model="teamHome"
                     placeholder="team two.."
                     :loading="!ratingsLoaded"
-                    :data="filteredTeamRatings('teamTwo')"
+                    :data="filteredTeamRatings('teamHome')"
                     field="team"
-                    @select="selectTeamTwo">
+                    @select="selectTeamHome">
                   </b-autocomplete>
                 </b-field>
                 <hr>
-                <p class="has-text-centered" v-if="!selectedTeamTwo">Pick a team..</p>
-                <TeamRatings :team="selectedTeamTwo"></TeamRatings>
+                <p class="has-text-centered" v-if="!selectedHomeTeam">Pick a team..</p>
+                <TeamRatings :team="selectedHomeTeam"></TeamRatings>
               </div>
             </div>
 
           </div>
+
+          <div class="columns">
+            <div class="column">
+              <div v-if="gamePrediction" class="box game-prediction">
+                <div class="title is-4 has-text-centered">Game Prediction</div>
+
+                <div class="columns prediction">
+                  <div class="column is-3">
+                    <p class="title is-5">{{ selectedAwayTeam.team }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Point Diff</p>
+                    <p class="title">{{ gamePrediction.away.expectedPointDiff }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Win %</p>
+                    <p class="title">{{ gamePrediction.away.winProbability }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Output</p>
+                    <p class="title">{{ gamePrediction.away.expectedOutput }}</p>
+                  </div>
+                </div>
+                <div class="columns prediction">
+                  <div class="column is-3">
+                    <p class="title is-5">@ {{ selectedHomeTeam.team }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Point Diff</p>
+                    <p class="title">{{ gamePrediction.home.expectedPointDiff }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Win %</p>
+                    <p class="title">{{ gamePrediction.home.winProbability }}</p>
+                  </div>
+                  <div class="column is-3">
+                    <p class="heading">Output</p>
+                    <p class="title">{{ gamePrediction.home.expectedOutput }}</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
         </div>
 
       </section>
@@ -74,6 +119,7 @@
 <script>
 import { mapState, mapGetters } from 'vuex'
 import TeamRatings from './TeamRatings'
+import { predictionMixin } from './mixins/predictionMixin'
 //import { TimelineMax, TweenMax } from 'gsap'
 
 export default {
@@ -81,24 +127,31 @@ export default {
   components: {
     TeamRatings
   },
+  mixins: [predictionMixin],
   data() {
     return {
-      teamOne: (this.$store.state.selectedTeamOne) ? this.$store.state.selectedTeamOne.team : '',
-      teamTwo: (this.$store.state.selectedTeamTwo) ? this.$store.state.selectedTeamTwo.team : '',
+      teamAway: (this.$store.state.selectedAwayTeam) ? this.$store.state.selectedAwayTeam.team : '',
+      teamHome: (this.$store.state.selectedHomeTeam) ? this.$store.state.selectedHomeTeam.team : '',
     };
   },
   computed: {
     ...mapState([
       "ratingsLoaded",
-      "selectedTeamOne",
-      "selectedTeamTwo",
+      "selectedAwayTeam",
+      "selectedHomeTeam",
       "teamRatings"
-    ])
+    ]),
+    gamePrediction() {
+      if (this.ratingsLoaded && this.selectedAwayTeam && this.selectedHomeTeam) {
+        const prediction = this.buildGamePrediction(this.selectedAwayTeam, this.selectedHomeTeam, this.teamRatings.averageTempo, this.teamRatings.averageEfficiency)
+        return prediction
+      }
+    }
   },
   methods: {
     filteredTeamRatings(type) {
       if (this.ratingsLoaded) {
-        const team = (type === 'teamOne') ? this.teamOne : this.teamTwo
+        const team = (type === 'teamAway') ? this.teamAway : this.teamHome
         return this.teamRatings.ratings.filter(option => {
           return (
             option.team
@@ -109,24 +162,24 @@ export default {
         });
       }
     },
-    selectTeamOne(option) {
+    selectTeamAway(option) {
       if (option) {
-        this.$store.commit("setTeamSelected", { team: option, type: 'one' })
+        this.$store.commit("setTeamSelected", { team: option, type: 'away' })
       } else {
-        this.$store.commit("setTeamSelected", { team: undefined, type: 'one' })
+        this.$store.commit("setTeamSelected", { team: undefined, type: 'away' })
       }
     },
-    selectTeamTwo(option) {
+    selectTeamHome(option) {
       if (option) {
-        this.$store.commit("setTeamSelected", { team: option, type: 'two' })
+        this.$store.commit("setTeamSelected", { team: option, type: 'home' })
       } else {
-        this.$store.commit("setTeamSelected", { team: undefined, type: 'two' })
+        this.$store.commit("setTeamSelected", { team: undefined, type: 'home' })
       }
     }
   },
   destroyed() {
-    this.$store.commit("setTeamSelected", { team: undefined, type: 'one' })
-    this.$store.commit("setTeamSelected", { team: undefined, type: 'two' })
+    this.$store.commit("setTeamSelected", { team: undefined, type: 'away' })
+    this.$store.commit("setTeamSelected", { team: undefined, type: 'home' })
   }
 };
 </script>
@@ -137,6 +190,14 @@ export default {
   vertical-align: middle;
   justify-content: center;
   align-items: center;
+}
+.columns.prediction {
+  .column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 .field {
   text-align: center;

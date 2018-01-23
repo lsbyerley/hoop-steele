@@ -48,8 +48,8 @@ export default {
   },
   methods: {
     loadTeamCompare(game) {
-      this.$store.commit("setTeamSelected", { team: game.away.kenPomRating, type: 'one' })
-      this.$store.commit("setTeamSelected", { team: game.home.kenPomRating, type: 'two' })
+      this.$store.commit("setTeamSelected", { team: game.away.kenPomRating, type: 'away' })
+      this.$store.commit("setTeamSelected", { team: game.home.kenPomRating, type: 'home' })
       this.$router.push({ path: 'team-compare' })
     },
     predictionClass(game) {

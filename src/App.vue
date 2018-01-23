@@ -35,7 +35,7 @@ export default {
 @import "~buefy/src/scss/buefy";
 
 body, html, #app {
-  height: 100%;
+  //height: 100%;
 }
 #app {
   background-color: #F7F7F7;
