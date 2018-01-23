@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
+import Fuse from 'fuse.js'
 import { cumulativeDistribution } from '../utils/util'
 
 const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:8000' : '';
@@ -61,15 +62,9 @@ export const store = new Vuex.Store({
     setTeamSelected: (state, { team, type }) => {
       const teamToSelect = (type === 'one') ? 'selectedTeamOne' : 'selectedTeamTwo'
       state[teamToSelect] = team;
-    },
-    setComparisonStatus: (state, { isActive }) => {
-      state.isComparisonActive = isActive
     }
   },
   getters: {
-    showTeamComparison: state => {
-      return state.isComparisonActive
-    },
     getScoreboardDate: state => {
         if (state.scoreboardLoaded && state.ratingsLoaded) {
           return state.scoreboard.scoresDateReadable
@@ -96,25 +91,40 @@ export const store = new Vuex.Store({
       //https://gamepredict.us/games
       //https://www.reddit.com/r/CollegeBasketball/comments/5xir8t/calculating_win_probability_and_margin_of_victory/
       if (state.scoreboardLoaded && state.ratingsLoaded) {
+
+        const searchOptions = {
+          shouldSort: true,
+          threshold: 0.6,
+          location: 0,
+          distance: 100,
+          maxPatternLength: 32,
+          minMatchCharLength: 1,
+          keys: [ "team" ]
+        };
+        const ratingsFuse = new Fuse(state.teamRatings.ratings, searchOptions);
+
         return state.scoreboard.games.map((game) => {
 
-          let awayTeamRating, homeTeamRating, gamePrediction
+          let awayTeamRating, homeTeamRating, gamePrediction;
 
-          for (var rating of state.teamRatings.ratings) {
-            if (rating.team === game.away.kpTeamNameMatch || rating.team === game.away.shortName) {
-              awayTeamRating = rating
-              break;
-            }
+          game.away.kenPomRating = awayTeamRating
+          game.home.kenPomRating = homeTeamRating
+
+          const awayTeamResult = ratingsFuse.search(game.away.location);
+          if (awayTeamResult.length > 0) {
+            game.away.kenPomRating = awayTeamResult[0]
+            game.away.ratingsMatch = game.away.location+'-'+awayTeamResult[0].team
           }
 
-          for (var rating of state.teamRatings.ratings) {
-            if (rating.team === game.home.kpTeamNameMatch || rating.team === game.home.shortName) {
-              homeTeamRating = rating
-              break;
-            }
+          const homeTeamResult = ratingsFuse.search(game.home.location);
+          if (homeTeamResult.length > 0) {
+            game.home.kenPomRating = homeTeamResult[0]
+            game.home.ratingsMatch = game.home.location+'-'+homeTeamResult[0].team
           }
 
-          if (awayTeamRating && homeTeamRating) {
+          if (game.away.kenPomRating && game.home.kenPomRating) {
+            const awayTeamRating = game.away.kenPomRating
+            const homeTeamRating = game.home.kenPomRating
             const homeCourtAdvantage = 3.75 //Ken Pomeroy purportedly uses 3.75 points for home court advantage
             const standardDeviation = 11 //Ken Pomeroy purportedly uses 11 points for the standard deviation
             const offWeight = 1.014; // Offensive weight for home game? Not sure how accurate these are
@@ -165,9 +175,6 @@ export const store = new Vuex.Store({
               expectedOutput: awayExpectedOutput.toFixed(1)
             }
           }
-
-          game.away.kenPomRating = awayTeamRating
-          game.home.kenPomRating = homeTeamRating
 
           return game
         })
