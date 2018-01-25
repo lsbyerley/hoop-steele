@@ -4,8 +4,8 @@
     <div class="level-left">
 
       <div class="level-item team-logo">
-        <figure class="image is-32x32">
-          <img v-bind:src="team.logo">
+        <figure ref="teamlogo" class="image is-32x32">
+          <img :src="team.logo" @error="teamImgError">
         </figure>
       </div>
 
@@ -108,6 +108,10 @@ export default {
   methods: {
     tooltipInfo(team, stat) {
       return `${team} ${stat}`
+    },
+    teamImgError() {
+      //this.team.logo = 'http://placehold.it/32x32'
+      this.$refs.teamlogo.style.display = 'none'
     }
   }
 }
@@ -136,7 +140,7 @@ export default {
     }
 
     .stat-value {
-      font-size: 1rem;
+      font-size: .8rem;
       @include mobile() {
         font-size: .75rem;
       }

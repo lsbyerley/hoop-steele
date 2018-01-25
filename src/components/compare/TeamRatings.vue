@@ -77,13 +77,13 @@
 </template>
 
 <script>
-import { teamData } from '@/teamData'
+import { cbbData } from '@/cbbData'
 
 export default {
   name: "TeamRatings",
   data() {
     return {
-      teamData: teamData
+      cbbData: cbbData
     }
   },
   props: {
@@ -94,7 +94,7 @@ export default {
   },
   methods: {
     getTeamLogo(team) {
-      const matchedTeam = this.teamData.find((td) => {
+      const matchedTeam = this.cbbData.find((td) => {
         let match = td.location.replace('State', 'St.')
         return match == team.team
       })

@@ -7,8 +7,8 @@
       <section class="hero">
         <div class="hero-body">
           <div class="container">
-            <h1 class="title">Scoreboard</h1>
-            <h2 class="subtitle">Live scores, game predictions, odds, and rankings</h2>
+            <h1 class="title is-4">Scoreboard</h1>
+            <h2 class="subtitle is-5">Scores, Predictions, Odds, and Rankings</h2>
           </div>
         </div>
       </section>
@@ -76,7 +76,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { majorConfs } from '@/teamData'
+import { majorConfs } from '@/cbbData'
 import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
 import Fuse from 'fuse.js'

@@ -39,7 +39,7 @@ body, html, #app {
 }
 #app {
   background-color: #F7F7F7;
-  font-family: 'Ubuntu Condensed', sans-serif;
+  font-family: 'Oswald', sans-serif;
   display: flex;
   flex-direction: column;
 
@@ -48,7 +48,18 @@ body, html, #app {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .title {
+    text-transform: uppercase;
+  }
+
+  .subtitle {
+    font-family: 'Oswald';
+    text-transform: inherit;
   }
 
   .title, .subtitle {
@@ -57,7 +68,7 @@ body, html, #app {
 }
 
 body, button, input, select, textarea {
-  font-family: 'Ubuntu Condensed', sans-serif;
+  font-family: 'Oswald', sans-serif;
 }
 
 .navbar {

@@ -1,27 +1,26 @@
 export const midMajors = [
-  'America East',
-  'Atlantic Sun',
+  'Am. East',
+  'A-Sun',
   'Big Sky',
   'Big South',
   'Big West',
-  'Colonial',
+  'CAA',
   'Horizon',
   'Independents',
   'Ivy',
-  'Metro Atlantic',
-  'Mid-American',
-  'Mid-Eastern',
-  'Missouri Valle',
+  'MAAC',
+  'MEAC',
+  'MVC',
   'Northeast',
   'Ohio Valley',
   'Patriot',
   'Southern',
   'Southland',
-  'Southwestern',
+  'SWAC',
   'Summit',
   'Sun Belt',
-  'West Coast',
-  'Western Athletic'
+  'WCC',
+  'WAC'
 ]
 
 export const majorConfs = [
@@ -32,11 +31,12 @@ export const majorConfs = [
   'Big Ten',
   'Big East',
   'C-USA',
+  'MW',
   'SEC',
   'Pac-12'
 ]
 
-export const teamData = [
+export const cbbData = [
   {
     id: 2,
     location: "Auburn",

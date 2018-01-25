@@ -7,8 +7,8 @@
       <section class="hero">
         <div class="hero-body">
           <div class="container">
-            <h1 class="title">Team Comparison</h1>
-            <h2 class="subtitle">Compare offense, defense, and other metrics</h2>
+            <h1 class="title is-4">Team Comparison</h1>
+            <h2 class="subtitle is-5">Compare offense, defense, and other metrics</h2>
           </div>
         </div>
       </section>
@@ -20,13 +20,13 @@
 
             <div class="column is-half">
               <div class="box">
-                <b-field>
+                <b-field label="Away Team">
                   <b-autocomplete
                     icon="search"
                     icon-pack="fa"
                     :maxResults="3"
                     v-model="teamAway"
-                    placeholder="team one.."
+                    placeholder="type a team name.."
                     :loading="!ratingsLoaded"
                     :data="filteredTeamRatings('teamAway')"
                     field="team"
@@ -34,20 +34,20 @@
                   </b-autocomplete>
                 </b-field>
                 <hr>
-                <p class="has-text-centered" v-if="!selectedAwayTeam">Pick a team..</p>
+                <p class="has-text-centered" v-if="!selectedAwayTeam">Pick an away team..</p>
                 <TeamRatings :team="selectedAwayTeam"></TeamRatings>
               </div>
             </div>
 
             <div class="column is-half">
               <div class="box">
-                <b-field>
+                <b-field label="Home Team">
                   <b-autocomplete
                     icon="search"
                     icon-pack="fa"
                     :maxResults="3"
                     v-model="teamHome"
-                    placeholder="team two.."
+                    placeholder="type a team name.."
                     :loading="!ratingsLoaded"
                     :data="filteredTeamRatings('teamHome')"
                     field="team"
@@ -55,7 +55,7 @@
                   </b-autocomplete>
                 </b-field>
                 <hr>
-                <p class="has-text-centered" v-if="!selectedHomeTeam">Pick a team..</p>
+                <p class="has-text-centered" v-if="!selectedHomeTeam">Pick a home team..</p>
                 <TeamRatings :team="selectedHomeTeam"></TeamRatings>
               </div>
             </div>
@@ -66,42 +66,8 @@
             <div class="column">
               <div v-if="gamePrediction" class="box game-prediction">
                 <div class="title is-4 has-text-centered">Game Prediction</div>
-
-                <div class="columns prediction">
-                  <div class="column is-3">
-                    <p class="title is-5">{{ selectedAwayTeam.team }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Point Diff</p>
-                    <p class="title">{{ gamePrediction.away.expectedPointDiff }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Win %</p>
-                    <p class="title">{{ gamePrediction.away.winProbability }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Output</p>
-                    <p class="title">{{ gamePrediction.away.expectedOutput }}</p>
-                  </div>
-                </div>
-                <div class="columns prediction">
-                  <div class="column is-3">
-                    <p class="title is-5">@ {{ selectedHomeTeam.team }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Point Diff</p>
-                    <p class="title">{{ gamePrediction.home.expectedPointDiff }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Win %</p>
-                    <p class="title">{{ gamePrediction.home.winProbability }}</p>
-                  </div>
-                  <div class="column is-3">
-                    <p class="heading">Output</p>
-                    <p class="title">{{ gamePrediction.home.expectedOutput }}</p>
-                  </div>
-                </div>
-
+                <TeamPredictions homeAway="away" :team="selectedAwayTeam" :gamePrediction="gamePrediction"></TeamPredictions>
+                <TeamPredictions homeAway="home" :team="selectedHomeTeam" :gamePrediction="gamePrediction"></TeamPredictions>
               </div>
             </div>
           </div>
@@ -118,14 +84,16 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import TeamRatings from './TeamRatings'
+import TeamRatings from './compare/TeamRatings'
+import TeamPredictions from './compare/TeamPredictions'
 import { predictionMixin } from './mixins/predictionMixin'
 //import { TimelineMax, TweenMax } from 'gsap'
 
 export default {
   name: "TeamCompare",
   components: {
-    TeamRatings
+    TeamRatings,
+    TeamPredictions
   },
   mixins: [predictionMixin],
   data() {

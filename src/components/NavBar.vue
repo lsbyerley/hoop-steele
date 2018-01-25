@@ -1,7 +1,9 @@
 <template>
   <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <router-link to="/" class="navbar-item" @click.native="showNav = false"><h1>Steele Hoops</h1></router-link>
+      <router-link to="/" class="navbar-item" @click.native="showNav = false">
+        <img src="../assets/logo.png" alt="Steele Hoops Logo">
+      </router-link>
       <div class="navbar-burger" @click="showNav = !showNav" :class="{ 'is-active': showNav }">
         <span></span>
         <span></span>
@@ -32,6 +34,7 @@ export default {
 <style scoped lang="scss">
 .navbar {
   z-index: 10;
+  font-family: 'Anton', sans-serif;
 
   .navbar-burger {
     span {
