@@ -7,13 +7,17 @@ import Buefy from "buefy";
 import { store } from "./store/index";
 import routes from './routes.js';
 
+// for all dates
+process.env.TZ = 'America/New_York';
 Vue.config.productionTip = process.env.NODE_ENV === 'production'
 
 //Vue.use(Buefy);
 Vue.component(Buefy.Autocomplete.name, Buefy.Autocomplete)
-Vue.component(Buefy.Select.name, Buefy.Select)
+Vue.component(Buefy.Datepicker.name, Buefy.Datepicker)
 Vue.component(Buefy.Field.name, Buefy.Field)
 Vue.component(Buefy.Input.name, Buefy.Input)
+Vue.component(Buefy.Loading.name, Buefy.Loading)
+Vue.component(Buefy.Select.name, Buefy.Select)
 Vue.component(Buefy.Tooltip.name, Buefy.Tooltip)
 
 Vue.use(VueRouter);

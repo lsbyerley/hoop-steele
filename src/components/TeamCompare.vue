@@ -2,6 +2,8 @@
 
   <section class="page-content">
 
+    <b-loading :active="!ratingsLoaded" :canCancel="false"></b-loading>
+
     <div class="team-compare">
 
       <section class="hero">
@@ -96,6 +98,11 @@ export default {
     TeamPredictions
   },
   mixins: [predictionMixin],
+  created() {
+    if (!this.ratingsLoaded) {
+      this.$store.dispatch("getTeamRatings");
+    }
+  },
   data() {
     return {
       teamAway: (this.$store.state.selectedAwayTeam) ? this.$store.state.selectedAwayTeam.team : '',

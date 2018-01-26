@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import moment from 'moment'
 
 const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:8000' : '';
 
@@ -28,16 +29,28 @@ export const store = new Vuex.Store({
         console.error(err)
       })
     },
-    getGames: ({ commit }) => {
-      const url = `${apiUrlBase}/api/games`
-      axios.get(url, { headers: { bucedup: 'hsclient198827' } }).then((res) => {
-        commit('setScoreboard', { scoreboard: res.data })
-        commit('setScoreboardLoaded', { scoreboardLoaded: true })
-      }).catch((err) => {
-        console.error(err)
-        commit('setScoreboardLoaded', { scoreboardLoaded: true })
-        commit('scoreboardError', { scoreboardError: true })
+    getGames: ({ commit }, payload) => {
+
+      let url = `${apiUrlBase}/api/games`
+      if (payload && payload.date) {
+        const dateParam = moment(payload.date).format('YYYYMMDD')
+        url = `${url}/${dateParam}`
+      }
+
+      return new Promise((resolve, reject) => {
+        commit('setScoreboardLoaded', { scoreboardLoaded: false })
+        axios.get(url, { headers: { bucedup: 'hsclient198827' } }).then((res) => {
+          commit('setScoreboard', { scoreboard: res.data })
+          commit('setScoreboardLoaded', { scoreboardLoaded: true })
+          resolve()
+        }).catch((err) => {
+          console.error(err)
+          commit('setScoreboardLoaded', { scoreboardLoaded: true })
+          commit('scoreboardError', { scoreboardError: true })
+          reject()
+        })
       })
+
     }
   },
   mutations: {
@@ -58,7 +71,10 @@ export const store = new Vuex.Store({
     },
     setTeamSelected: (state, { team, type }) => {
       const teamToSelect = (type === 'away') ? 'selectedAwayTeam' : 'selectedHomeTeam'
-      state[teamToSelect] = team;
+      state[teamToSelect] = team
+    },
+    setScoreboardDate: (state, { newDate }) => {
+      state.scoreboardDate = newDate
     }
   },
   getters: {

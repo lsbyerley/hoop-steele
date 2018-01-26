@@ -2,6 +2,8 @@
 
   <section class="page-content">
 
+    <b-loading :active="!allDataLoaded" :canCancel="false"></b-loading>
+
     <div class="scoreboard">
 
       <section class="hero">
@@ -18,9 +20,20 @@
         <div class="container">
           <div class="box filters-panel">
             <div class="level">
-              <div class="level-item game-date">
-                <strong>Game Date:</strong>
-                <span v-if="scoreboardLoaded">{{ scoreboard.scoresDateReadable }}</span>
+              <div class="level-item game-date filter">
+                <b-field label="Select a date">
+                  <b-datepicker
+                    :value="scoreboardDate"
+                    @input="changeScoreboardDate"
+                    :focused-date="scoreboardDate"
+                    :min-date="dpDates.minDate"
+                    :max-date="dpDates.maxDate"
+                    :loading="!allDataLoaded"
+                    icon-pack="fa"
+                    icon="calendar"
+                  >
+                  </b-datepicker>
+                </b-field>
               </div>
               <div class="level-item">
                 <strong>Predictions</strong>
@@ -55,9 +68,8 @@
           <div class="notification is-danger" v-show="scoreboardError">
             There was error loading the games. Please try reloading the page
           </div>
-          <div class="scoreboard-loading" v-show="!allDataLoaded">
-            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-            <span class="sr-only">Loading...</span>
+          <div class="notification is-warning" v-if="(filteredGames.length === 0 && scoreboardError === false && scoreboardLoaded === true)">
+            No games match the selected filters.
           </div>
           <div class="columns is-multiline">
             <div class="column is-half-tablet is-one-third-fullhd" v-for="game in filteredGames">
@@ -80,10 +92,19 @@ import { majorConfs } from '@/cbbData'
 import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
 import Fuse from 'fuse.js'
+import moment from 'moment'
 
 export default {
   name: "Scoreboard",
   mixins: [predictionMixin],
+  created() {
+    if (!this.ratingsLoaded) {
+      this.$store.dispatch('getTeamRatings');
+    }
+    if (!this.scoreboardLoaded) {
+      this.$store.dispatch('getGames');
+    }
+  },
   data() {
     return {
       teamSearchInput: '',
@@ -106,6 +127,15 @@ export default {
     ]),
     allDataLoaded() {
       return (this.scoreboardLoaded && this.ratingsLoaded)
+    },
+    scoreboardDate() {
+      return (this.allDataLoaded) ? moment(this.scoreboard.date, 'YYYYMMDD').toDate() : moment( moment().format('YYYYMMDD'), 'YYYYMMDD').toDate()
+    },
+    dpDates() {
+      return {
+        minDate: moment(this.scoreboardDate, 'YYYYMMDD').subtract(10, "day").toDate(),
+        maxDate: moment(this.scoreboardDate, 'YYYYMMDD').add(5, "day").toDate()
+      }
     },
     games() {
       if (this.allDataLoaded) {
@@ -149,8 +179,8 @@ export default {
       }
     },
     filteredGames() {
+      let filteredGames = []
       if (this.allDataLoaded) {
-        let filteredGames = []
 
         // Team Search input takes precedence over game filter dropdown
         if ( this.teamSearchInput.length >= 2 ) {
@@ -191,13 +221,17 @@ export default {
 
           }
 
-          return filteredGames
         }
-
       }
+      return filteredGames
     }
   },
   methods: {
+    changeScoreboardDate(newDate) {
+      if (newDate !== this.scoreboardDate) {
+        this.$store.dispatch('getGames', { date: newDate });
+      }
+    },
     calculateCorrectPicks() {
       if (this.allDataLoaded) {
         let totalFinal = 0;
@@ -226,10 +260,6 @@ export default {
 </script>
 
 <style lang="scss">
-.scoreboard-loading {
-  text-align: center;
-  margin: 2rem 0;
-}
 .box.filters-panel {
   margin-bottom: 3rem;
   padding: .5rem;

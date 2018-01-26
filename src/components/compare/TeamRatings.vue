@@ -78,6 +78,18 @@
 
 <script>
 import { cbbData } from '@/cbbData'
+import Fuse from 'fuse.js'
+
+const searchOptions = {
+  shouldSort: true,
+  threshold: 0.6,
+  location: 0,
+  distance: 100,
+  maxPatternLength: 32,
+  minMatchCharLength: 1,
+  keys: [ "location" ]
+};
+const logoFuse = new Fuse(cbbData, searchOptions);
 
 export default {
   name: "TeamRatings",
@@ -94,16 +106,25 @@ export default {
   },
   methods: {
     getTeamLogo(team) {
-      const matchedTeam = this.cbbData.find((td) => {
-        let match = td.location.replace('State', 'St.')
-        return match == team.team
-      })
 
-      if (matchedTeam) {
-        return `http://a1.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/${matchedTeam.id}.png&h=150&w=150`
+      const logoResult = logoFuse.search(team.team);
+      if (logoResult.length > 0) {
+        const teamId = logoResult[0].id
+        return `http://a1.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/${teamId}.png&h=150&w=150`
       } else {
         return 'https://via.placeholder.com/150x150'
       }
+
+      /*const matchedTeam = this.cbbData.find((td) => {
+        let match = td.location.replace('State', 'St.')
+        return match == team.team
+      })*/
+
+      /*if (matchedTeam) {
+        return `http://a1.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/${matchedTeam.id}.png&h=150&w=150`
+      } else {
+        return 'https://via.placeholder.com/150x150'
+      }*/
     },
     getOrdinal(n) {
       //TODO: issue with 112th, 212th, 312th

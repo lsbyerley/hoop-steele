@@ -15,10 +15,6 @@ export default {
   components: {
     NavBar,
     FootBar
-  },
-  created() {
-    this.$store.dispatch("getTeamRatings");
-    this.$store.dispatch("getGames");
   }
 }
 </script>
