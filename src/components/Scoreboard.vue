@@ -29,6 +29,7 @@
                     :min-date="dpDates.minDate"
                     :max-date="dpDates.maxDate"
                     :loading="!allDataLoaded"
+                    :mobile-native="false"
                     icon-pack="fa"
                     icon="calendar"
                   >
