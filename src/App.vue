@@ -33,12 +33,21 @@ export default {
 #app {
   background-color: #F7F7F7;
   font-family: 'Oswald', sans-serif;
-  //display: flex;
-  //min-height: 100vh;
-  //flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 
   .page-content {
-    //flex: 1 0 auto;
+    flex: 1 0 auto;
+  }
+
+  @include mobile() {
+    display: block;
+    min-height: inherit;
+
+    .page-content {
+      flex:none;
+    }
   }
 
   h1, h2, h3, h4, h5, h6 {

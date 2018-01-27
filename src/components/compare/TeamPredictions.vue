@@ -1,7 +1,10 @@
 <template>
   <div class="columns prediction">
     <div class="column is-3">
-      <p class="title is-5">{{ team.team }}</p>
+      <p class="title is-5">
+        <span v-if="this.homeAway === 'away'">@</span>
+        {{ team.team }}
+      </p>
     </div>
     <div class="column is-3">
       <p class="heading">Point Diff</p>

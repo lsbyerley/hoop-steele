@@ -23,7 +23,7 @@
             <div class="box filters-panel">
               <div class="level">
                 <div class="level-item game-date filter">
-                  <b-field label="Select a date">
+                  <b-field label="Game Date">
                     <b-datepicker
                       :value="scoreboardDate"
                       @input="changeScoreboardDate"
@@ -97,7 +97,7 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { majorConfs } from '@/cbbData'
+import { majorConfs, midMajors, conferences } from '@/cbbData'
 import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
 import Fuse from 'fuse.js'
@@ -118,7 +118,7 @@ export default {
   data() {
     return {
       teamSearchInput: '',
-      selectedGameFilter: 'NCAA-D1'
+      selectedGameFilter: 'Top 25'
     }
   },
   components: {
@@ -163,13 +163,19 @@ export default {
 
         return this.scoreboard.games.map((game) => {
 
-          const awayTeamResult = ratingsFuse.search(game.away.location);
+          let awayLoc = game.away.location
+          let homeLoc = game.home.location
+          // stupid hack for NC State (kenpom its North Carolina St.)
+          if (awayLoc === 'NC State') { awayLoc = 'North Carolina St.' }
+          if (homeLoc === 'NC State') { homeLoc = 'North Carolina St.' }
+
+          const awayTeamResult = ratingsFuse.search(awayLoc);
           if (awayTeamResult.length > 0) {
             game.away.kenPomRating = awayTeamResult[0]
             game.away.ratingsMatch = game.away.location+'-'+awayTeamResult[0].team
           }
 
-          const homeTeamResult = ratingsFuse.search(game.home.location);
+          const homeTeamResult = ratingsFuse.search(homeLoc);
           if (homeTeamResult.length > 0) {
             game.home.kenPomRating = homeTeamResult[0]
             game.home.ratingsMatch = game.home.location+'-'+homeTeamResult[0].team
@@ -199,7 +205,7 @@ export default {
             const home = game.home.shortName.toLowerCase();
             return ( away.includes(this.teamSearchInput) || home.includes(this.teamSearchInput) )
           })
-          this.selectedGameFilter = 'NCAA-D1'
+          this.selectedGameFilter = 'Top 25'
           return filteredGames
 
         } else {
@@ -216,8 +222,7 @@ export default {
 
           } else if (this.selectedGameFilter === 'Mid-Majors') {
             filteredGames = this.games.filter((game) => {
-              const gameConf = game.conference || ''
-              if (gameConf && !majorConfs.includes(gameConf)) {
+              if (midMajors.includes(game.away.confId) || midMajors.includes(game.home.confId)) {
                 return true
               }
               return false
@@ -225,8 +230,15 @@ export default {
 
           } else {
             filteredGames = this.games.filter((game) => {
-              const gameConf = game.conference || ''
-              return ( gameConf && gameConf === this.selectedGameFilter )
+              const awayConf = conferences.find(function(conf) {
+                return conf.id === game.away.confId
+              })
+              const homeConf = conferences.find(function(conf) {
+                return conf.id === game.home.confId
+              })
+              return ( (awayConf && awayConf.name === this.selectedGameFilter) || (homeConf && homeConf.name === this.selectedGameFilter) )
+              //const gameConf = game.conference || ''
+              //return ( gameConf && gameConf === this.selectedGameFilter )
             })
 
           }
@@ -347,7 +359,7 @@ export default {
           text-align: center;
         }
 
-        .span.select {
+        span.select {
           width: 100%;
 
           select {

@@ -172,7 +172,7 @@ export default {
       // In .5 seconds we want x to go to 0
       tl.to(el, 0.5, {
         x: 0,
-        ease: Power4.easeIn
+        ease: Power4.easeOut
       });
 
       // In 1 second we want the scale to go from .8 to 1
@@ -192,6 +192,8 @@ export default {
     }
   },
   destroyed() {
+    this.teamAway = ''
+    this.teamHome = ''
     this.$store.commit("setTeamSelected", { team: undefined, type: 'away' })
     this.$store.commit("setTeamSelected", { team: undefined, type: 'home' })
   }

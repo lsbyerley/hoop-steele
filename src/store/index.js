@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
+import { conferences } from '@/cbbData'
 
 const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:8000' : '';
 
@@ -80,10 +81,22 @@ export const store = new Vuex.Store({
   getters: {
     filterOptions: state => {
       if (state.scoreboardLoaded && state.ratingsLoaded) {
+
+        let totalGames = 0
         let addedFilterOptions = []
         state.scoreboard.games.forEach((game) => {
-          if (game.conference && !addedFilterOptions.includes(game.conference)) {
-            addedFilterOptions.push(game.conference)
+          totalGames += 1;
+          const awayConf = conferences.find(function(conf) {
+            return conf.id === game.away.confId
+          })
+          const homeConf = conferences.find(function(conf) {
+            return conf.id === game.home.confId
+          })
+          if (awayConf && !addedFilterOptions.includes(awayConf.name)) {
+            addedFilterOptions.push(awayConf.name)
+          }
+          if (homeConf && !addedFilterOptions.includes(homeConf.name)) {
+            addedFilterOptions.push(homeConf.name)
           }
         })
         addedFilterOptions.sort((a, b) => {

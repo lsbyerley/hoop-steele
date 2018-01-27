@@ -5,6 +5,34 @@ const moment = require('moment');
 const axios = require('axios');
 const cheerio = require('cheerio');
 
+const cache = function cache(duration) {
+	return function(req, res, next) {
+		const key = '__hoopsteele-cache-__' + req.originalUrl || req.url;
+		const cachedBody = mcache.get(key);
+		if (cachedBody) {
+			if (env === 'development') { console.log('HITTIN CACHE') }
+			res.send(cachedBody);
+			return;
+		} else {
+			if (env === 'development') { console.log('FRESH RESPONSE') }
+			res.sendResponse = res.send;
+			res.send = function(body) {
+				mcache.put(key, body, duration * 1000);
+				res.sendResponse(body);
+			};
+			next();
+		}
+	};
+};
+
+function checkHeader(req, res, next) {
+	if (req.headers.bucedup && req.headers.bucedup === 'hsclient198827') {
+		return next();
+	} else {
+		return res.status(401).json({'valid': false})
+	}
+}
+
 function normalizeTeam(obj, gameOdds) {
 
 	const teamAbbrev = obj.team.abbreviation
@@ -50,36 +78,9 @@ function normalizeTeam(obj, gameOdds) {
 		teamSpread,
 		score: obj.score,
 		color: obj.team.color,
+		confId: parseInt(obj.team.conferenceId),
 		record: record,
 		logo: `http://a1.espncdn.com/combiner/i?img=/i/teamlogos/ncaa/500/${obj.team.id}.png&h=150&w=150`
-	}
-}
-
-const cache = function cache(duration) {
-	return function(req, res, next) {
-		const key = '__hoopsteele-cache-__' + req.originalUrl || req.url;
-		const cachedBody = mcache.get(key);
-		if (cachedBody) {
-			if (env === 'development') { console.log('HITTIN CACHE') }
-			res.send(cachedBody);
-			return;
-		} else {
-			if (env === 'development') { console.log('FRESH RESPONSE') }
-			res.sendResponse = res.send;
-			res.send = function(body) {
-				mcache.put(key, body, duration * 1000);
-				res.sendResponse(body);
-			};
-			next();
-		}
-	};
-};
-
-function checkHeader(req, res, next) {
-	if (req.headers.bucedup && req.headers.bucedup === 'hsclient198827') {
-		return next();
-	} else {
-		return res.status(401).json({'valid': false})
 	}
 }
 
@@ -90,13 +91,14 @@ router.get('/testheader', checkHeader, (req, res) => {
 router.get('/games/:date*?', checkHeader, cache(200), (req, res) => {
 
 	let scoreboardDate = moment().format('YYYYMMDD')
-	//const scoreboardDate = moment().subtract(1, "day").format('YYYYMMDD') //for testing
 	if (req.params && req.params.date) {
 		const paramDate = req.params.date
 		if ( moment(paramDate, 'YYYYMMDD').isValid() ) {
 			scoreboardDate = paramDate
 		}
 	}
+
+	//scoreboardDate = moment().subtract(1, "day").format('YYYYMMDD') //for testing
 
 	const url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300&dates='+scoreboardDate;
 
@@ -109,11 +111,6 @@ router.get('/games/:date*?', checkHeader, cache(200), (req, res) => {
 			const gameDate = moment(event.date).format('MMMM Do YYYY')
 			const gameTime = moment(event.date).format('h:mm A')
 			const isConfGame = event.competitions[0].conferenceCompetition
-
-			let conference = ''
-			if (isConfGame) {
-				conference = event.competitions[0].groups.shortName
-			}
 
 			let gameOdds = {}
 			if (event.competitions[0].odds && event.competitions[0].odds.length > 0) {
@@ -154,8 +151,7 @@ router.get('/games/:date*?', checkHeader, cache(200), (req, res) => {
 				home: homeTeam,
 				gameOdds,
 				broadcast,
-				isConfGame,
-				conference
+				isConfGame
 			}
 
 		})

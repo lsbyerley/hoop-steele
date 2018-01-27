@@ -1,42 +1,139 @@
-export const midMajors = [
-  'Am. East',
-  'A-Sun',
-  'Big Sky',
-  'Big South',
-  'Big West',
-  'CAA',
-  'Horizon',
-  'Independents',
-  'Ivy',
-  'MAAC',
-  'MEAC',
-  'MVC',
-  'Northeast',
-  'Ohio Valley',
-  'Patriot',
-  'Southern',
-  'Southland',
-  'SWAC',
-  'Summit',
-  'Sun Belt',
-  'WCC',
-  'WAC'
-]
+export const midMajors = [1,46,5,6,9,10,45,12,13,14,16,18,19,20,22,24,25,26,49,27,29,30];
 
-export const majorConfs = [
-  'ACC',
-  'American',
-  'A 10',
-  'Big 12',
-  'Big Ten',
-  'Big East',
-  'C-USA',
-  'MW',
-  'SEC',
-  'Pac-12'
-]
+export const majorConfs = [2,62,3,8,7,4,11,44,23,21];
 
-export const cbbData = [
+export const conferences = [
+  {
+    name: "A 10",
+    id: 3
+  },
+  {
+    name: "A-Sun",
+    id: 46
+  },
+  {
+    name: "ACC",
+    id: 2
+  },
+  {
+    name: "Am. East",
+    id: 1
+  },
+  {
+    name: "American",
+    id: 62
+  },
+  {
+    name: "Big 12",
+    id: 8
+  },
+  {
+    name: "Big East",
+    id: 4
+  },
+  {
+    name: "Big Sky",
+    id: 5
+  },
+  {
+    name: "Big South",
+    id: 6
+  },
+  {
+    name: "Big Ten",
+    id: 7
+  },
+  {
+    name: "Big West",
+    id: 9
+  },
+  {
+    name: "C-USA",
+    id: 11
+  },
+  {
+    name: "CAA",
+    id: 10
+  },
+  {
+    name: "Horizon",
+    id: 45
+  },
+  {
+    name: "Ivy",
+    id: 12
+  },
+  {
+    name: "MAAC",
+    id: 13
+  },
+  {
+    name: "MAC",
+    id: 14
+  },
+  {
+    name: "MEAC",
+    id: 16
+  },
+  {
+    name: "MVC",
+    id: 18
+  },
+  {
+    name: "MW",
+    id: 44
+  },
+  {
+    name: "NEC",
+    id: 19
+  },
+  {
+    name: "OVC",
+    id: 20
+  },
+  {
+    name: "Pac-12",
+    id: 21
+  },
+  {
+    name: "Patriot",
+    id: 22
+  },
+  {
+    name: "SEC",
+    id: 23
+  },
+  {
+    name: "SWAC",
+    id: 26
+  },
+  {
+    name: "Southern",
+    id: 24
+  },
+  {
+    name: "Southland",
+    id: 25
+  },
+  {
+    name: "Summit",
+    id: 49
+  },
+  {
+    name: "Sun Belt",
+    id: 27
+  },
+  {
+    name: "WAC",
+    id: 30
+  },
+  {
+    name: "WCC",
+    id: 29
+  }
+];
+
+export const teams = [
   {
     id: 2,
     location: "Auburn",
