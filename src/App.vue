@@ -30,17 +30,16 @@ export default {
 @import "~bulma";
 @import "~buefy/src/scss/buefy";
 
-body, html, #app {
-  //height: 100%;
-}
 #app {
   background-color: #F7F7F7;
   font-family: 'Oswald', sans-serif;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
 
   .page-content {
     flex: 1 0 auto;
+    //flex-grow: 1;
   }
 
   h1, h2, h3, h4, h5, h6 {

@@ -1,89 +1,97 @@
 <template>
 
-  <section class="page-content">
+  <transition @enter="enter" @leave="leave" :css="false">
 
-    <b-loading :active="!allDataLoaded" :canCancel="false"></b-loading>
+    <section class="page-content">
 
-    <div class="scoreboard">
+      <b-loading :active="!allDataLoaded" :canCancel="false"></b-loading>
 
-      <section class="hero">
-        <div class="hero-body">
+      <div class="scoreboard">
+
+        <section class="hero">
+          <div class="hero-body">
+            <div class="container">
+              <h1 class="title is-4">Scoreboard</h1>
+              <h2 class="subtitle is-5">Scores, Predictions, Odds, and Rankings</h2>
+            </div>
+          </div>
+        </section>
+
+        <section class="section games">
+
           <div class="container">
-            <h1 class="title is-4">Scoreboard</h1>
-            <h2 class="subtitle is-5">Scores, Predictions, Odds, and Rankings</h2>
-          </div>
-        </div>
-      </section>
-
-      <section class="section games">
-
-        <div class="container">
-          <div class="box filters-panel">
-            <div class="level">
-              <div class="level-item game-date filter">
-                <b-field label="Select a date">
-                  <b-datepicker
-                    :value="scoreboardDate"
-                    @input="changeScoreboardDate"
-                    :focused-date="scoreboardDate"
-                    :min-date="dpDates.minDate"
-                    :max-date="dpDates.maxDate"
-                    :loading="!allDataLoaded"
-                    :mobile-native="false"
-                    icon-pack="fa"
-                    icon="calendar"
-                  >
-                  </b-datepicker>
-                </b-field>
-              </div>
-              <div class="level-item">
-                <strong>Predictions</strong>
-                <span class="icon">
-                  <i class="fa fa-check"></i>
-                </span>
-                {{ calculateCorrectPicks() }}
-              </div>
-              <div class="level-item filter">
-                <b-field label="Team Search">
-                  <b-input v-model.trim="teamSearchInput" placeholder="search.."></b-input>
-                </b-field>
-              </div>
-              <div class="level-item filter">
-                <b-field label="Games Filter">
-                    <b-select placeholder="Games Filter" v-model="selectedGameFilter" :loading="!allDataLoaded">
-                        <option
-                            v-for="option in filterOptions"
-                            :value="option"
-                            :key="option"
-                          >
-                          {{ option }}
-                        </option>
-                    </b-select>
-                </b-field>
+            <div class="box filters-panel">
+              <div class="level">
+                <div class="level-item game-date filter">
+                  <b-field label="Select a date">
+                    <b-datepicker
+                      :value="scoreboardDate"
+                      @input="changeScoreboardDate"
+                      :focused-date="scoreboardDate"
+                      :min-date="dpDates.minDate"
+                      :max-date="dpDates.maxDate"
+                      :loading="!allDataLoaded"
+                      :mobile-native="false"
+                      icon-pack="fa"
+                      icon="calendar"
+                    >
+                    </b-datepicker>
+                  </b-field>
+                </div>
+                <div class="level-item filter">
+                  <div class="field">
+                    <div class="label">Predictions</div>
+                    <div class="control">
+                      <span class="icon">
+                        <i class="fa fa-check"></i>
+                      </span>
+                      {{ calculateCorrectPicks() }}
+                    </div>
+                  </div>
+                </div>
+                <div class="level-item filter">
+                  <b-field label="Team Search">
+                    <b-input v-model.trim="teamSearchInput" placeholder="search.."></b-input>
+                  </b-field>
+                </div>
+                <div class="level-item filter">
+                  <b-field label="Games Filter">
+                      <b-select placeholder="Games Filter" v-model="selectedGameFilter" :loading="!allDataLoaded">
+                          <option
+                              v-for="option in filterOptions"
+                              :value="option"
+                              :key="option"
+                            >
+                            {{ option }}
+                          </option>
+                      </b-select>
+                  </b-field>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="container">
-          <div class="notification is-danger" v-show="scoreboardError">
-            There was error loading the games. Please try reloading the page
-          </div>
-          <div class="notification is-warning" v-if="(filteredGames.length === 0 && scoreboardError === false && scoreboardLoaded === true)">
-            No games match the selected filters.
-          </div>
-          <div class="columns is-multiline">
-            <div class="column is-half-tablet is-one-third-fullhd" v-for="game in filteredGames">
-              <Game :game="game" :key="game.id"></Game>
+          <div class="container">
+            <div class="notification is-danger" v-show="scoreboardError">
+              There was error loading the games. Please try reloading the page
+            </div>
+            <div class="notification is-warning" v-if="(filteredGames.length === 0 && scoreboardError === false && scoreboardLoaded === true)">
+              No games match the selected filters.
+            </div>
+            <div class="columns is-multiline">
+              <div class="column is-half-tablet is-one-third-fullhd" v-for="game in filteredGames">
+                <Game :game="game" :key="game.id"></Game>
+              </div>
             </div>
           </div>
-        </div>
 
-      </section>
+        </section>
 
-    </div>
+      </div>
 
-  </section>
+    </section>
+
+  </transition>
 
 </template>
 
@@ -94,6 +102,7 @@ import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
 import Fuse from 'fuse.js'
 import moment from 'moment'
+import { TimelineMax, TweenMax } from 'gsap'
 
 export default {
   name: "Scoreboard",
@@ -255,12 +264,44 @@ export default {
           return 'No Games Final'
         }
       }
+    },
+    enter(el, done) {
+      const tl = new TimelineMax({
+        onComplete: done
+      })
+
+      tl.set(el, {
+        x: -(window.innerWidth * 1.5),
+        //scale: 0.8,
+        transformOrigin: '50% 50%'
+      })
+
+      tl.to(el, 0.5, {
+        x: 0,
+        ease: Power4.easeOut
+      });
+
+      tl.to(el, 1, {
+        //scale: 1,
+        ease: Power4.easeOut
+      });
+    },
+    leave(el, done) {
+      TweenMax.fromTo(el, 1, {
+        autoAlpha: 1
+      }, {
+        autoAlpha: 0,
+        ease: Power4.easeOut,
+        onComplete: done
+      });
     }
   }
 }
 </script>
 
 <style lang="scss">
+@import '~bulma/sass/utilities/mixins';
+
 .box.filters-panel {
   margin-bottom: 3rem;
   padding: .5rem;
@@ -286,10 +327,42 @@ export default {
       align-items: center;
 
       .label {
-        margin: 0 5px 0 0;
+        margin: 0 10px 0 0;
         vertical-align: middle;
       }
     }
   }
+
+  @include mobile() {
+    .level-item.filter .field {
+      width: 100%;
+
+      .label {
+        margin: 0 1rem 0 0;
+      }
+      .control {
+        flex-grow: 1;
+
+        input {
+          text-align: center;
+        }
+
+        .span.select {
+          width: 100%;
+
+          select {
+            width: 100%;
+            text-align: center;
+            text-align-last: center;
+
+            option {
+              //text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }
 </style>
