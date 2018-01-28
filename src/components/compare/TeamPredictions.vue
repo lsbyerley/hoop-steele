@@ -2,7 +2,7 @@
   <div class="columns prediction">
     <div class="column is-3">
       <p class="title is-5">
-        <span v-if="this.homeAway === 'away'">@</span>
+        <span v-if="this.homeAway === 'home'">@</span>
         {{ team.team }}
       </p>
     </div>
