@@ -4,6 +4,7 @@ const mcache = require('memory-cache');
 const moment = require('moment');
 const axios = require('axios');
 const cheerio = require('cheerio');
+const kpMatches = require('../src/utils/kpMatches');
 
 const cache = function cache(duration) {
 	return function(req, res, next) {
@@ -68,9 +69,14 @@ function normalizeTeam(obj, gameOdds) {
 		rank = obj.curatedRank.current
 	}
 
+	let location = obj.team.location
+	if (kpMatches[obj.team.id]) {
+		location = kpMatches[obj.team.id].kpTeamName
+	}
+
 	return {
 		id: obj.team.id,
-		location: obj.team.location,
+		location,
 		name: obj.team.name,
 		shortName: obj.team.shortDisplayName,
 		abbrev: teamAbbrev,

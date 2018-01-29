@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import moment from 'moment'
-import { conferences } from '@/cbbData'
+import { conferences } from '@/utils/cbbData'
 
 const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:8000' : '';
 

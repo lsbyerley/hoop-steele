@@ -77,17 +77,17 @@
 </template>
 
 <script>
-import { teams } from '@/cbbData'
+import { teams } from '@/utils/cbbData'
 import Fuse from 'fuse.js'
 
 const searchOptions = {
   shouldSort: true,
-  threshold: 0.6,
+  threshold: 0.2,
   location: 0,
   distance: 100,
   maxPatternLength: 32,
   minMatchCharLength: 1,
-  keys: [ "location" ]
+  keys: [ "location", "kpTeamName" ]
 };
 const logoFuse = new Fuse(teams, searchOptions);
 

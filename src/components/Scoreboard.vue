@@ -97,10 +97,10 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex'
-import { majorConfs, midMajors, conferences } from '@/cbbData'
+import { majorConfs, midMajors, conferences } from '@/utils/cbbData'
 import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
-import Fuse from 'fuse.js'
+//import Fuse from 'fuse.js'
 import moment from 'moment'
 import { TimelineMax, TweenMax } from 'gsap'
 
@@ -150,35 +150,44 @@ export default {
     games() {
       if (this.allDataLoaded) {
 
-        const searchOptions = {
+        /*const searchOptions = {
           shouldSort: true,
-          threshold: 0.6,
+          threshold: 0.2,
           location: 0,
           distance: 100,
           maxPatternLength: 32,
           minMatchCharLength: 1,
           keys: [ "team" ]
         };
-        const ratingsFuse = new Fuse(this.teamRatings.ratings, searchOptions);
+        const ratingsFuse = new Fuse(this.teamRatings.ratings, searchOptions);*/
 
         return this.scoreboard.games.map((game) => {
 
-          let awayLoc = game.away.location
-          let homeLoc = game.home.location
-          // stupid hack for NC State (kenpom its North Carolina St.)
-          if (awayLoc === 'NC State') { awayLoc = 'North Carolina St.' }
-          if (homeLoc === 'NC State') { homeLoc = 'North Carolina St.' }
-
-          const awayTeamResult = ratingsFuse.search(awayLoc);
+          /*console.log(game.away.confId != null)
+          const awayTeamResult = (game.away.confId != null) ? ratingsFuse.search(game.away.location) : 0;
           if (awayTeamResult.length > 0) {
             game.away.kenPomRating = awayTeamResult[0]
             game.away.ratingsMatch = game.away.location+'-'+awayTeamResult[0].team
           }
 
-          const homeTeamResult = ratingsFuse.search(homeLoc);
+          const homeTeamResult = (game.home.confId != null) ? ratingsFuse.search(game.home.location) : 0;
           if (homeTeamResult.length > 0) {
             game.home.kenPomRating = homeTeamResult[0]
             game.home.ratingsMatch = game.home.location+'-'+homeTeamResult[0].team
+          }*/
+
+          for (var rating of this.teamRatings.ratings) {
+            if (rating.team === game.away.location) {
+              game.away.kenPomRating = rating
+              break;
+            }
+          }
+
+          for (var rating of this.teamRatings.ratings) {
+            if (rating.team === game.home.location) {
+              game.home.kenPomRating = rating
+              break;
+            }
           }
 
           if (game.away.kenPomRating && game.home.kenPomRating) {

@@ -20,6 +20,17 @@
         <section class="section team-select">
 
           <div class="container">
+
+            <div class="columns">
+              <div class="column">
+                <div v-if="gamePrediction" class="box game-prediction">
+                  <div class="title is-4 has-text-centered">Game Prediction</div>
+                  <TeamPredictions homeAway="away" :team="selectedAwayTeam" :gamePrediction="gamePrediction"></TeamPredictions>
+                  <TeamPredictions homeAway="home" :team="selectedHomeTeam" :gamePrediction="gamePrediction"></TeamPredictions>
+                </div>
+              </div>
+            </div>
+
             <div class="columns">
 
               <div class="column is-half">
@@ -64,16 +75,6 @@
                 </div>
               </div>
 
-            </div>
-
-            <div class="columns">
-              <div class="column">
-                <div v-if="gamePrediction" class="box game-prediction">
-                  <div class="title is-4 has-text-centered">Game Prediction</div>
-                  <TeamPredictions homeAway="away" :team="selectedAwayTeam" :gamePrediction="gamePrediction"></TeamPredictions>
-                  <TeamPredictions homeAway="home" :team="selectedHomeTeam" :gamePrediction="gamePrediction"></TeamPredictions>
-                </div>
-              </div>
             </div>
 
           </div>
