@@ -15,7 +15,7 @@ module.exports = {
 	127: { kpTeamName: "Michigan St." },
 	145: { kpTeamName: "Mississippi" },
 	147: { kpTeamName: "Montana St." },
-	152: { kpTeamName: "NC St." },
+	152: { kpTeamName: "North Carolina St." },
 	166: { kpTeamName: "New Mexico St." },
 	193: { kpTeamName: "Miami OH" },
 	194: { kpTeamName: "Ohio St." },

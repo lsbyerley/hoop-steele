@@ -204,7 +204,7 @@ export const teams = [
   { id: 149, location: "Montana", abbrev: "MONT" },
   { id: 150, location: "Duke", abbrev: "DUKE" },
   { id: 151, location: "East Carolina", abbrev: "ECU" },
-  { id: 152, location: "NC State", abbrev: "NCST", kpTeamName: "NC St." },
+  { id: 152, location: "NC State", abbrev: "NCST", kpTeamName: "North Carolina St." },
   { id: 153, location: "North Carolina", abbrev: "UNC" },
   { id: 154, location: "Wake Forest", abbrev: "WAKE" },
   { id: 155, location: "North Dakota", abbrev: "UND" },

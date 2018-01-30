@@ -76,12 +76,14 @@ export default {
   .team {
     flex-direction: row;
     .at {
+      margin-right: 3px;
+      font-weight: bold;
       font-size: .75rem;
     }
   }
   @include mobile() {
     .title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
     }
   }
 }
