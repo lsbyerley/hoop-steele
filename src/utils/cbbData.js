@@ -4,132 +4,164 @@ export const majorConfs = [2, 62, 3, 8, 7, 4, 11, 44, 23, 21];
 
 export const conferences = [
   {
-    name: "A 10",
-    id: 3
+    display: "A 10",
+    id: 3,
+    value: "a-10"
   },
   {
-    name: "A-Sun",
-    id: 46
+    display: "A-Sun",
+    id: 46,
+    value: "a-sun"
   },
   {
-    name: "ACC",
-    id: 2
+    display: "ACC",
+    id: 2,
+    value: "acc"
   },
   {
-    name: "Am. East",
-    id: 1
+    display: "Am. East",
+    id: 1,
+    value: "am-east"
   },
   {
-    name: "American",
-    id: 62
+    display: "American",
+    id: 62,
+    value: "american"
   },
   {
-    name: "Big 12",
-    id: 8
+    display: "Big 12",
+    id: 8,
+    value: "big-12"
   },
   {
-    name: "Big East",
-    id: 4
+    display: "Big East",
+    id: 4,
+    value: "big-east"
   },
   {
-    name: "Big Sky",
-    id: 5
+    display: "Big Sky",
+    id: 5,
+    value: "big-sky"
   },
   {
-    name: "Big South",
-    id: 6
+    display: "Big South",
+    id: 6,
+    value: "big-south"
   },
   {
-    name: "Big Ten",
-    id: 7
+    display: "Big Ten",
+    id: 7,
+    value: "big-ten"
   },
   {
-    name: "Big West",
-    id: 9
+    display: "Big West",
+    id: 9,
+    value: "big-west"
   },
   {
-    name: "C-USA",
-    id: 11
+    display: "C-USA",
+    id: 11,
+    value: "c-usa"
   },
   {
-    name: "CAA",
-    id: 10
+    display: "CAA",
+    id: 10,
+    value: "caa"
   },
   {
-    name: "Horizon",
-    id: 45
+    display: "Horizon",
+    id: 45,
+    value: "horizon"
   },
   {
-    name: "Ivy",
-    id: 12
+    display: "Ivy",
+    id: 12,
+    value: "ivy"
   },
   {
-    name: "MAAC",
-    id: 13
+    display: "MAAC",
+    id: 13,
+    value: "maac"
   },
   {
-    name: "MAC",
-    id: 14
+    display: "MAC",
+    id: 14,
+    value: "mac"
   },
   {
-    name: "MEAC",
-    id: 16
+    display: "MEAC",
+    id: 16,
+    value: "meac"
   },
   {
-    name: "MVC",
-    id: 18
+    display: "MVC",
+    id: 18,
+    value: "mvc"
   },
   {
-    name: "MW",
-    id: 44
+    display: "MW",
+    id: 44,
+    value: "mw"
   },
   {
-    name: "NEC",
-    id: 19
+    display: "NEC",
+    id: 19,
+    value: "nec"
   },
   {
-    name: "OVC",
-    id: 20
+    display: "OVC",
+    id: 20,
+    value: "ovc"
   },
   {
-    name: "Pac-12",
-    id: 21
+    display: "Pac-12",
+    id: 21,
+    value: "pac-12"
   },
   {
-    name: "Patriot",
-    id: 22
+    display: "Patriot",
+    id: 22,
+    value: "patriot"
   },
   {
-    name: "SEC",
-    id: 23
+    display: "SEC",
+    id: 23,
+    value: "sec"
   },
   {
-    name: "SWAC",
-    id: 26
+    display: "SWAC",
+    id: 26,
+    value: "swac"
   },
   {
-    name: "Southern",
-    id: 24
+    display: "Southern",
+    id: 24,
+    value: "southern"
   },
   {
-    name: "Southland",
-    id: 25
+    display: "Southland",
+    id: 25,
+    value: "southland"
   },
   {
-    name: "Summit",
-    id: 49
+    display: "Summit",
+    id: 49,
+    value: "summit"
   },
   {
-    name: "Sun Belt",
-    id: 27
+    display: "Sun Belt",
+    id: 27,
+    value: "sun-belt"
   },
   {
-    name: "WAC",
-    id: 30
+    display: "WAC",
+    id: 30,
+    value: "wac"
   },
   {
-    name: "WCC",
-    id: 29
+    display: "WCC",
+    id: 29,
+    value: "wcc"
   }
 ];
 

@@ -109,6 +109,7 @@ export default {
     }
   },
   data() {
+    //console.log(this.$route.params)
     return {
       teamAway: (this.$store.state.selectedAwayTeam) ? this.$store.state.selectedAwayTeam.team : '',
       teamHome: (this.$store.state.selectedHomeTeam) ? this.$store.state.selectedHomeTeam.team : '',

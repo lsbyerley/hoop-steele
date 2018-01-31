@@ -8,6 +8,21 @@ const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:
 
 Vue.use(Vuex)
 
+const defaultFilters = [
+  {
+    value: 'top-25',
+    display: 'Top 25'
+  },
+  {
+    value: 'mid-majors',
+    display: 'Mid Majors'
+  },
+  {
+    value: 'ncaa-d1',
+    display: 'NCAA-D1'
+  }
+]
+
 export const store = new Vuex.Store({
   state: {
     scoreboardLoaded: false,
@@ -16,7 +31,7 @@ export const store = new Vuex.Store({
     isComparisonActive: false,
     selectedAwayTeam: undefined,
     selectedHomeTeam: undefined,
-    filterOptions: ['Top 25', 'Mid-Majors', 'NCAA-D1'],
+    filterOptions: defaultFilters,
     teamRatings: {},
     scoreboard: {}
   },
@@ -92,16 +107,16 @@ export const store = new Vuex.Store({
           const homeConf = conferences.find(function(conf) {
             return conf.id === game.home.confId
           })
-          if (awayConf && !addedFilterOptions.includes(awayConf.name)) {
-            addedFilterOptions.push(awayConf.name)
+          if (awayConf && !addedFilterOptions.find(f => f.id === awayConf.id)) {
+            addedFilterOptions.push(awayConf)
           }
-          if (homeConf && !addedFilterOptions.includes(homeConf.name)) {
-            addedFilterOptions.push(homeConf.name)
+          if (homeConf && !addedFilterOptions.find(f => f.id === homeConf.id)) {
+            addedFilterOptions.push(homeConf)
           }
         })
         addedFilterOptions.sort((a, b) => {
-          if (a > b) { return 1 }
-          else if (a < b) { return -1 }
+          if (a.display > b.display) { return 1 }
+          else if (a.display < b.display) { return -1 }
           return 0;
         })
         const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)

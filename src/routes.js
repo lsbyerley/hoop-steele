@@ -8,14 +8,14 @@ export default [
     redirect: '/scoreboard'
   },
   {
-    path: '/scoreboard',
+    path: '/scoreboard/:date?/:filter?',
     component: Scoreboard,
     meta: {
       title: 'Steele Hoops: Scoreboard'
     }
   },
   {
-    path: '/team-compare',
+    path: '/team-compare/:awayTeam?/:homeTeam?',
     component: TeamCompare,
     meta: {
       title: 'Steele Hoops: Team Compare'

@@ -59,10 +59,10 @@
                       <b-select placeholder="Games Filter" v-model="selectedGameFilter" :loading="!allDataLoaded">
                           <option
                               v-for="option in filterOptions"
-                              :value="option"
-                              :key="option"
+                              :value="option.value"
+                              :key="option.value"
                             >
-                            {{ option }}
+                            {{ option.display }}
                           </option>
                       </b-select>
                   </b-field>
@@ -75,7 +75,7 @@
             <div class="notification is-danger" v-show="scoreboardError">
               There was error loading the games. Please try reloading the page
             </div>
-            <div class="notification is-warning" v-if="(filteredGames.length === 0 && scoreboardError === false && scoreboardLoaded === true)">
+            <div class="notification is-warning" v-show="showNoGamesNotif">
               No games match the selected filters.
             </div>
             <div class="columns is-multiline">
@@ -100,7 +100,6 @@ import { mapState, mapGetters } from 'vuex'
 import { majorConfs, midMajors, conferences } from '@/utils/cbbData'
 import { predictionMixin } from './mixins/predictionMixin'
 import Game from './game/Game'
-//import Fuse from 'fuse.js'
 import moment from 'moment'
 import { TimelineMax, TweenMax } from 'gsap'
 
@@ -116,9 +115,10 @@ export default {
     }
   },
   data() {
+    //console.log(this.$route.params)
     return {
       teamSearchInput: '',
-      selectedGameFilter: 'Top 25'
+      selectedGameFilter: this.$store.state.filterOptions[0].value
     }
   },
   components: {
@@ -138,43 +138,22 @@ export default {
     allDataLoaded() {
       return (this.scoreboardLoaded && this.ratingsLoaded)
     },
+    showNoGamesNotif() {
+      return (this.filteredGames.length === 0 && this.scoreboardError === false && this.scoreboardLoaded === true)
+    },
     scoreboardDate() {
       return (this.allDataLoaded) ? moment(this.scoreboard.date, 'YYYYMMDD').toDate() : moment( moment().format('YYYYMMDD'), 'YYYYMMDD').toDate()
     },
     dpDates() {
       return {
-        minDate: moment(this.scoreboardDate, 'YYYYMMDD').subtract(10, "day").toDate(),
-        maxDate: moment(this.scoreboardDate, 'YYYYMMDD').add(5, "day").toDate()
+        minDate: moment(this.scoreboardDate, 'YYYYMMDD').subtract(1, "day").toDate(),
+        maxDate: moment(this.scoreboardDate, 'YYYYMMDD').add(3, "day").toDate()
       }
     },
     games() {
       if (this.allDataLoaded) {
 
-        /*const searchOptions = {
-          shouldSort: true,
-          threshold: 0.2,
-          location: 0,
-          distance: 100,
-          maxPatternLength: 32,
-          minMatchCharLength: 1,
-          keys: [ "team" ]
-        };
-        const ratingsFuse = new Fuse(this.teamRatings.ratings, searchOptions);*/
-
         return this.scoreboard.games.map((game) => {
-
-          /*console.log(game.away.confId != null)
-          const awayTeamResult = (game.away.confId != null) ? ratingsFuse.search(game.away.location) : 0;
-          if (awayTeamResult.length > 0) {
-            game.away.kenPomRating = awayTeamResult[0]
-            game.away.ratingsMatch = game.away.location+'-'+awayTeamResult[0].team
-          }
-
-          const homeTeamResult = (game.home.confId != null) ? ratingsFuse.search(game.home.location) : 0;
-          if (homeTeamResult.length > 0) {
-            game.home.kenPomRating = homeTeamResult[0]
-            game.home.ratingsMatch = game.home.location+'-'+homeTeamResult[0].team
-          }*/
 
           for (var rating of this.teamRatings.ratings) {
             if (rating.team === game.away.location) {
@@ -214,22 +193,22 @@ export default {
             const home = game.home.shortName.toLowerCase();
             return ( away.includes(this.teamSearchInput) || home.includes(this.teamSearchInput) )
           })
-          this.selectedGameFilter = 'Top 25'
+          this.selectedGameFilter = 'top-25'
           return filteredGames
 
         } else {
 
-          if (this.selectedGameFilter === 'NCAA-D1') {
+          if (this.selectedGameFilter === 'ncaa-d1') {
             return this.games
 
-          } else if (this.selectedGameFilter === 'Top 25') {
+          } else if (this.selectedGameFilter === 'top-25') {
             filteredGames = this.games.filter((game) => {
               const awayRank = game.away.rank || ''
               const homeRank = game.home.rank || ''
               return (awayRank || homeRank)
             })
 
-          } else if (this.selectedGameFilter === 'Mid-Majors') {
+          } else if (this.selectedGameFilter === 'mid-majors') {
             filteredGames = this.games.filter((game) => {
               if (midMajors.includes(game.away.confId) || midMajors.includes(game.home.confId)) {
                 return true
@@ -245,7 +224,7 @@ export default {
               const homeConf = conferences.find(function(conf) {
                 return conf.id === game.home.confId
               })
-              return ( (awayConf && awayConf.name === this.selectedGameFilter) || (homeConf && homeConf.name === this.selectedGameFilter) )
+              return ( (awayConf && awayConf.value === this.selectedGameFilter) || (homeConf && homeConf.value === this.selectedGameFilter) )
               //const gameConf = game.conference || ''
               //return ( gameConf && gameConf === this.selectedGameFilter )
             })
