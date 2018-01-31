@@ -146,8 +146,8 @@ export default {
     },
     dpDates() {
       return {
-        minDate: moment(this.scoreboardDate, 'YYYYMMDD').subtract(1, "day").toDate(),
-        maxDate: moment(this.scoreboardDate, 'YYYYMMDD').add(3, "day").toDate()
+        minDate: moment( moment().format('YYYYMMDD'), 'YYYYMMDD').subtract(1, "day").toDate(),
+        maxDate: moment( moment().format('YYYYMMDD'), 'YYYYMMDD').add(1, "day").toDate()
       }
     },
     games() {
