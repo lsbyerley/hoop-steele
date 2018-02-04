@@ -152,7 +152,7 @@ export default {
       }
     },
     games() {
-      if (this.allDataLoaded) {
+      if (this.allDataLoaded && !this.scoreboardError) {
 
         return this.scoreboard.games.map((game) => {
 
@@ -185,7 +185,7 @@ export default {
     },
     filteredGames() {
       let filteredGames = []
-      if (this.allDataLoaded) {
+      if (this.allDataLoaded && !this.scoreboardError) {
 
         // Team Search input takes precedence over game filter dropdown
         if ( this.teamSearchInput.length >= 2 ) {
@@ -244,7 +244,7 @@ export default {
       }
     },
     calculateCorrectPicks() {
-      if (this.allDataLoaded) {
+      if (this.allDataLoaded && !this.scoreboardError) {
         let totalFinal = 0;
         let totalCorrect = 0;
         this.filteredGames.forEach((game) => {

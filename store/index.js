@@ -3,10 +3,6 @@ import Vuex from 'vuex'
 import moment from 'moment'
 import { conferences } from '@/utils/cbbData'
 
-//const apiUrlBase = (process.env.NODE_ENV === 'development') ? 'http://localhost:8000' : '';
-//const apiUrlBase = 'http://localhost:8000'
-const apiUrlBase = ''
-
 Vue.use(Vuex)
 
 const defaultFilters = [
@@ -40,7 +36,8 @@ const createStore = () => {
     actions: {
       async getTeamRatings ({ commit }) {
         try {
-          const res = await this.$axios.get('/team-ratings', { headers: { bucedup: 'hsclient198827' } })
+          this.$axios.setHeader('bucedup', 'shclient198827')
+          const res = await this.$axios.get('/team-ratings')
           commit('setTeamRatings', { teamRatings: res.data })
           commit('setRatingsLoaded', { ratingsLoaded: true })
         } catch(err) {
@@ -54,13 +51,14 @@ const createStore = () => {
           url = `${url}/${dateParam}`
         }
         try {
-          const res = await this.$axios.get(url, { headers: { bucedup: 'hsclient198827' } })
+          this.$axios.setHeader('bucedup', 'shclient198827')
+          const res = await this.$axios.get(url)
           commit('setScoreboard', { scoreboard: res.data })
           commit('setScoreboardLoaded', { scoreboardLoaded: true })
         } catch(err) {
           console.error(err)
           commit('setScoreboardLoaded', { scoreboardLoaded: true })
-          commit('scoreboardError', { scoreboardError: true })
+          commit('setScoreboardError', { scoreboardError: true })
         }
       }
     },
@@ -90,7 +88,7 @@ const createStore = () => {
     },
     getters: {
       filterOptions: state => {
-        if (state.scoreboardLoaded && state.ratingsLoaded) {
+        if (state.scoreboardLoaded && state.ratingsLoaded && !state.scoreboardError) {
 
           let totalGames = 0
           let addedFilterOptions = []

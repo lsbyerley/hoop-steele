@@ -72,8 +72,8 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    // See https://github.com/nuxt-community/axios-module#options
-    API_PORT: 8000
+    prefix: '/api'
+    //secure: process.env.NODE_ENV === 'production' // will need this when ssl cert installed
   },
 
   /*

@@ -31,7 +31,7 @@ const cache = function cache(duration) {
 };
 
 function checkHeader(req, res, next) {
-	if (req.headers.bucedup && req.headers.bucedup === 'hsclient198827') {
+	if (req.headers.bucedup && req.headers.bucedup === 'shclient198827') {
 		return next();
 	} else {
 		return res.status(401).json({'valid': false})

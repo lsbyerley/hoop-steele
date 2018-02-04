@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/byerlelu/.nvm/versions/node/v8.9.4/bin/node /usr/local/bin/yarn add @nuxtjs/google-analytics
+  /Users/byerlelu/.nvm/versions/node/v8.9.4/bin/node /usr/local/bin/yarn add @nuxtjs/axios@5.0.0
 
 PATH: 
   /Users/byerlelu/.nvm/versions/node/v8.9.4/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -17,7 +17,7 @@ npm manifest:
   {
     "name": "steele-hoops",
     "version": "1.0.0",
-    "description": "College Basketball scoreboard, bet finder, and team comparisons",
+    "description": "College basketball scoreboard, predictions and team comparison",
     "author": "lsbyerley",
     "private": true,
     "scripts": {
@@ -28,6 +28,7 @@ npm manifest:
     },
     "dependencies": {
       "@nuxtjs/axios": "^4.4.0",
+      "@nuxtjs/google-analytics": "^2.0.2",
       "body-parser": "^1.18.2",
       "buefy": "^0.6.3",
       "cheerio": "^1.0.0-rc.2",
@@ -66,6 +67,12 @@ Lockfile:
       chalk "^2.3.0"
       debug "^3.1.0"
       whatwg-url "^6.4.0"
+  
+  "@nuxtjs/google-analytics@^2.0.2":
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/@nuxtjs/google-analytics/-/google-analytics-2.0.2.tgz#75353143628fd7697b41eb5aa7da38a513394eca"
+    dependencies:
+      vue-analytics "^5.4.0"
   
   "@nuxtjs/youch@^4.2.3":
     version "4.2.3"
@@ -6510,6 +6517,10 @@ Lockfile:
     dependencies:
       indexof "0.0.1"
   
+  vue-analytics@^5.4.0:
+    version "5.8.0"
+    resolved "https://registry.yarnpkg.com/vue-analytics/-/vue-analytics-5.8.0.tgz#0df9ce8e6f52f32f1fef597af9debcd2674eea91"
+  
   vue-hot-reload-api@^2.2.0:
     version "2.2.4"
     resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.2.4.tgz#683bd1d026c0d3b3c937d5875679e9a87ec6cd8f"
@@ -6848,4 +6859,4 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: EACCES: permission denied, mkdir '/Users/byerlelu/Library/Caches/Yarn/v1/npm-@nuxtjs/google-analytics-2.0.2-75353143628fd7697b41eb5aa7da38a513394eca'
+  Error: EACCES: permission denied, mkdir '/Users/byerlelu/Library/Caches/Yarn/v1/npm-@nuxtjs/axios-5.0.0-5e51bffe35e1577feca570d62fec9c138c3d2af8'

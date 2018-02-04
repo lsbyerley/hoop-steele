@@ -36,7 +36,8 @@ app.use(helmet.contentSecurityPolicy({
 			"'unsafe-eval'",
 			"'unsafe-inline'",
 			'ajax.googleapis.com',
-			'www.google-analytics.com'
+			'www.google-analytics.com',
+			'cdnjs.cloudflare.com'
 		],
 		styleSrc: [
 			"'self'",
