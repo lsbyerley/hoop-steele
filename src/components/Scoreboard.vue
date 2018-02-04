@@ -252,7 +252,7 @@ export default {
             const awayPredicted = game.away.predictions.expectedOutput;
             const homePredicted = game.home.predictions.expectedOutput;
             const predictedWinner = (awayPredicted > homePredicted) ? 'away' : 'home';
-            const actualWinner = (game.away.score > game.home.score) ? 'away' : 'home';
+            const actualWinner = (parseInt(game.away.score) > parseInt(game.home.score)) ? 'away' : 'home';
             if (predictedWinner === actualWinner) {
               totalCorrect += 1
             }
