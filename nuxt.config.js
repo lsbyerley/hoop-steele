@@ -72,7 +72,6 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
-    prefix: '/api'
     //secure: process.env.NODE_ENV === 'production' // will need this when ssl cert installed
   },
 

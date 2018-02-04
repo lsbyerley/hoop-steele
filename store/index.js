@@ -37,7 +37,7 @@ const createStore = () => {
       async getTeamRatings ({ commit }) {
         try {
           this.$axios.setHeader('bucedup', 'shclient198827')
-          const res = await this.$axios.get('/team-ratings')
+          const res = await this.$axios.get('/api/team-ratings')
           commit('setTeamRatings', { teamRatings: res.data })
           commit('setRatingsLoaded', { ratingsLoaded: true })
         } catch(err) {
@@ -45,7 +45,7 @@ const createStore = () => {
         }
       },
       async getGames ({ commit }, payload) {
-        let url = `/games`
+        let url = `/api/games`
         if (payload && payload.date) {
           const dateParam = moment(payload.date).format('YYYYMMDD')
           url = `${url}/${dateParam}`
