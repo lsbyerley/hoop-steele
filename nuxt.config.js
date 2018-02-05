@@ -72,6 +72,7 @@ module.exports = {
   ** Axios module configuration
   */
   axios: {
+    proxy: true //https://github.com/nuxt-community/axios-module/issues/95#issuecomment-363204248
     //secure: process.env.NODE_ENV === 'production' // will need this when ssl cert installed
   },
 

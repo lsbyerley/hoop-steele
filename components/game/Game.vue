@@ -75,7 +75,6 @@ export default {
   .game-header {
     padding: .5rem 1rem;
     background: #0A2145;
-    border-bottom: 2px solid #ddd;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     font-size: .85rem;
