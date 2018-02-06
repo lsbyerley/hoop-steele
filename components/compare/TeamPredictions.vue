@@ -1,8 +1,8 @@
 <template>
   <div class="columns prediction is-mobile">
     <div class="column is-3 team">
-      <span class="at" v-if="this.homeAway === 'home'">@</span>
-      <figure class="image is-32x32">
+      <figure class="image">
+        <span class="at" v-if="this.homeAway === 'home'">@</span>
         <img v-bind:src="getTeamLogo(team)">
       </figure>
     </div>
@@ -49,8 +49,6 @@ export default {
       const stat = this.prediction[type]
       const statToCompare = (this.homeAway === 'away') ? this.gamePrediction.home[type] : this.gamePrediction.away[type]
 
-      console.log(stat, statToCompare)
-
       return {
         'green': stat > statToCompare,
         'red': stat < statToCompare
@@ -67,10 +65,16 @@ export default {
 .prediction {
   .team {
     flex-direction: row;
+
     .at {
-      margin-right: 3px;
+      position: absolute;
+      left: -1rem;
+      top: .65rem;
       font-weight: bold;
-      font-size: .75rem;
+      font-size: 1rem;
+    }
+    .image {
+      width: 3rem;
     }
   }
   .score {

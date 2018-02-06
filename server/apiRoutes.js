@@ -229,8 +229,8 @@ router.get('/team-ratings', checkHeader, cache(1000), (req, res) => {
 
     })
 
-		const averageTempo = totalTempo / totalTeams
-		const averageEfficiency = totalEfficiency / totalTeams
+		const averageTempo = parseFloat((totalTempo / totalTeams).toFixed(1))
+		const averageEfficiency = parseFloat((totalEfficiency / totalTeams).toFixed(1))
 
     res.status(200).json({
 			totalTeams,
