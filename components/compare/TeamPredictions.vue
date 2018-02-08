@@ -27,11 +27,6 @@ import { logoMixin } from '@/components/mixins/logoMixin'
 export default {
   name: "TeamPredictions",
   mixins: [logoMixin],
-  data() {
-    return {
-      prediction: (this.homeAway === 'away') ? this.gamePrediction.away : this.gamePrediction.home
-    }
-  },
   props: {
     homeAway: String,
     team: {
@@ -41,6 +36,11 @@ export default {
     gamePrediction: {
       type: Object,
       default: {}
+    }
+  },
+  computed: {
+    prediction() {
+      return (this.homeAway === 'away') ? this.gamePrediction.away : this.gamePrediction.home
     }
   },
   methods: {
@@ -63,6 +63,14 @@ export default {
 @import '~assets/styles/style-vars';
 
 .prediction {
+
+  .column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
   .team {
     flex-direction: row;
 
@@ -73,9 +81,15 @@ export default {
       font-weight: bold;
       font-size: 1rem;
     }
+
     .image {
       width: 3rem;
     }
+
+    .name {
+      margin-left: 1rem;
+    }
+
   }
   .score {
     .green {

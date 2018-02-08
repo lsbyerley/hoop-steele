@@ -19,20 +19,18 @@
 
         <div class="container">
 
-          <div class="columns">
-            <div class="column">
-              <div v-if="gamePrediction" class="box game-prediction">
-                <div class="title is-4 has-text-centered">Game Prediction</div>
-                <TeamPredictions homeAway="away" :team="selectedAwayTeam" :gamePrediction="gamePrediction"></TeamPredictions>
-                <TeamPredictions homeAway="home" :team="selectedHomeTeam" :gamePrediction="gamePrediction"></TeamPredictions>
-              </div>
-            </div>
+          <div class="swap-teams" v-if="Object.keys(selectedAwayTeam).length > 0 && Object.keys(selectedHomeTeam).length > 0">
+            <a class="button is-info" v-on:click="swapTeams">
+              <span class="icon"><i class="fa fa-sliders"></i></span>
+              <span>Swap</span>
+            </a>
           </div>
+          <GamePrediction :away="selectedAwayTeam" :home="selectedHomeTeam"></GamePrediction>
 
           <div class="columns">
 
             <div class="column is-half">
-              <div class="box">
+              <div class="box" ref="awayTeamInput">
                 <b-field label="Away Team">
                   <b-autocomplete
                     icon="search"
@@ -53,7 +51,7 @@
             </div>
 
             <div class="column is-half">
-              <div class="box">
+              <div class="box" ref="homeTeamInput">
                 <b-field label="Home Team">
                   <b-autocomplete
                     icon="search"
@@ -86,19 +84,17 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import TeamRatings from '@/components/compare/TeamRatings'
-import TeamPredictions from '@/components/compare/TeamPredictions'
-import { predictionMixin } from '@/components/mixins/predictionMixin'
+import GamePrediction from '@/components/compare/GamePrediction'
 //import { TimelineMax, TweenMax, Back } from 'gsap'
 
 export default {
-  name: "TeamCompare",
+  name: 'TeamCompare',
   components: {
-    TeamRatings,
-    TeamPredictions
+    GamePrediction,
+    TeamRatings
   },
-  mixins: [predictionMixin],
   async fetch ({ store, params }) {
     if (!store.state.ratingsLoaded) {
       await store.dispatch('getTeamRatings')
@@ -110,7 +106,6 @@ export default {
     }
   },
   data() {
-    //console.log(this.$route.params)
     return {
       awayTeam: (this.$store.state.selectedAwayTeam) ? this.$store.state.selectedAwayTeam.team : '',
       homeTeam: (this.$store.state.selectedHomeTeam) ? this.$store.state.selectedHomeTeam.team : ''
@@ -122,17 +117,7 @@ export default {
       "ratingsLoaded",
       "selectedAwayTeam",
       "selectedHomeTeam"
-    ]),
-    gamePrediction() {
-      if (this.ratingsLoaded && this.selectedAwayTeam && this.selectedHomeTeam) {
-        if (Object.keys(this.selectedAwayTeam).length > 0 && Object.keys(this.selectedHomeTeam).length > 0) {
-          const avgTempo = this.teamRatings.averageTempo
-          const avgEff = this.teamRatings.averageEfficiency
-          const prediction = this.buildGamePrediction(this.selectedAwayTeam, this.selectedHomeTeam, avgTempo, avgEff)
-          return prediction
-        }
-      }
-    }
+    ])
   },
   methods: {
     filteredTeamRatings(type) {
@@ -152,47 +137,59 @@ export default {
     },
     selectAwayTeam(option) {
       if (option) {
-        this.$store.commit("setTeamSelected", { team: option, type: 'away' })
+        this.$store.commit('setTeamSelected', { team: option, type: 'away' })
       } else {
-        this.$store.commit("setTeamSelected", { team: {}, type: 'away' })
+        this.$store.commit('setTeamSelected', { team: {}, type: 'away' })
       }
     },
     selectHomeTeam(option) {
       if (option) {
-        this.$store.commit("setTeamSelected", { team: option, type: 'home' })
+        this.$store.commit('setTeamSelected', { team: option, type: 'home' })
       } else {
-        this.$store.commit("setTeamSelected", { team: {}, type: 'home' })
+        this.$store.commit('setTeamSelected', { team: {}, type: 'home' })
       }
+    },
+    swapTeams() {
+      const selectedAway = this.$store.state.selectedAwayTeam
+      const selectedHome = this.$store.state.selectedHomeTeam
+
+      this.$store.commit('setTeamSelected', { team: selectedHome, type: 'away' })
+      this.$store.commit('setTeamSelected', { team: selectedAway, type: 'home' })
+
+      this.$nextTick(function () {
+        // this is ugly but only way to programmatically change input values with out triggering another change
+        this.$refs.awayTeamInput.children[0].children[1].children[0].children[0].value = selectedHome.team
+        this.$refs.homeTeamInput.children[0].children[1].children[0].children[0].value = selectedAway.team
+      })
     }
   },
   destroyed() {
     this.awayTeam = ''
     this.homeTeam = ''
-    this.$store.commit("setTeamSelected", { team: {}, type: 'away' })
-    this.$store.commit("setTeamSelected", { team: {}, type: 'home' })
+    this.$store.commit('setTeamSelected', { team: {}, type: 'away' })
+    this.$store.commit('setTeamSelected', { team: {}, type: 'home' })
   }
 };
 </script>
 
-<style lang="scss">
-.column.compare {
-  display: flex;
-  vertical-align: middle;
-  justify-content: center;
-  align-items: center;
-}
-.columns.prediction {
-  .column {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+<style scoped lang="scss">
+@import '~bulma/sass/utilities/mixins';
+
+.team-select {
+  .swap-teams {
+    text-align: center;
+    margin-bottom: 1rem;
   }
-}
-.field {
-  text-align: center;
-}
-.control {
-  text-align: center;
+  @include mobile() {
+    .swap-teams {
+      margin-top: -1.5rem;
+    }
+  }
+  .field {
+    text-align: center;
+  }
+  .control {
+    text-align: center;
+  }
 }
 </style>

@@ -109,6 +109,11 @@ router.get('/games/:date*?', checkHeader, cache(200), (req, res) => {
 	}
 
 	//scoreboardDate = moment().subtract(1, "day").format('YYYYMMDD') //for testing
+	/*if (! isNCAATournament) {
+		params.groups = '50';
+	} else {
+		params.groups = '50,100,55,56';
+	}*/
 
 	const url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300&dates='+scoreboardDate;
 

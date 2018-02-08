@@ -226,8 +226,6 @@ export default {
                 return conf.id === game.home.confId
               })
               return ( (awayConf && awayConf.value === this.selectedGameFilter) || (homeConf && homeConf.value === this.selectedGameFilter) )
-              //const gameConf = game.conference || ''
-              //return ( gameConf && gameConf === this.selectedGameFilter )
             })
 
           }
