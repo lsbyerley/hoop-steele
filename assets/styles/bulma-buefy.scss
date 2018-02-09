@@ -4,6 +4,14 @@
 // Import custom variable overrides
 @import './style-vars';
 
-// Import Bulma and Buefy styles
+// Import Bulma
 @import '~bulma';
-@import '~buefy/src/scss/buefy';
+
+// Import Buefy components
+//@import '~buefy/src/scss/buefy';
+@import "~buefy/src/scss/components/_autocomplete";
+@import "~buefy/src/scss/components/_datepicker";
+@import "~buefy/src/scss/components/_form";
+@import "~buefy/src/scss/components/_loading";
+@import "~buefy/src/scss/components/_select";
+@import "~buefy/src/scss/components/_tooltip";

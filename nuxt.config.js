@@ -1,4 +1,5 @@
 const pkg = require('./package')
+const webpack = require('webpack')
 
 module.exports = {
   mode: 'universal',
@@ -80,6 +81,10 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    plugins: [
+      // Ignore all locale files of moment.js
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    ],
     postcss: {
       plugins: {
         'postcss-cssnext': {
