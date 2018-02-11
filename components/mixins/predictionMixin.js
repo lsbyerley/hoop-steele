@@ -31,7 +31,7 @@ export const predictionMixin = {
       //const homeDefensiveEfficiency = homeTeamRating.adjD * defWeight
 
       // EXPECTED TEMPO
-      //const expectedTempoTest = D1AverageTempo * (awayTempo/D1AverageTempo) * (homeTempo/D1AverageTempo)
+      //const expectedTempo = D1AverageTempo * (awayTempo/D1AverageTempo) * (homeTempo/D1AverageTempo)
       const expectedTempo = (awayTempo + homeTempo - D1AverageTempo)
 
       // AWAY EXPECTED OUTPUT
@@ -58,7 +58,7 @@ export const predictionMixin = {
       }
 
       return {
-        expectedTempo,
+        expectedTempo: parseFloat(expectedTempo.toFixed(1)),
         away: {
           expectedPointDiff: parseFloat(awayPointDiff.toFixed(fixedValue)),
           winProbability: (awayWinProbability * 100).toFixed(1) + '%',

@@ -173,6 +173,7 @@ export default {
           if (game.away.kenPomRating && game.home.kenPomRating) {
             const prediction = this.buildGamePrediction(game.away.kenPomRating, game.home.kenPomRating, this.teamRatings.averageTempo, this.teamRatings.averageEfficiency)
 
+            game.expectedTempo = prediction.expectedTempo;
             game.away.predictions = prediction.away;
             game.home.predictions = prediction.home;
           }

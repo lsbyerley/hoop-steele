@@ -10,30 +10,39 @@
         </div>
       </div>
       <div class="level-right">
-
         <div class="level-item team-compare" v-if="game.away.predictions && game.home.predictions">
           <span class="icon" v-on:click="loadTeamCompare(game)">
             <i class="fa fa-lg fa-exchange"></i>
           </span>
         </div>
-
         <div class="level-item">{{ game.statusText }}</div>
-
         <div class="level-item prediction-result" v-if="game.state === 'post' && game.away.predictions && game.home.predictions">
           <span class="icon">
             <i class="fa" v-bind:class="predictionClass(game)"></i>
           </span>
         </div>
-
       </div>
     </div>
     <TeamRow :game="game" teamType="away"></TeamRow>
     <TeamRow :game="game" teamType="home"></TeamRow>
+    <div class="level game-footer is-mobile" v-if="game.state === 'pre' && (game.gameOdds.ou || game.expectedTempo)">
+      <div class="level-item" v-if="game.gameOdds.ou">
+        <p>O/U: {{game.gameOdds.ou}}</p>
+      </div>
+      <div class="level-item" v-if="game.away.predictions && game.home.predictions">
+        <p>Total Pred: {{ game.away.predictions.expectedOutput + game.home.predictions.expectedOutput }}</p>
+      </div>
+      <div class="level-item" v-if="game.expectedTempo">
+        <p>Pred Tempo: {{ tempoType(game.expectedTempo) }} ({{ game.expectedTempo }})</p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import TeamRow from './TeamRow'
+import { mapState } from 'vuex'
+import inRange from 'lodash/inRange'
 
 export default {
   name: "Game",
@@ -46,7 +55,28 @@ export default {
       default: null
     }
   },
+  computed: {
+    ...mapState([
+      "ratingsLoaded",
+      "teamRatings"
+    ])
+  },
   methods: {
+    tempoType(tempo) {
+      if (this.ratingsLoaded) {
+
+        const avgTempo = this.teamRatings.averageTempo //68.2
+        const highestTempo = avgTempo + 10
+        const lowestTempo = avgTempo - 10
+
+        if (tempo >= highestTempo) { return 'Very Fast' }
+        else if (inRange(tempo, highestTempo, (avgTempo+2) )) { return 'Fast' }
+        else if (inRange(tempo, (avgTempo+2), (avgTempo-2) )) { return 'Normal' }
+        else if (inRange(tempo, (avgTempo-2), lowestTempo)) { return 'Slow' }
+        else if (tempo <= lowestTempo) { return 'Very Slow' }
+
+      }
+    },
     loadTeamCompare(game) {
       this.$store.commit("setTeamSelected", { team: game.away.kenPomRating, type: 'away' })
       this.$store.commit("setTeamSelected", { team: game.home.kenPomRating, type: 'home' })
@@ -74,7 +104,7 @@ export default {
 
   .game-header {
     padding: .5rem 1rem;
-    background: #0A2145;
+    background: $etsu-blue;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     font-size: .85rem;
@@ -101,6 +131,15 @@ export default {
         color: $red;
       }
     }
+  }
+
+  .game-footer {
+    padding: .5rem 1rem;
+    background: $etsu-blue;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: #fff;
+    font-size: .85rem;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="level team-row is-mobile" v-bind:class="teamType">
+  <div class="level team-row is-mobile" v-bind:class="teamClass(teamType)">
 
     <div class="level-left">
 
@@ -106,6 +106,23 @@ export default {
     }
   },
   methods: {
+    teamClass(teamType) {
+
+      let winner = false
+      if (this.game.state === 'post') {
+        if (teamType === 'away') {
+          if (parseInt(this.game.away.score) > parseInt(this.game.home.score)) { winner = true }
+        } else if (teamType === 'home') {
+          if (parseInt(this.game.home.score) > parseInt(this.game.away.score)) { winner = true }
+        }
+      }
+
+      return {
+        'away': (teamType === 'away'),
+        'home': (teamType === 'home'),
+        'winner': winner
+      }
+    },
     tooltipInfo(team, stat) {
       return `${team} ${stat}`
     },
@@ -121,8 +138,18 @@ export default {
 @import '~bulma/sass/utilities/mixins';
 
 .team-row {
+  position: relative;
   padding: .5rem 1rem;
   margin: 0;
+
+  &.winner::before {
+    content: '\F0DA';
+    font-family: FontAwesome;
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    left: 0;
+  }
 
   .level-right {
 
