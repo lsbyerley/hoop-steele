@@ -1,6 +1,9 @@
 const pkg = require('./package')
 const webpack = require('webpack')
 
+const googleFontUrl = 'https://fonts.googleapis.com/css?family=Anton|Oswald'
+const faIconUrl = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+
 module.exports = {
   mode: 'universal',
 
@@ -35,8 +38,8 @@ module.exports = {
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
       { rel: 'manifest', href: '/favicon/manifest.json' },
       { name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Anton|Oswald' },
-      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' }
+      { rel: 'preload', href: googleFontUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" },
+      { rel: 'preload', href: faIconUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }
     ]
   },
 
