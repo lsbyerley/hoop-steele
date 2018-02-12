@@ -74,7 +74,8 @@ export default {
 }
 
 body, button, input, select, textarea {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 500;
 }
 
 .navbar {

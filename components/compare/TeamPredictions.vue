@@ -78,7 +78,7 @@ export default {
       position: absolute;
       left: -1rem;
       top: .65rem;
-      font-weight: bold;
+      font-weight: 600;
       font-size: 1rem;
     }
 

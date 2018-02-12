@@ -154,8 +154,9 @@ export default {
   .level-right {
 
     .tag {
-      font-weight: bold;
+      font-weight: 700;
       font-size: .75rem;
+
       @include mobile() {
         font-size: .6rem;
       }
@@ -168,12 +169,14 @@ export default {
 
     .stat-value {
       font-size: .8rem;
+      font-weight: 500;
+
       @include mobile() {
         font-size: .75rem;
       }
 
       &.score {
-        font-weight: bold;
+        font-weight: 700;
       }
     }
 
@@ -191,7 +194,7 @@ export default {
 
     .team-name {
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 700;
       display: flex;
       align-items: center;
 
@@ -216,6 +219,7 @@ export default {
     }
     .team-record {
       font-size: .75rem;
+      font-weight: 600;
     }
   }
 }

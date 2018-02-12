@@ -108,7 +108,7 @@ export default {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     font-size: .85rem;
-    font-weight: bold;
+    font-weight: 600;
     color: #fff;
     margin: 0;
 
