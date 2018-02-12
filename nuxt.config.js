@@ -40,7 +40,8 @@ module.exports = {
       { name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png' },
       //{ rel: 'preload', href: googleFontUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }, // causes too much text flickering
       { rel: 'stylesheet', href: googleFontUrl },
-      { rel: 'preload', href: faIconUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }
+      //{ rel: 'preload', href: faIconUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }
+      { rel: 'stylesheet', href: faIconUrl }
     ]
   },
 
