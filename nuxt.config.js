@@ -38,7 +38,8 @@ module.exports = {
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png' },
       { rel: 'manifest', href: '/favicon/manifest.json' },
       { name: 'msapplication-TileImage', content: '/favicon/ms-icon-144x144.png' },
-      { rel: 'preload', href: googleFontUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" },
+      //{ rel: 'preload', href: googleFontUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }, // causes too much text flickering
+      { rel: 'stylesheet', href: googleFontUrl },
       { rel: 'preload', href: faIconUrl, 'as': 'style', 'onload': "this.rel='stylesheet'" }
     ]
   },

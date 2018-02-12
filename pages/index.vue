@@ -309,6 +309,7 @@ export default {
 
       .label {
         margin: 0 1rem 0 0;
+        min-width: 80px;
       }
       .control {
         flex-grow: 1;
