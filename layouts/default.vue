@@ -30,7 +30,9 @@ export default {
 
 #app {
   background-color: #F7F7F7;
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 400;
+  font-style: normal;
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -49,17 +51,20 @@ export default {
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Anton', sans-serif;
-    letter-spacing: 3px;
+    font-family: 'Dosis', sans-serif;
+    //letter-spacing: 3px;
     text-transform: uppercase;
   }
 
   .title {
+    font-weight: 700;
+    font-style: normal;
     text-transform: uppercase;
   }
 
   .subtitle {
-    font-family: 'Oswald';
+    font-weight: 500;
+    font-style: normal;
     text-transform: inherit;
   }
 

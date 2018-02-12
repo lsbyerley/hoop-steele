@@ -68,7 +68,9 @@ export default {
         li a {
           padding: 0.5rem 1rem;
           color: #fff;
-          font-family: 'Anton', sans-serif;
+          font-family: 'Dosis', sans-serif;
+          font-weight: 700;
+          font-style: normal;
 
           &:hover {
             color: $etsu-gold;

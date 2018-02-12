@@ -1,7 +1,7 @@
 const pkg = require('./package')
 const webpack = require('webpack')
 
-const googleFontUrl = 'https://fonts.googleapis.com/css?family=Anton|Oswald'
+const googleFontUrl = 'https://fonts.googleapis.com/css?family=Dosis:400,500,600,700,800'
 const faIconUrl = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 
 module.exports = {

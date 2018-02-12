@@ -140,6 +140,7 @@ export default {
     border-bottom-right-radius: 5px;
     color: #fff;
     font-size: .85rem;
+    font-weight: 600;
   }
 }
 </style>

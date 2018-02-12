@@ -34,7 +34,9 @@ export default {
 <style scoped lang="scss">
 .navbar {
   z-index: 10;
-  font-family: 'Anton', sans-serif;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
+  font-style: normal;
 
   .navbar-burger {
     span {
