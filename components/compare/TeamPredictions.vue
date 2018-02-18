@@ -77,9 +77,9 @@ export default {
     .at {
       position: absolute;
       left: -1rem;
-      top: .65rem;
+      top: .35rem;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 1.5rem;
     }
 
     .image {

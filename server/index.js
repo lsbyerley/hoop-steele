@@ -55,7 +55,7 @@ app.use(helmet.contentSecurityPolicy({
 			"'self'",
 			'data:',
 			'www.google-analytics.com',
-			'a1.espncdn.com',
+			'http://*.espncdn.com',
 			'placehold.it'
 		],
 		mediaSrc: [ "'self'" ],

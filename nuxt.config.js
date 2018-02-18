@@ -71,7 +71,8 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/google-analytics'
   ],
 
   /*
@@ -80,6 +81,13 @@ module.exports = {
   axios: {
     proxy: true //https://github.com/nuxt-community/axios-module/issues/95#issuecomment-363204248
     //secure: process.env.NODE_ENV === 'production' // will need this when ssl cert installed
+  },
+
+  /*
+  ** Google analytics config
+  */
+  'google-analytics': {
+   id: 'UA-114371448-1'
   },
 
   /*
