@@ -30,7 +30,7 @@
         <p>O/U: {{game.gameOdds.ou}}</p>
       </div>
       <div class="level-item" v-if="game.away.predictions && game.home.predictions">
-        <p>Total Pred: {{ game.away.predictions.expectedOutput + game.home.predictions.expectedOutput }}</p>
+        <p>Total Pred: {{ formatTotalPredicted(game) }}</p>
       </div>
       <div class="level-item" v-if="game.expectedTempo">
         <p>Pred Tempo: {{ tempoType(game.expectedTempo) }} ({{ game.expectedTempo }})</p>
@@ -62,6 +62,10 @@ export default {
     ])
   },
   methods: {
+    formatTotalPredicted(game) {
+      const total = game.away.predictions.expectedOutput + game.home.predictions.expectedOutput
+      return total.toFixed(0)
+    },
     tempoType(tempo) {
       if (this.ratingsLoaded) {
 
