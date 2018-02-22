@@ -4,6 +4,7 @@ module.exports = {
 	21: { kpTeamName: "San Diego St." },
 	23: { kpTeamName: "San Jose St." },
 	36: { kpTeamName: "Colorado St." },
+	41: { kpTeamName: "Connecticut" },
 	52: { kpTeamName: "Florida St." },
 	55: { kpTeamName: "Jacksonville St." },
 	62: { kpTeamName: "Hawaii" },
