@@ -174,8 +174,23 @@ export default {
             const prediction = this.buildGamePrediction(game.away.kenPomRating, game.home.kenPomRating, this.teamRatings.averageTempo, this.teamRatings.averageEfficiency)
 
             game.expectedTempo = prediction.expectedTempo;
-            game.away.predictions = prediction.away;
-            game.home.predictions = prediction.home;
+
+            if (game.neutralSite) {
+              game.away.predictions = {
+                expectedOutput: prediction.away.expectedOutputNeutral,
+                expectedPointDiff: prediction.away.expectedPointDiffNeutral,
+                winProbability: prediction.away.winProbabilityNeutral
+              }
+              game.home.predictions = {
+                expectedOutput: prediction.home.expectedOutputNeutral,
+                expectedPointDiff: prediction.home.expectedPointDiffNeutral,
+                winProbability: prediction.home.winProbabilityNeutral
+              }
+            } else {
+              game.away.predictions = prediction.away;
+              game.home.predictions = prediction.home;
+            }
+
           }
 
           return game;

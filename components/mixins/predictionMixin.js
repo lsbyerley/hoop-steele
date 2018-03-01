@@ -36,38 +36,52 @@ export const predictionMixin = {
 
       // AWAY EXPECTED OUTPUT
       //const awayExpectedOutput = (awayOffensiveEfficiency/D1AverageEfficiency) * (homeDefensiveEfficiency/D1AverageEfficiency) * D1AverageEfficiency * (expectedTempo/100)
-      let awayExpectedOutput = ((awayOffensiveEfficiency+homeDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
-      awayExpectedOutput = awayExpectedOutput - (homeCourtAdvantage/2)
+      const awayExpectedOutputNeutral = ((awayOffensiveEfficiency+homeDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
+      const awayExpectedOutput = awayExpectedOutputNeutral - (homeCourtAdvantage/2)
 
       // HOME EXPECTED OUTPUT
       //const homeExpectedOutput = (homeOffensiveEfficiency/D1AverageEfficiency) * (awayDefensiveEfficiency/D1AverageEfficiency) * D1AverageEfficiency * (expectedTempo/100)
-      let homeExpectedOutput = ((homeOffensiveEfficiency+awayDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
-      homeExpectedOutput = homeExpectedOutput + (homeCourtAdvantage/2)
+      const homeExpectedOutputNeutral = ((homeOffensiveEfficiency+awayDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
+      const homeExpectedOutput = homeExpectedOutputNeutral + (homeCourtAdvantage/2)
 
       // AWAY POINT DIFFERENTIAL AND WIN PROBABILITY
-      const awayPointDiff = ((awayAdjEM - homeAdjEM) * (awayTempo + homeTempo) / 200) - homeCourtAdvantage
+      const awayPointDiffNeutral = ((awayAdjEM - homeAdjEM) * (awayTempo + homeTempo) / 200)
+      const awayPointDiff = awayPointDiffNeutral - (homeCourtAdvantage/2)
       const awayWinProbability = cumulativeDistribution(awayPointDiff, 0, standardDeviation)
+      const awayWinProbabilityNeutral = cumulativeDistribution(awayPointDiffNeutral, 0, standardDeviation)
 
       // HOME POINT DIFFERENTIAL AND WIN PROBABILITY
-      const homePointDiff = ((homeAdjEM - awayAdjEM) * (awayTempo + homeTempo) / 200) + homeCourtAdvantage
+      const homePointDiffNeutral = ((homeAdjEM - awayAdjEM) * (awayTempo + homeTempo) / 200)
+      const homePointDiff = homePointDiffNeutral + (homeCourtAdvantage/2)
       const homeWinProbability = cumulativeDistribution(homePointDiff, 0, standardDeviation)
+      const homeWinProbabilityNeutral = cumulativeDistribution(homePointDiffNeutral, 0, standardDeviation)
 
       let fixedValue = 0
+      let fixedValueNeutral = 0;
       if ( (awayPointDiff>=0 && awayPointDiff<=2) || (homePointDiff>=0 && homePointDiff<=2) ) {
         fixedValue = 1
+      }
+      if ( (awayPointDiffNeutral>=0 && awayPointDiffNeutral<=2) || (homePointDiffNeutral>=0 && homePointDiffNeutral<=2) ) {
+        fixedValueNeutral = 1
       }
 
       return {
         expectedTempo: parseFloat(expectedTempo.toFixed(1)),
         away: {
+          expectedOutput: parseFloat(awayExpectedOutput.toFixed(fixedValue)),
           expectedPointDiff: parseFloat(awayPointDiff.toFixed(fixedValue)),
           winProbability: (awayWinProbability * 100).toFixed(1) + '%',
-          expectedOutput: parseFloat(awayExpectedOutput.toFixed(fixedValue))
+          expectedOutputNeutral: parseFloat(awayExpectedOutputNeutral.toFixed(fixedValueNeutral)),
+          expectedPointDiffNeutral: parseFloat(awayPointDiffNeutral.toFixed(fixedValueNeutral)),
+          winProbabilityNeutral: (awayWinProbabilityNeutral * 100).toFixed(1) + '%'
         },
         home: {
+          expectedOutput: parseFloat(homeExpectedOutput.toFixed(fixedValue)),
           expectedPointDiff: parseFloat(homePointDiff.toFixed(fixedValue)),
           winProbability: (homeWinProbability * 100).toFixed(1) + '%',
-          expectedOutput: parseFloat(homeExpectedOutput.toFixed(fixedValue))
+          expectedOutputNeutral: parseFloat(homeExpectedOutputNeutral.toFixed(fixedValueNeutral)),
+          expectedPointDiffNeutral: parseFloat(homePointDiffNeutral.toFixed(fixedValueNeutral)),
+          winProbabilityNeutral: (homeWinProbabilityNeutral * 100).toFixed(1) + '%'
         }
       }
 

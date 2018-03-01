@@ -40,6 +40,11 @@ function getGames(scoreboardDate) {
   				broadcast = event.competitions[0].geoBroadcasts[0].media.shortName
   			}
 
+        let gameNote = ''
+        if (event.competitions[0].notes && event.competitions[0].notes.length > 0) {
+          gameNote = event.competitions[0].notes[0].headline
+        }
+
   			const teamA = (event.competitions[0].competitors[0].homeAway === "away") ? event.competitions[0].competitors[0] : event.competitions[0].competitors[1]
   			const awayTeam = normalizeTeam(teamA, gameOdds)
 
@@ -49,8 +54,12 @@ function getGames(scoreboardDate) {
   			const venueName = event.competitions[0].venue.fullName
   			const venueLocation = `${event.competitions[0].venue.address.city}, ${event.competitions[0].venue.address.state}`
 
+        const neutralSite = event.competitions[0].neutralSite
+
   			return {
   				id: event.id,
+          neutralSite,
+          gameNote,
   				gameDate,
   				gameTime,
   				state: statusState,

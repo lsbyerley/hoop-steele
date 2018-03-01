@@ -8,6 +8,11 @@
           </span>
           {{ game.broadcast }}
         </div>
+        <div class="level-item" v-if="game.neutralSite">
+          <b-tooltip label="Neutral Site" :active="true" animated type="is-info">
+            <span class="tag is-info">NS</span>
+          </b-tooltip>
+        </div>
       </div>
       <div class="level-right">
         <div class="level-item team-compare" v-if="game.away.predictions && game.home.predictions">
@@ -25,6 +30,11 @@
     </div>
     <TeamRow :game="game" teamType="away"></TeamRow>
     <TeamRow :game="game" teamType="home"></TeamRow>
+    <div class="level game-note" v-if="game.gameNote">
+      <div class="level-item">
+        <p>{{ game.gameNote }}</p>
+      </div>
+    </div>
     <div class="level game-footer is-mobile" v-if="game.state === 'pre' && (game.gameOdds.ou || game.expectedTempo)">
       <div class="level-item" v-if="game.gameOdds.ou">
         <p>O/U: {{game.gameOdds.ou}}</p>
@@ -137,6 +147,14 @@ export default {
     }
   }
 
+  .game-note {
+    padding: .5rem 1rem;
+    background: #eaeaea;
+    font-size: .65rem;
+    color: #4a4a4a;
+    margin: 0;
+  }
+
   .game-footer {
     padding: .5rem 1rem;
     background: $etsu-blue;
@@ -146,5 +164,6 @@ export default {
     font-size: .85rem;
     font-weight: 600;
   }
+
 }
 </style>
