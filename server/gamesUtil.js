@@ -51,8 +51,10 @@ function getGames(scoreboardDate) {
   			const teamB = (event.competitions[0].competitors[0].homeAway === "home") ? event.competitions[0].competitors[0] : event.competitions[0].competitors[1]
   			const homeTeam = normalizeTeam(teamB, gameOdds)
 
-  			const venueName = event.competitions[0].venue.fullName
-  			const venueLocation = `${event.competitions[0].venue.address.city}, ${event.competitions[0].venue.address.state}`
+        const venueName = ''
+        const venueLocation = ''
+  			//const venueName = event.competitions[0].venue.fullName
+  			//const venueLocation = `${event.competitions[0].venue.address.city}, ${event.competitions[0].venue.address.state}`
 
         const neutralSite = event.competitions[0].neutralSite
 

@@ -1,5 +1,6 @@
 import { cumulativeDistribution } from '@/utils/util'
 //https://www.reddit.com/r/CollegeBasketball/comments/5xir8t/calculating_win_probability_and_margin_of_victory/
+//https://docs.google.com/spreadsheets/d/1rN8ae-oNNqdqOEGsRlPFcxw3chJfMX-sqxfJpxtJ-a0/edit#gid=2060291492
 
 export const predictionMixin = {
   methods: {
