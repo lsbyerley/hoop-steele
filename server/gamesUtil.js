@@ -10,9 +10,22 @@ function getGames(scoreboardDate) {
 
   return new Promise((resolve, reject) => {
 
-    const url = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?groups=50&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300&dates='+scoreboardDate;
+    let groups = 50; // ALL NCAA
 
-    axios.get(url).then((resp) => {
+    const year = moment(scoreboardDate, 'YYYYMMDD').format('YYYY')
+    const month = moment(scoreboardDate, 'YYYYMMDD').format('MM')
+    const day = moment(scoreboardDate, 'YYYYMMDD').format('DD')
+
+    // Looking for the day after NCAA Selection Sunday and right after Final Four Champ
+    if ( (parseInt(month) === 3 && parseInt(day) >= 12) || (parseInt(month) === 4 && parseInt(day) <= 2) ) {
+      groups = 100 // NCAA Tournament Games
+    }
+
+    const apiBase = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
+    const apiParams = `?groups=${groups}&lang=en&region=us&contentorigin=espn&tz=America/New_York&limit=300`
+    const apiUrl = `${apiBase}${apiParams}&dates=${scoreboardDate}`
+
+    axios.get(apiUrl).then((resp) => {
 
   		let events = resp.data.events
   		const games = events.map((event) => {
