@@ -6,18 +6,12 @@ const kpMatches = require('../utils/kpMatches');
 //http://site.api.espn.com/apis/v2/flex?league=mens-college-basketball&team=2193&pubkey=ncb-clubhouse&contentorigin=espn
 //http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/bpi/season?contentorigin=espn&sort=bpirank:asc,bpi:asc&limit=351&groups=50
 
-function getGames(scoreboardDate) {
+function getGames(scoreboardDate, isNCAATournament) {
 
   return new Promise((resolve, reject) => {
 
     let groups = 50; // ALL NCAA
-
-    const year = moment(scoreboardDate, 'YYYYMMDD').format('YYYY')
-    const month = moment(scoreboardDate, 'YYYYMMDD').format('MM')
-    const day = moment(scoreboardDate, 'YYYYMMDD').format('DD')
-
-    // Looking for the day after NCAA Selection Sunday and right after Final Four Champ
-    if ( (parseInt(month) === 3 && parseInt(day) >= 12) || (parseInt(month) === 4 && parseInt(day) <= 2) ) {
+    if ( isNCAATournament ) {
       groups = 100 // NCAA Tournament Games
     }
 

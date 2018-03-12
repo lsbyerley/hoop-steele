@@ -48,9 +48,20 @@ router.get('/games/:date*?', checkHeader, cache(200), (req, res) => {
 		}
 	}
 
-	getGames(scoreboardDate).then((games) => {
+	let isNCAATournament = false;
+
+	const ncaaStart = moment('20180312', 'YYYYMMDD')
+	const ncaaEnd = moment('20180402', 'YYYYMMDD')
+
+	// Looking for the day after NCAA Selection Sunday and the day of the Final Four
+	if ( scoreboardDate >= ncaaStart || scoreboardDate <= ncaaEnd ) {
+		isNCAATournament = true
+	}
+
+	getGames(scoreboardDate, isNCAATournament).then((games) => {
 		res.status(200).json({
 			date: scoreboardDate,
+			isNCAATournament,
 			games
 		})
 	}).catch((err) => {

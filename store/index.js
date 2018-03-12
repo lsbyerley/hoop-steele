@@ -5,7 +5,7 @@ import { conferences } from '@/utils/cbbData'
 
 Vue.use(Vuex)
 
-const defaultFilters = [
+let defaultFilters = [
   {
     value: 'top-25',
     display: 'Top 25'
@@ -29,7 +29,7 @@ const createStore = () => {
       isComparisonActive: false,
       selectedAwayTeam: {},
       selectedHomeTeam: {},
-      filterOptions: defaultFilters,
+      filterOptions: {},
       teamRatings: {},
       scoreboard: {}
     },
@@ -90,30 +90,41 @@ const createStore = () => {
       filterOptions: state => {
         if (state.scoreboardLoaded && state.ratingsLoaded && !state.scoreboardError) {
 
-          let totalGames = 0
-          let addedFilterOptions = []
-          state.scoreboard.games.forEach((game) => {
-            totalGames += 1;
-            const awayConf = conferences.find(function(conf) {
-              return conf.id === game.away.confId
+          if (state.scoreboard.isNCAATournament) {
+            defaultFilters = [
+              {
+                value: 'ncaa-d1',
+                display: 'NCAA-D1'
+              }
+            ]
+            return defaultFilters
+          } else {
+            let totalGames = 0
+            let addedFilterOptions = []
+            state.scoreboard.games.forEach((game) => {
+              totalGames += 1;
+              const awayConf = conferences.find(function(conf) {
+                return conf.id === game.away.confId
+              })
+              const homeConf = conferences.find(function(conf) {
+                return conf.id === game.home.confId
+              })
+              if (awayConf && !addedFilterOptions.find(f => f.id === awayConf.id)) {
+                addedFilterOptions.push(awayConf)
+              }
+              if (homeConf && !addedFilterOptions.find(f => f.id === homeConf.id)) {
+                addedFilterOptions.push(homeConf)
+              }
             })
-            const homeConf = conferences.find(function(conf) {
-              return conf.id === game.home.confId
+            addedFilterOptions.sort((a, b) => {
+              if (a.display > b.display) { return 1 }
+              else if (a.display < b.display) { return -1 }
+              return 0;
             })
-            if (awayConf && !addedFilterOptions.find(f => f.id === awayConf.id)) {
-              addedFilterOptions.push(awayConf)
-            }
-            if (homeConf && !addedFilterOptions.find(f => f.id === homeConf.id)) {
-              addedFilterOptions.push(homeConf)
-            }
-          })
-          addedFilterOptions.sort((a, b) => {
-            if (a.display > b.display) { return 1 }
-            else if (a.display < b.display) { return -1 }
-            return 0;
-          })
-          const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
-          return sortedFilterOptions
+            const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
+            return sortedFilterOptions
+          }
+
         }
       }
     }

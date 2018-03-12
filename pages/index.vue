@@ -116,10 +116,9 @@ export default {
     }
   },
   data() {
-    //console.log(this.$route.params)
     return {
       teamSearchInput: '',
-      selectedGameFilter: this.$store.state.filterOptions[0].value
+      selectedGameFilter: (this.$store.state.scoreboardLoaded && this.$store.state.scoreboard.isNCAATournament) ? 'ncaa-d1' : 'top-25'
     }
   },
   components: {
@@ -146,9 +145,17 @@ export default {
       return (this.allDataLoaded) ? moment(this.scoreboard.date, 'YYYYMMDD').toDate() : moment( moment().format('YYYYMMDD'), 'YYYYMMDD').toDate()
     },
     dpDates() {
+
+      let minDate = moment( moment().format('YYYYMMDD'), 'YYYYMMDD').subtract(1, "day").toDate();
+      let maxDate = moment( moment().format('YYYYMMDD'), 'YYYYMMDD').add(2, "day").toDate();
+      if (this.scoreboardLoaded && this.scoreboard.isNCAATournament) {
+        // all of march and two days in april
+        minDate = moment( moment().format('20180301'), 'YYYYMMDD').toDate();
+        maxDate = moment( moment().format('20180402'), 'YYYYMMDD').toDate();
+      }
       return {
-        minDate: moment( moment().format('YYYYMMDD'), 'YYYYMMDD').subtract(1, "day").toDate(),
-        maxDate: moment( moment().format('YYYYMMDD'), 'YYYYMMDD').add(2, "day").toDate()
+        minDate: minDate,
+        maxDate: maxDate
       }
     },
     games() {
