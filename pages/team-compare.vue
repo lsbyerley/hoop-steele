@@ -20,7 +20,7 @@
         <div class="container">
 
           <div class="swap-teams" v-if="Object.keys(selectedAwayTeam).length > 0 && Object.keys(selectedHomeTeam).length > 0">
-            <a class="button is-info" v-on:click="swapTeams">
+            <a class="button is-info" @click="swapTeams" :disabled="isSwapDisabled">
               <span class="icon"><i class="fa fa-sliders"></i></span>
               <span>Swap</span>
             </a>
@@ -115,6 +115,9 @@ export default {
     };
   },
   computed: {
+    isSwapDisabled() {
+      return this.$store.state.neutralSite
+    },
     neutralSite: {
       get() {
         return this.$store.state.neutralSite
@@ -161,17 +164,19 @@ export default {
       }
     },
     swapTeams() {
-      const selectedAway = this.$store.state.selectedAwayTeam
-      const selectedHome = this.$store.state.selectedHomeTeam
+      if (!this.isSwapDisabled) {
+        const selectedAway = this.$store.state.selectedAwayTeam
+        const selectedHome = this.$store.state.selectedHomeTeam
 
-      this.$store.commit('setTeamSelected', { team: selectedHome, type: 'away' })
-      this.$store.commit('setTeamSelected', { team: selectedAway, type: 'home' })
+        this.$store.commit('setTeamSelected', { team: selectedHome, type: 'away' })
+        this.$store.commit('setTeamSelected', { team: selectedAway, type: 'home' })
 
-      this.$nextTick(function () {
-        // this is ugly but only way to programmatically change input values with out triggering another change
-        this.$refs.awayTeamInput.children[0].children[1].children[0].children[0].value = selectedHome.team
-        this.$refs.homeTeamInput.children[0].children[1].children[0].children[0].value = selectedAway.team
-      })
+        this.$nextTick(function () {
+          // this is ugly but only way to programmatically change input values with out triggering another change
+          this.$refs.awayTeamInput.children[0].children[1].children[0].children[0].value = selectedHome.team
+          this.$refs.homeTeamInput.children[0].children[1].children[0].children[0].value = selectedAway.team
+        })
+      }
     }
   },
   destroyed() {
