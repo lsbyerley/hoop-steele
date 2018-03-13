@@ -25,6 +25,9 @@
               <span>Swap</span>
             </a>
           </div>
+          <div class="field" v-if="Object.keys(selectedAwayTeam).length > 0 && Object.keys(selectedHomeTeam).length > 0">
+            <b-switch v-model="neutralSite">Neutral Site</b-switch>
+          </div>
           <GamePrediction :away="selectedAwayTeam" :home="selectedHomeTeam"></GamePrediction>
 
           <div class="columns">
@@ -112,6 +115,14 @@ export default {
     };
   },
   computed: {
+    neutralSite: {
+      get() {
+        return this.$store.state.neutralSite
+      },
+      set(value) {
+        this.$store.commit('setNeutralSite', { neutralSite: value })
+      }
+    },
     ...mapState([
       "teamRatings",
       "ratingsLoaded",
@@ -168,6 +179,7 @@ export default {
     this.homeTeam = ''
     this.$store.commit('setTeamSelected', { team: {}, type: 'away' })
     this.$store.commit('setTeamSelected', { team: {}, type: 'home' })
+    this.$store.commit('setNeutralSite', { neutralSite: false })
   }
 };
 </script>

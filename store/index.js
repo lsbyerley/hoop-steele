@@ -26,7 +26,7 @@ const createStore = () => {
       scoreboardLoaded: false,
       scoreboardError: false,
       ratingsLoaded: false,
-      isComparisonActive: false,
+      neutralSite: false,
       selectedAwayTeam: {},
       selectedHomeTeam: {},
       filterOptions: {},
@@ -81,6 +81,9 @@ const createStore = () => {
       setTeamSelected: (state, { team, type }) => {
         const teamToSelect = (type === 'away') ? 'selectedAwayTeam' : 'selectedHomeTeam'
         state[teamToSelect] = team
+      },
+      setNeutralSite: (state, { neutralSite }) => {
+        state.neutralSite = neutralSite
       },
       setScoreboardDate: (state, { newDate }) => {
         state.scoreboardDate = newDate

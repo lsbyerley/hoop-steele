@@ -92,8 +92,11 @@ export default {
       }
     },
     loadTeamCompare(game) {
-      this.$store.commit("setTeamSelected", { team: game.away.kenPomRating, type: 'away' })
-      this.$store.commit("setTeamSelected", { team: game.home.kenPomRating, type: 'home' })
+      this.$store.commit('setTeamSelected', { team: game.away.kenPomRating, type: 'away' })
+      this.$store.commit('setTeamSelected', { team: game.home.kenPomRating, type: 'home' })
+      if (game.neutralSite) {
+        this.$store.commit('setNeutralSite', { neutralSite: true })
+      }
       this.$router.push({ path: 'team-compare' })
     },
     predictionClass(game) {
