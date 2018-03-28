@@ -159,7 +159,7 @@ export default {
       }
     },
     games() {
-      if (this.allDataLoaded && !this.scoreboardError) {
+      if (this.allDataLoaded && !this.scoreboardError && this.scoreboard.games) {
 
         return this.scoreboard.games.map((game) => {
 
@@ -208,7 +208,7 @@ export default {
     },
     filteredGames() {
       let filteredGames = []
-      if (this.allDataLoaded && !this.scoreboardError) {
+      if (this.allDataLoaded && !this.scoreboardError && this.games) {
 
         // Team Search input takes precedence over game filter dropdown
         if ( this.teamSearchInput.length >= 2 ) {

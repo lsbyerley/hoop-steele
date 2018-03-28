@@ -104,27 +104,29 @@ const createStore = () => {
           } else {
             let totalGames = 0
             let addedFilterOptions = []
-            state.scoreboard.games.forEach((game) => {
-              totalGames += 1;
-              const awayConf = conferences.find(function(conf) {
-                return conf.id === game.away.confId
+            if (state.scoreboard.games) {
+              state.scoreboard.games.forEach((game) => {
+                totalGames += 1;
+                const awayConf = conferences.find(function(conf) {
+                  return conf.id === game.away.confId
+                })
+                const homeConf = conferences.find(function(conf) {
+                  return conf.id === game.home.confId
+                })
+                if (awayConf && !addedFilterOptions.find(f => f.id === awayConf.id)) {
+                  addedFilterOptions.push(awayConf)
+                }
+                if (homeConf && !addedFilterOptions.find(f => f.id === homeConf.id)) {
+                  addedFilterOptions.push(homeConf)
+                }
               })
-              const homeConf = conferences.find(function(conf) {
-                return conf.id === game.home.confId
+              addedFilterOptions.sort((a, b) => {
+                if (a.display > b.display) { return 1 }
+                else if (a.display < b.display) { return -1 }
+                return 0;
               })
-              if (awayConf && !addedFilterOptions.find(f => f.id === awayConf.id)) {
-                addedFilterOptions.push(awayConf)
-              }
-              if (homeConf && !addedFilterOptions.find(f => f.id === homeConf.id)) {
-                addedFilterOptions.push(homeConf)
-              }
-            })
-            addedFilterOptions.sort((a, b) => {
-              if (a.display > b.display) { return 1 }
-              else if (a.display < b.display) { return -1 }
-              return 0;
-            })
-            const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
+              const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
+            }
             return sortedFilterOptions
           }
 
