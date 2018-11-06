@@ -106,7 +106,9 @@ function normalizeTeam(obj, gameOdds) {
 		confRecord = obj.records.find((r) => {
 			return r.type === "vsconf"
 		})
-		record = `${overallRecord.summary} (${confRecord.summary})`
+    if (overallRecord && confRecord) {
+		  record = `${overallRecord.summary} (${confRecord.summary})`
+    }
 	}
 
 	let teamSpread = '';
