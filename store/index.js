@@ -29,7 +29,7 @@ const createStore = () => {
       neutralSite: false,
       selectedAwayTeam: {},
       selectedHomeTeam: {},
-      filterOptions: {},
+      filterOptions: [],
       teamRatings: {},
       scoreboard: {}
     },
@@ -120,14 +120,16 @@ const createStore = () => {
                   addedFilterOptions.push(homeConf)
                 }
               })
-              addedFilterOptions.sort((a, b) => {
-                if (a.display > b.display) { return 1 }
-                else if (a.display < b.display) { return -1 }
-                return 0;
-              })
-              const sortedFilterOptions = state.filterOptions.concat(addedFilterOptions)
+              if (addedFilterOptions.length > 0) {
+                addedFilterOptions.sort((a, b) => {
+                  if (a.display > b.display) { return 1 }
+                  else if (a.display < b.display) { return -1 }
+                  return 0;
+                })
+              }
+              //const sortedFilterOptions =
             }
-            return sortedFilterOptions
+            return defaultFilters.concat(addedFilterOptions)
           }
 
         }

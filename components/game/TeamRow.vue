@@ -100,9 +100,9 @@ export default {
         default: 'away'
     }
   },
-  data() {
-    return {
-      team: this.game[this.teamType]
+  computed: {
+    team() {
+      return this.game[this.teamType]
     }
   },
   methods: {
