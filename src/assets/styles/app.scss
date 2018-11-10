@@ -1,0 +1,52 @@
+@font-face {
+  font-family: EZLight;
+  src: url('./assets/fonts/ez-sans-light.woff2') format('woff2');
+}
+@font-face {
+  font-family: EZMedium;
+  src: url('./assets/fonts/ez-sans-medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: EZBold;
+  src: url('./assets/fonts/ez-sans-bold.woff2') format('woff2');
+}
+
+@import './variables.scss';
+
+@import '~mustard-ui/src/scss/mustard-ui.scss';
+
+.progress-bar > span.progress-bar-blue {
+  background: $color-blue;
+}
+
+nav.nav {
+  padding: 0;
+
+  .nav-logo {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+  }
+
+  .nav-container {
+    margin: 0;
+  }
+}
+
+footer.footer {
+  background: $color-blue;
+
+  .container {
+    padding: 1rem 0;
+  }
+  .footer-text p {
+    text-align: center;
+    color: $color-white;
+  }
+  .copy {
+    margin: 0;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #fff;
+    border-top: 1px solid #9e9e9e;
+  }
+}
