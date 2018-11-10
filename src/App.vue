@@ -57,7 +57,8 @@ export default {
   methods: {
     async getData() {
       this.dataLoading = true
-      const res = await axios.get('http://localhost:3000/api/games')
+      const host = process.env.API_HOST
+      const res = await axios.get(`${host}/api/games`)
       this.gamesDate = res.data.date
       this.games = res.data.games
       this.dataLoading = false

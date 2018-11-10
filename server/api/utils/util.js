@@ -1,3 +1,4 @@
+require('dotenv').config()
 const axios = require('axios')
 const dayjs = require('dayjs')
 const _get = require('lodash/get')
@@ -67,7 +68,7 @@ async function getOdds() {
   const options = {
     url: 'https://jsonodds.com/api/odds/ncaab',
     headers: {
-      'x-api-key': 'd3e32b4c-80f4-4522-8054-2992b1177805'
+      'x-api-key': process.env.JSONODDS_API_KEY
     }
   }
   const oddsRes = await axios(options)
