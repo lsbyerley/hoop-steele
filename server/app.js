@@ -7,6 +7,9 @@ const app = express();
 const host = process.env.HOST || "127.0.0.1";
 const port = process.env.PORT || 3000;
 
+// for all dates
+process.env.TZ = 'America/New_York';
+
 app.use(compression());
 app.use(express.static(path.resolve('./dist')));
 
