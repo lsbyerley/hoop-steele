@@ -116,6 +116,9 @@
         </div>
       </div>
     </div>
+    <div class="panel-footer" v-if="game.note">
+      <p class="footer-text left">{{ game.note }}</p>
+    </div>
   </div>
 </template>
 
@@ -138,7 +141,6 @@ export default {
       } else {
         return `${game.home.abbrev} ${aline}`
       }
-      //return (aDiff > 0) ? aDiff : hDiff
     }
   }
 }
@@ -157,16 +159,26 @@ export default {
     margin-top: 0;
   }
 
-  .panel-head, .panel-footer {
-    background: $color-blue;
-    color: #fff;
-  }
-
   .panel-head {
     margin: 0;
+    color: #fff;
+    background: $color-blue;
 
     .panel-title {
       font-size: 1rem;
+    }
+  }
+
+  .panel-footer {
+    font-size: .65rem;
+    background: $color-gray-200;
+    color: $color-blue;
+    border-top: 1px solid $color-blue;
+    padding: 10px 15px;
+    text-align: center;
+
+    @media (max-width: $game-breakpoint) {
+      font-size: .55rem;
     }
   }
 

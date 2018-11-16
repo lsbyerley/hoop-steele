@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="col col-sm-12" v-for="game in preGames">
-            <Game :game="game" />
+            <Game :key="game.id" :game="game" />
           </div>
         </div>
       </div>

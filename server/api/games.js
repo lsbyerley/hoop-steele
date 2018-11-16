@@ -19,8 +19,6 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
 	try{
 
-    console.log('defaultDate', dayjs().format('YYYYMMDD'))
-
     //TODO: if its past midnight and games are still going, use the previous day
     const paramDate = req.params.date
     let gamesDate = dayjs().format('YYYYMMDD')
@@ -48,6 +46,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
         const vegasLine = _get(game, 'competitions[0].odds[0].details')
         const vegasTotal = _get(game, 'competitions[0].odds[0].overUnder')
         const neutralSite = _get(game, 'competitions[0].neutralSite')
+        const note = _get(game, 'competitions[0].notes[0].headline')
         const status = {
           id: _get(game, 'status.type.id'),
           state: _get(game, 'status.type.state'),
@@ -88,7 +87,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
           //let totalDiff = 0
           if (vegasTotal) {
-            totalDiff = prediction.total - vegasTotal
+            totalDiff = (vegasTotal > prediction.total) ? vegasTotal - prediction.total : prediction.total - vegasTotal
             totalDiff = round(totalDiff, 1)
           }
 
@@ -114,6 +113,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
           id: game.id,
           startTime,
           neutralSite,
+          note,
           status: status,
           away: awayTeam,
           home: homeTeam,
