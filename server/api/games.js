@@ -19,6 +19,8 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
 	try{
 
+    console.log('defaultDate', dayjs().format('YYYYMMDD'))
+
     //TODO: if its past midnight and games are still going, use the previous day
     const paramDate = req.params.date
     let gamesDate = dayjs().format('YYYYMMDD')
