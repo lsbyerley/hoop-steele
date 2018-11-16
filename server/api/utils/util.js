@@ -14,7 +14,7 @@ function normalizeTeam(obj) {
 
   let teamName = _get(obj, 'team.location')
   let kpTeam = teams.find((t) => {
-    return t.id === teamId && t.kpTeamName
+    return t.id === teamId && t.kpTeamName != null
   })
 
   if (kpTeam) {

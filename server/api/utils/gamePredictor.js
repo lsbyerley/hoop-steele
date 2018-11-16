@@ -17,7 +17,7 @@ function cumulativeDistribution(x, mean, standardDeviation) {
 	return 0.5 * erfc(-(x - mean) / (standardDeviation * Math.sqrt(2)));
 }
 
-function gamePredictor(awayTeamRating, homeTeamRating, averageTempo, averageEfficiency) {
+function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo, averageEfficiency) {
 
   //const awayTeamRating = game.away.kenPomRating
   //const homeTeamRating = game.home.kenPomRating
@@ -46,7 +46,7 @@ function gamePredictor(awayTeamRating, homeTeamRating, averageTempo, averageEffi
 
   // EXPECTED TEMPO
   //const expectedTempo = D1AverageTempo * (awayTempo/D1AverageTempo) * (homeTempo/D1AverageTempo)
-  const expectedTempo = (awayTempo + homeTempo - D1AverageTempo)
+  let expectedTempo = (awayTempo + homeTempo - D1AverageTempo)
 
   // AWAY EXPECTED OUTPUT
   //const awayExpectedOutput = (awayOffensiveEfficiency/D1AverageEfficiency) * (homeDefensiveEfficiency/D1AverageEfficiency) * D1AverageEfficiency * (expectedTempo/100)
@@ -70,47 +70,45 @@ function gamePredictor(awayTeamRating, homeTeamRating, averageTempo, averageEffi
   const homeWinProbability = cumulativeDistribution(homePointDiff, 0, standardDeviation)
   const homeWinProbabilityNeutral = cumulativeDistribution(homePointDiffNeutral, 0, standardDeviation)
 
-  let fixedValue = 1
-  let fixedValueNeutral = 0;
-  if ( (awayPointDiff>=0 && awayPointDiff<=2) || (homePointDiff>=0 && homePointDiff<=2) ) {
-    //fixedValue = 1
-  }
-  if ( (awayPointDiffNeutral>=0 && awayPointDiffNeutral<=2) || (homePointDiffNeutral>=0 && homePointDiffNeutral<=2) ) {
-    //fixedValueNeutral = 1
-  }
-
   let tempoText = ''
   const highestTempo = D1AverageTempo + 10
   const lowestTempo = D1AverageTempo - 10
-
   if (expectedTempo >= highestTempo) { tempoText = 'Very Fast' }
   else if (inRange(expectedTempo, highestTempo, (D1AverageTempo+2) )) { tempoText = 'Fast' }
   else if (inRange(expectedTempo, (D1AverageTempo+2), (D1AverageTempo-2) )) { tempoText = 'Normal' }
   else if (inRange(expectedTempo, (D1AverageTempo-2), lowestTempo)) { tempoText = 'Slow' }
   else if (expectedTempo <= lowestTempo) { tempoText = 'Very Slow' }
+  expectedTempo = parseFloat(expectedTempo.toFixed(1))
 
-  const totalOutput = parseFloat(awayExpectedOutput + homeExpectedOutput).toFixed(1)
+  let total, awayTotal, awayLine, awayWinPerc, homeTotal, homeLine, homeWinPerc
+  if (neutralSite) {
+    total = parseFloat((awayExpectedOutputNeutral + homeExpectedOutputNeutral).toFixed(1))
+    awayTotal = parseFloat(awayExpectedOutputNeutral.toFixed(1))
+    awayLine = parseFloat(awayPointDiffNeutral.toFixed(1))
+    awayWinPerc = `${(awayWinProbabilityNeutral * 100).toFixed(1)}%`
+    homeTotal = parseFloat(homeExpectedOutputNeutral.toFixed(1))
+    homeLine = parseFloat(homePointDiffNeutral.toFixed(1))
+    homeWinPerc = `${(homeWinProbabilityNeutral * 100).toFixed(1)}%`
+  } else {
+    total = parseFloat((awayExpectedOutput + homeExpectedOutput).toFixed(1))
+    awayTotal = parseFloat(awayExpectedOutput.toFixed(1))
+    awayLine = parseFloat(awayPointDiff.toFixed(1))
+    awayWinPerc = `${(awayWinProbability * 100).toFixed(1)}%`
+    homeTotal = parseFloat(homeExpectedOutput.toFixed(1))
+    homeLine = parseFloat(homePointDiff.toFixed(1))
+    homeWinPerc = `${(homeWinProbability * 100).toFixed(1)}%`
+  }
 
   return {
-    expectedTempo: parseFloat(expectedTempo.toFixed(1)),
+    expectedTempo,
     tempoText,
-    totalOutput,
-    away: {
-      expectedOutput: parseFloat(awayExpectedOutput.toFixed(fixedValue)),
-      expectedPointDiff: parseFloat(awayPointDiff.toFixed(fixedValue)),
-      winProbability: (awayWinProbability * 100).toFixed(1) + '%',
-      expectedOutputNeutral: parseFloat(awayExpectedOutputNeutral.toFixed(fixedValueNeutral)),
-      expectedPointDiffNeutral: parseFloat(awayPointDiffNeutral.toFixed(fixedValueNeutral)),
-      winProbabilityNeutral: (awayWinProbabilityNeutral * 100).toFixed(1) + '%'
-    },
-    home: {
-      expectedOutput: parseFloat(homeExpectedOutput.toFixed(fixedValue)),
-      expectedPointDiff: parseFloat(homePointDiff.toFixed(fixedValue)),
-      winProbability: (homeWinProbability * 100).toFixed(1) + '%',
-      expectedOutputNeutral: parseFloat(homeExpectedOutputNeutral.toFixed(fixedValueNeutral)),
-      expectedPointDiffNeutral: parseFloat(homePointDiffNeutral.toFixed(fixedValueNeutral)),
-      winProbabilityNeutral: (homeWinProbabilityNeutral * 100).toFixed(1) + '%'
-    }
+    total,
+    awayTotal,
+    awayLine,
+    awayWinPerc,
+    homeTotal,
+    homeLine,
+    homeWinPerc,
   }
 
 }

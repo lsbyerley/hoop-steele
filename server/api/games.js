@@ -15,7 +15,7 @@ var corsOptions = {
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
-router.get('/games/:date*?', cors(corsOptions), cache(100), async (req, res) => {
+router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res) => {
 
 	try{
 
@@ -29,13 +29,13 @@ router.get('/games/:date*?', cors(corsOptions), cache(100), async (req, res) => 
     }
 
     const apiBase = 'http://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
-    const apiParams = '?calendartype=blacklist&limit=300&showAirings=false&lang=en&region=us&contentorigin=espn'
+    const apiParams = '?tz=America/New_York&calendartype=blacklist&limit=300&showAirings=false&lang=en&region=us&contentorigin=espn'
     const url = `${apiBase}${apiParams}&dates=${gamesDate}&groups=50`
     const gamesRes = await axios.get(url)
     const teamRatings = await getTeamRatings()
     //const odds = await util.getOdds()
 
-    let games = []
+    let preGames = [], inpostGames = [], nonMatches = [];
     let gamesData = _get(gamesRes, 'data.events')
     if (gamesData) {
       gamesData.forEach((game, i) => {
@@ -43,8 +43,9 @@ router.get('/games/:date*?', cors(corsOptions), cache(100), async (req, res) => 
         const startTime = dayjs(_get(game, 'competitions[0].date')).format('h:mm A')
         const teamOne = _get(game, 'competitions[0].competitors[0]')
         const teamTwo = _get(game, 'competitions[0].competitors[1]')
-        const spread = _get(game, 'competitions[0].odds[0].details')
-        const total = _get(game, 'competitions[0].odds[0].overUnder')
+        const vegasLine = _get(game, 'competitions[0].odds[0].details')
+        const vegasTotal = _get(game, 'competitions[0].odds[0].overUnder')
+        const neutralSite = _get(game, 'competitions[0].neutralSite')
         const status = {
           id: _get(game, 'status.type.id'),
           state: _get(game, 'status.type.state'),
@@ -64,63 +65,83 @@ router.get('/games/:date*?', cors(corsOptions), cache(100), async (req, res) => 
 
         let prediction;
         if (awayTeam.kenPom && homeTeam.kenPom) {
-          prediction = gamePredictor(awayTeam.kenPom, homeTeam.kenPom, teamRatings.avgTempo, teamRatings.avgEfficiency)
+          prediction = gamePredictor(neutralSite, awayTeam.kenPom, homeTeam.kenPom, teamRatings.avgTempo, teamRatings.avgEfficiency)
         }
 
-        if (prediction && (spread || total)) {
+        if (!awayTeam.kenPom) {
+          nonMatches.push('Away - '+awayTeam.name)
+        }
+        if (!homeTeam.kenPom) {
+          nonMatches.push('Home - '+homeTeam.name)
+        }
 
-          let totalDiff = 0
-          if (total) {
-            let vegasTotal = parseFloat(total)
-            let predictedTotal = parseFloat(prediction.totalOutput)
-            totalDiff = (vegasTotal > predictedTotal) ? vegasTotal - predictedTotal : predictedTotal - vegasTotal
+        let totalDiff = 0,
+          spreadDiff = 0,
+          shFactor = 0,
+          addPre = false;
+
+        if (prediction && (vegasLine || vegasTotal)) {
+
+          addPre = true;
+
+          //let totalDiff = 0
+          if (vegasTotal) {
+            totalDiff = prediction.total - vegasTotal
             totalDiff = round(totalDiff, 1)
           }
 
-          let spreadDiff = 0
-          if (spread) {
-            let split = spread.split(' ')
+          //let spreadDiff = 0
+          if (vegasLine) {
+            let split = vegasLine.split(' ')
             if (split.length == 2) {
               let vegasSpread = split[1]
               vegasSpread = vegasSpread.replace('-', '')
               vegasSpread = round(vegasSpread, '1')
 
-              let predictedSpread = (prediction.away.expectedPointDiff > 0) ? prediction.away.expectedPointDiff : prediction.home.expectedPointDiff
-              spreadDiff = (vegasSpread > predictedSpread) ? vegasSpread - predictedSpread : predictedSpread - vegasSpread
+              let shSpread = (prediction.awayLine > 0) ? prediction.awayLine : prediction.homeLine
+              spreadDiff = (vegasSpread > shSpread) ? vegasSpread - shSpread : shSpread - vegasSpread
               spreadDiff = round(spreadDiff, '1')
             }
           }
 
-          let shFactor = spreadDiff + totalDiff
+          shFactor = spreadDiff + totalDiff
           shFactor = round(shFactor, '1')
+        }
 
-          games.push({
-            id: game.id,
-            startTime,
-            neutralSite: _get(game, 'competitions[0].neutralSite'),
-            status: status,
-            away: awayTeam,
-            home: homeTeam,
-            odds: {
-              spread: (spread) ? spread : '-',
-              total: (total) ? total : '-'
-            },
-            prediction,
-            totalDiff,
-            spreadDiff,
-            shFactor,
-          })
+        let g = {
+          id: game.id,
+          startTime,
+          neutralSite,
+          status: status,
+          away: awayTeam,
+          home: homeTeam,
+          odds: {
+            vegasLine: (vegasLine) ? vegasLine : '-',
+            vegasTotal: (vegasTotal) ? vegasTotal : '-'
+          },
+          prediction,
+          totalDiff,
+          spreadDiff,
+          shFactor,
+        }
+
+        if (status.state === "pre" && addPre) {
+          preGames.push(g)
+        } else {
+          inpostGames.push(g)
         }
 
       })
     }
 
-    games = orderBy(games, ['shFactor'], ['desc'])
+    preGames = orderBy(preGames, ['shFactor'], ['desc'])
 
     return res.status(200).json({
       date: dayjs(gamesDate).format('dddd MMMM D'),
-      total: games.length,
-      games: games
+      totalGames: (preGames.length+inpostGames.length),
+      nonMatches,
+      preGames: preGames,
+      inpostGames: inpostGames
     })
 
 	} catch (err) {

@@ -14,13 +14,13 @@
           <span class="progress-bar-blue" style="width: 100%;"></span>
         </div>
         <div class="row">
-          <div class="col col-sm-12" v-if="showNoGames">
+          <div class="col col-sm-12" v-if="showNoPreGames">
             <div class="alert alert-info align-center">
-              <p><strong>No Games!</strong> Either there's no games today or no games with odds (yet)</p>
-              <button class="button-primary" @click="handleReload">Try Again?</button>
+              <p>Either there's no games with odds (yet), or no games today</p>
+              <!--<button class="button-primary" @click="handleReload">Try Again?</button>-->
             </div>
           </div>
-          <div class="col col-sm-12" v-for="game in games">
+          <div class="col col-sm-12" v-for="game in preGames">
             <Game :game="game" />
           </div>
         </div>
@@ -32,6 +32,7 @@
           <div class="col col-sm-12">
             <div class="footer-text">
               <p>Degenerates rejoice</p>
+              <p>All stats and formulas used on this page were retrieved from public pages.</p>
             </div>
           </div>
         </div>
@@ -55,14 +56,23 @@ export default {
   },
   data() {
     return {
-      games: [],
+      preGames: [],
+      inpostGames: [],
+      nonMatches: [],
       gamesDate: '',
       dataLoading: true,
     };
   },
   computed: {
-    showNoGames() {
-      if (!this.dataLoading && this.games.length === 0) {
+    showNoPreGames() {
+      if (!this.dataLoading && this.preGames.length === 0) {
+        return true
+      } else {
+        return false
+      }
+    },
+    showNoinpostGames() {
+      if (!this.dataLoading && this.inpostGames.length === 0) {
         return true
       } else {
         return false
@@ -75,7 +85,9 @@ export default {
       const host = process.env.API_HOST
       const res = await axios.get(`${host}/api/games`)
       this.gamesDate = res.data.date
-      this.games = res.data.games
+      this.preGames = res.data.preGames
+      this.inpostGames = res.data.inpostGames
+      this.nonMatches = res.data.nonMatches
       this.dataLoading = false
     },
     handleReload() {
