@@ -312,7 +312,7 @@ const teams = [
   { id: 302, location: "UC Davis", abbrev: "UCD" },
   { id: 304, location: "Idaho State", abbrev: "IDST", kpTeamName: "Idaho St." },
   { id: 305, location: "DePaul", abbrev: "DEP" },
-  { id: 309, location: "Louisiana", abbrev: "ULL", kpTeamName: "Louisiana Lafayette" },
+  { id: 309, location: "Louisiana", abbrev: "ULL", kpTeamName: "Louisiana" },
   { id: 311, location: "Maine", abbrev: "MAINE" },
   { id: 314, location: "Iona", abbrev: "IONA" },
   { id: 315, location: "Niagara", abbrev: "NIAG" },
