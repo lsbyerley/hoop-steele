@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-wrap">
     <nav class="nav">
       <div class="nav-container">
         <div class="nav-logo">

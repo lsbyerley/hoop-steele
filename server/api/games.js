@@ -35,7 +35,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     const teamRatings = await getTeamRatings()
     //const odds = await util.getOdds()
 
-    let preGames = [], inpostGames = [], nonMatches = [];
+    let preGames = [], inpostGames = [], noOdds = [], nonMatches = [];
     let gamesData = _get(gamesRes, 'data.events')
     if (gamesData) {
       gamesData.forEach((game, i) => {
@@ -76,8 +76,8 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
           nonMatches.push('Home - '+homeTeam.name)
         }
 
-        let totalDiff = 0,
-          spreadDiff = 0,
+        let totalDiff = '-',
+          spreadDiff = '-',
           shFactor = 0,
           addPre = false;
 
@@ -85,13 +85,11 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
           addPre = true;
 
-          //let totalDiff = 0
           if (vegasTotal) {
             totalDiff = (vegasTotal > prediction.total) ? vegasTotal - prediction.total : prediction.total - vegasTotal
             totalDiff = round(totalDiff, 1)
           }
 
-          //let spreadDiff = 0
           if (vegasLine) {
             let split = vegasLine.split(' ')
             if (split.length == 2) {
@@ -129,7 +127,9 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
         if (status.state === "pre" && addPre) {
           preGames.push(g)
-        } else {
+        } else if (status.state === "pre" && !addPre) {
+          noOdds.push(g)
+        } else if (status.state === "in" || status.state === "post") {
           inpostGames.push(g)
         }
 
@@ -139,11 +139,15 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     preGames = orderBy(preGames, ['shFactor'], ['desc'])
 
     return res.status(200).json({
+      url,
       date: dayjs(gamesDate).format('dddd MMMM D'),
-      totalGames: (preGames.length+inpostGames.length),
+      totalPre: (preGames.length),
+      totalInPost: (inpostGames.length),
+      totalNoOdds: (noOdds.length),
       nonMatches,
-      preGames: preGames,
-      inpostGames: inpostGames
+      preGames,
+      noOdds,
+      inpostGames
     })
 
 	} catch (err) {
