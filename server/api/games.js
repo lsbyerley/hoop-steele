@@ -76,8 +76,8 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
           nonMatches.push('Home - '+homeTeam.name)
         }
 
-        let totalDiff = '-',
-          spreadDiff = '-',
+        let totalDiff = 0,
+          spreadDiff = 0,
           shFactor = 0,
           addPre = false;
 
