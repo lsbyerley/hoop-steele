@@ -19,12 +19,8 @@ function cumulativeDistribution(x, mean, standardDeviation) {
 
 function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo, averageEfficiency) {
 
-  //const awayTeamRating = game.away.kenPomRating
-  //const homeTeamRating = game.home.kenPomRating
-  const homeCourtAdvantage = 3.75 //Ken Pomeroy purportedly uses 3.75 points for home court advantage
+  const homeCourtAdvantage = 3.5 //Ken Pomeroy purportedly uses 3.75 points for home court advantage
   const standardDeviation = 11 //Ken Pomeroy purportedly uses 11 points for the standard deviation
-  const offWeight = 1.014; // Offensive weight for home game? Not sure how accurate these are
-  const defWeight = 0.986; // Defensive weight for home game? Not sure how accurate these are
   const D1AverageTempo = averageTempo
   const D1AverageEfficiency = averageEfficiency
 
@@ -33,28 +29,21 @@ function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo
   const awayTempo = awayTeamRating.adjT
   const awayOffensiveEfficiency = awayTeamRating.adjO
   const awayDefensiveEfficiency = awayTeamRating.adjD
-  //const awayOffensiveEfficiency = awayTeamRating.adjO * defWeight;
-  //const awayDefensiveEfficiency = awayTeamRating.adjD * offWeight;
 
   // HOME TEAM VARIABLES
   const homeAdjEM = parseFloat(homeTeamRating.adjEM)
   const homeTempo = homeTeamRating.adjT
   const homeOffensiveEfficiency = homeTeamRating.adjO
   const homeDefensiveEfficiency = homeTeamRating.adjD
-  //const homeOffensiveEfficiency = homeTeamRating.adjO * offWeight
-  //const homeDefensiveEfficiency = homeTeamRating.adjD * defWeight
 
   // EXPECTED TEMPO
-  //const expectedTempo = D1AverageTempo * (awayTempo/D1AverageTempo) * (homeTempo/D1AverageTempo)
   let expectedTempo = (awayTempo + homeTempo - D1AverageTempo)
 
   // AWAY EXPECTED OUTPUT
-  //const awayExpectedOutput = (awayOffensiveEfficiency/D1AverageEfficiency) * (homeDefensiveEfficiency/D1AverageEfficiency) * D1AverageEfficiency * (expectedTempo/100)
   const awayExpectedOutputNeutral = ((awayOffensiveEfficiency+homeDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
   const awayExpectedOutput = awayExpectedOutputNeutral - (homeCourtAdvantage/2)
 
   // HOME EXPECTED OUTPUT
-  //const homeExpectedOutput = (homeOffensiveEfficiency/D1AverageEfficiency) * (awayDefensiveEfficiency/D1AverageEfficiency) * D1AverageEfficiency * (expectedTempo/100)
   const homeExpectedOutputNeutral = ((homeOffensiveEfficiency+awayDefensiveEfficiency-D1AverageEfficiency)/100) * expectedTempo
   const homeExpectedOutput = homeExpectedOutputNeutral + (homeCourtAdvantage/2)
 

@@ -8,20 +8,21 @@
       <div class="row">
         <div class="col col-sm-12 col-md-3">
           <div class="row matchup">
+            <div v-if="game.neutralSite" class="neutral-tag">Neutral Site</div>
             <div class="col team visitor">
-              <div class="team-name">
+              <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id" target="_blank">
                 <span v-if="game.away.rank">{{ game.away.rank }}</span>
                 {{ game.away.shortName }}
-              </div>
+              </a>
               <img class="team-logo" :src="game.away.logo">
               <div class="team-record">({{ game.away.totalRecord }}, {{ game.away.ahRecord }} Away)</div>
               <div class="score" v-if="game.status.state !== 'pre'">{{ game.away.score }}</div>
             </div>
             <div class="col team home">
-              <div class="team-name">
+              <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id" target="_blank">
                 <span v-if="game.home.rank">{{ game.home.rank }}</span>
                 {{ game.home.shortName }}
-              </div>
+              </a>
               <img class="team-logo" :src="game.home.logo">
               <div class="team-record">({{ game.home.totalRecord }}, {{ game.home.ahRecord }} Home)</div>
               <div class="score" v-if="game.status.state !== 'pre'">{{ game.home.score }}</div>
@@ -188,6 +189,7 @@ export default {
     > .row {
       margin: 0;
     }
+
   }
 
   .row.diffs {
@@ -202,9 +204,21 @@ export default {
   }
 
   .row.matchup {
+    position: relative;
     align-items: center;
     justify-content: space-around;
     margin: 0;
+
+    .neutral-tag {
+      position: absolute;
+      background: $color-green-500;
+      color: #fff;
+      border-radius: 5px;
+      top: 40%;
+      left: 42%;
+      font-size: 8px;
+      padding: 2px 5px;
+    }
 
     .visitor, .home {
       text-align: center;
@@ -214,6 +228,7 @@ export default {
     .team {
 
       .team-name {
+        display: block;
         font-size: .75rem;
         font-family: 'EZMedium', sans-serif;
         text-transform: uppercase;

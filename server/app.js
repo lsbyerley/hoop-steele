@@ -17,7 +17,6 @@ app.use(express.static(path.resolve('./dist')));
 app.use('/api', require('./api'));
 
 app.use('/', (req, res, next) => {
-  //console.log( path.join(__dirname, '../', 'dist/index.html') )
   res.sendFile( path.join(__dirname, '../', 'dist/index.html') );
 })
 
