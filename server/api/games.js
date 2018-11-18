@@ -29,7 +29,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     }
 
     const apiBase = 'http://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
-    const apiParams = '?tz=America/New_York&calendartype=blacklist&limit=300&showAirings=false&lang=en&region=us&contentorigin=espn'
+    const apiParams = '?tz=America/New_York&limit=300&showAirings=false&lang=en&region=us&contentorigin=espn'
     const url = `${apiBase}${apiParams}&dates=${gamesDate}&groups=50`
     const gamesRes = await axios.get(url)
     const teamRatings = await getTeamRatings()
@@ -37,6 +37,9 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
     let preGames = [], inpostGames = [], noOdds = [], nonMatches = [];
     let gamesData = _get(gamesRes, 'data.events')
+
+    console.log('GamesCheck:', gamesData.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
+
     if (gamesData) {
       gamesData.forEach((game, i) => {
 

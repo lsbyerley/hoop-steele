@@ -73,18 +73,22 @@ function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo
   if (neutralSite) {
     total = parseFloat((awayExpectedOutputNeutral + homeExpectedOutputNeutral).toFixed(1))
     awayTotal = parseFloat(awayExpectedOutputNeutral.toFixed(1))
-    awayLine = parseFloat(awayPointDiffNeutral.toFixed(1))
+    //awayLine = parseFloat(awayPointDiffNeutral.toFixed(1))
+    awayLine = parseFloat(awayExpectedOutputNeutral - homeExpectedOutputNeutral).toFixed(1)
     awayWinPerc = `${(awayWinProbabilityNeutral * 100).toFixed(1)}%`
     homeTotal = parseFloat(homeExpectedOutputNeutral.toFixed(1))
-    homeLine = parseFloat(homePointDiffNeutral.toFixed(1))
+    //homeLine = parseFloat(homePointDiffNeutral.toFixed(1))
+    homeLine = parseFloat(homeExpectedOutputNeutral - awayExpectedOutputNeutral).toFixed(1)
     homeWinPerc = `${(homeWinProbabilityNeutral * 100).toFixed(1)}%`
   } else {
     total = parseFloat((awayExpectedOutput + homeExpectedOutput).toFixed(1))
     awayTotal = parseFloat(awayExpectedOutput.toFixed(1))
-    awayLine = parseFloat(awayPointDiff.toFixed(1))
+    //awayLine = parseFloat(awayPointDiff.toFixed(1))
+    awayLine = parseFloat(awayExpectedOutput - homeExpectedOutput).toFixed(1)
     awayWinPerc = `${(awayWinProbability * 100).toFixed(1)}%`
     homeTotal = parseFloat(homeExpectedOutput.toFixed(1))
-    homeLine = parseFloat(homePointDiff.toFixed(1))
+    //homeLine = parseFloat(homePointDiff.toFixed(1))
+    homeLine = parseFloat(homeExpectedOutput - awayExpectedOutput).toFixed(1)
     homeWinPerc = `${(homeWinProbability * 100).toFixed(1)}%`
   }
 

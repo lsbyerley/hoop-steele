@@ -37,7 +37,7 @@
           </div>
         </div>
       </div>
-      <p class="copy align-center">SteeleHoops - Beat. The. Odds.</p>
+      <p class="copy align-center">SteeleHoops - Beat. The. Bookie.</p>
     </footer>
   </div>
 </template>
