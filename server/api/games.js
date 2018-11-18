@@ -46,8 +46,8 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
         const startTime = dayjs(_get(game, 'competitions[0].date')).format('h:mm A')
         const teamOne = _get(game, 'competitions[0].competitors[0]')
         const teamTwo = _get(game, 'competitions[0].competitors[1]')
-        const vegasLine = _get(game, 'competitions[0].odds[0].details')
-        const vegasTotal = _get(game, 'competitions[0].odds[0].overUnder')
+        let vegasLine = _get(game, 'competitions[0].odds[0].details')
+        let vegasTotal = _get(game, 'competitions[0].odds[0].overUnder')
         const neutralSite = _get(game, 'competitions[0].neutralSite')
         const note = _get(game, 'competitions[0].notes[0].headline')
         const status = {
@@ -94,16 +94,20 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
           }
 
           if (vegasLine) {
-            let split = vegasLine.split(' ')
-            if (split.length == 2) {
-              let vegasSpread = split[1]
-              vegasSpread = vegasSpread.replace('-', '')
-              vegasSpread = round(vegasSpread, '1')
 
-              let shSpread = (prediction.awayLine > 0) ? prediction.awayLine : prediction.homeLine
-              spreadDiff = (vegasSpread > shSpread) ? vegasSpread - shSpread : shSpread - vegasSpread
-              spreadDiff = round(spreadDiff, '1')
+            let vegasSpread = 0
+            if (vegasLine !== 'EVEN') {
+              let split = vegasLine.split(' ');
+              if (split.length == 2) {
+                vegasSpread = split[1]
+                vegasSpread = vegasSpread.replace('-', '')
+                vegasSpread = round(vegasSpread, '1')
+              }
             }
+
+            let shSpread = (prediction.awayLine > 0) ? prediction.awayLine : prediction.homeLine
+            spreadDiff = (vegasSpread > shSpread) ? vegasSpread - shSpread : shSpread - vegasSpread
+            spreadDiff = round(spreadDiff, '1')
           }
 
           shFactor = spreadDiff + totalDiff

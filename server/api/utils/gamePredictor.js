@@ -48,14 +48,18 @@ function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo
   const homeExpectedOutput = homeExpectedOutputNeutral + (homeCourtAdvantage/2)
 
   // AWAY POINT DIFFERENTIAL AND WIN PROBABILITY
-  const awayPointDiffNeutral = ((awayAdjEM - homeAdjEM) * (awayTempo + homeTempo) / 200)
-  const awayPointDiff = awayPointDiffNeutral - (homeCourtAdvantage/2)
+  //const awayPointDiffNeutral = ((awayAdjEM - homeAdjEM) * (awayTempo + homeTempo) / 200)
+  //const awayPointDiff = awayPointDiffNeutral - (homeCourtAdvantage/2)
+  const awayPointDiffNeutral = awayExpectedOutputNeutral - homeExpectedOutputNeutral
+  const awayPointDiff = awayExpectedOutput - homeExpectedOutput
   const awayWinProbability = cumulativeDistribution(awayPointDiff, 0, standardDeviation)
   const awayWinProbabilityNeutral = cumulativeDistribution(awayPointDiffNeutral, 0, standardDeviation)
 
   // HOME POINT DIFFERENTIAL AND WIN PROBABILITY
-  const homePointDiffNeutral = ((homeAdjEM - awayAdjEM) * (awayTempo + homeTempo) / 200)
-  const homePointDiff = homePointDiffNeutral + (homeCourtAdvantage/2)
+  //const homePointDiffNeutral = ((homeAdjEM - awayAdjEM) * (awayTempo + homeTempo) / 200)
+  //const homePointDiff = homePointDiffNeutral + (homeCourtAdvantage/2)
+  const homePointDiffNeutral = homeExpectedOutputNeutral - awayExpectedOutputNeutral
+  const homePointDiff = homeExpectedOutput - awayExpectedOutput
   const homeWinProbability = cumulativeDistribution(homePointDiff, 0, standardDeviation)
   const homeWinProbabilityNeutral = cumulativeDistribution(homePointDiffNeutral, 0, standardDeviation)
 
