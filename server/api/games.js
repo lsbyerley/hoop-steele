@@ -85,7 +85,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
 
           addPre = true;
 
-          if (vegasTotal) {
+          if (vegasTotal && vegasTotal > 0) {
             totalDiff = (vegasTotal > prediction.total) ? vegasTotal - prediction.total : prediction.total - vegasTotal
             totalDiff = round(totalDiff, 1)
           }
