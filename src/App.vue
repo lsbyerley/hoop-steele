@@ -16,7 +16,7 @@
         <div class="row">
           <div class="col col-sm-12" v-if="showNoPreGames">
             <div class="alert alert-info align-center">
-              <p>Either there's no games with odds (yet), or no games today</p>
+              <p>{{ errMsg }}</p>
               <!--<button class="button-primary" @click="handleReload">Try Again?</button>-->
             </div>
           </div>
@@ -61,34 +61,36 @@ export default {
       nonMatches: [],
       gamesDate: '',
       dataLoading: true,
+      errMsg: 'There was an error, contact your boy'
     };
   },
   computed: {
     showNoPreGames() {
-      if (!this.dataLoading && this.preGames.length === 0) {
-        return true
-      } else {
-        return false
-      }
+      return (!this.dataLoading && this.preGames.length === 0)
     },
     showNoinpostGames() {
-      if (!this.dataLoading && this.inpostGames.length === 0) {
-        return true
-      } else {
-        return false
-      }
+      return (!this.dataLoading && this.inpostGames.length === 0)
     }
   },
   methods: {
     async getData() {
       this.dataLoading = true
-      const host = process.env.API_HOST
-      const res = await axios.get(`${host}/api/games`)
-      this.gamesDate = res.data.date
-      this.preGames = res.data.preGames
-      this.inpostGames = res.data.inpostGames
-      this.nonMatches = res.data.nonMatches
-      this.dataLoading = false
+      try {
+        const host = process.env.API_HOST
+        const res = await axios.get(`${host}/api/games`)
+        this.gamesDate = res.data.date
+        this.preGames = res.data.preGames
+        this.inpostGames = res.data.inpostGames
+        this.nonMatches = res.data.nonMatches
+        this.dataLoading = false
+        if (this.preGames.length === 0) {
+          this.errMsg = 'Either there\'s no games with odds (yet), or no games today'
+        }
+      } catch(e) {
+        console.log('apierror', e)
+        this.errMsg = 'There\'s an error in the api, contact your boy'
+        this.dataLoading = false
+      }
     },
     handleReload() {
       console.log('reloading!')

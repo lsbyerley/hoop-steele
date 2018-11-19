@@ -38,8 +38,6 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     let preGames = [], inpostGames = [], noOdds = [], nonMatches = [];
     let gamesData = _get(gamesRes, 'data.events')
 
-    console.log('GamesCheck:', gamesData.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
-
     if (gamesData) {
       gamesData.forEach((game, i) => {
 
@@ -144,6 +142,8 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     }
 
     preGames = orderBy(preGames, ['shFactor'], ['desc'])
+
+    console.log('GamesCheck-', 'Pre:', preGames.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
 
     return res.status(200).json({
       url,
