@@ -48,6 +48,17 @@ function normalizeTeam(obj) {
     }
   }
 
+  let ppg = ''
+  let statistics = _get(obj, 'statistics')
+  if (statistics) {
+    avgPoints = statistics.find((s) => {
+      return s.name === 'avgPoints'
+    })
+    if (avgPoints) {
+      ppg = avgPoints.displayValue
+    }
+  }
+
   return {
     id: teamId,
     abbrev: _get(obj, 'team.abbreviation'),
@@ -60,6 +71,7 @@ function normalizeTeam(obj) {
     rank,
     totalRecord,
     ahRecord,
+    ppg,
   }
 }
 

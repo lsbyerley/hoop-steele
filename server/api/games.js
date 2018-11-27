@@ -8,14 +8,14 @@ const orderBy = require('lodash/orderBy')
 const getTeamRatings = require('./utils/teamRatings')
 const gamePredictor = require('./utils/gamePredictor')
 const util = require('./utils/util')
-const cache = require('./utils/cache')
+const isDev = process.env.ENV === 'dev'
 
-var corsOptions = {
+var corsOptions = isDev ? {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+} : {}
 
-router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res) => {
+router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
 
 	try{
 
@@ -28,9 +28,9 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
       }
     }
 
-    const apiBase = 'http://site.web.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
-    const apiParams = '?tz=America/New_York&limit=300&showAirings=false&lang=en&region=us&contentorigin=espn'
-    const url = `${apiBase}${apiParams}&dates=${gamesDate}&groups=50`
+    const apiBase = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
+    const apiParams = `lang=en&region=us&calendartype=blacklist&limit=300&tz=America%2FNew_York&groups=50`
+    const url = `${apiBase}?${apiParams}&dates=${gamesDate}`
     const gamesRes = await axios.get(url)
     const teamRatings = await getTeamRatings()
     //const odds = await util.getOdds()
@@ -131,6 +131,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
         }
 
         if (status.state === "pre" && addPre) {
+          console.log('PREGAME -', g.startTime, g.status.state, g.away.abbrev, g.home.abbrev)
           preGames.push(g)
         } else if (status.state === "pre" && !addPre) {
           noOdds.push(g)
@@ -158,8 +159,7 @@ router.get('/games/:date*?', cors(corsOptions), /*cache(100),*/ async (req, res)
     })
 
 	} catch (err) {
-		console.error(err)
-		return res.status(500).json({ error: err })
+		return res.status(500).json({ error: 'error in the external games fetch' })
 	}
 
 })

@@ -16,7 +16,7 @@
               </a>
               <img class="team-logo" :src="game.away.logo">
               <div class="team-record">({{ game.away.totalRecord }}, {{ game.away.ahRecord }} Away)</div>
-              <div class="score" v-if="game.status.state !== 'pre'">{{ game.away.score }}</div>
+              <!--<div class="score">{{ scoreValue(game, 'away') }}</div>-->
             </div>
             <div class="col team home">
               <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id" target="_blank">
@@ -25,7 +25,7 @@
               </a>
               <img class="team-logo" :src="game.home.logo">
               <div class="team-record">({{ game.home.totalRecord }}, {{ game.home.ahRecord }} Home)</div>
-              <div class="score" v-if="game.status.state !== 'pre'">{{ game.home.score }}</div>
+              <!--<div class="score">{{ scoreValue(game, 'home') }}</div>-->
             </div>
           </div>
         </div>
@@ -141,6 +141,13 @@ export default {
         return `${game.away.abbrev} ${hline}`
       } else {
         return `${game.home.abbrev} ${aline}`
+      }
+    },
+    scoreValue(game, type) {
+      if (game.status.state === 'pre' && game.away.ppg && game.home.ppg) {
+        return (type === 'away') ? `${game.away.ppg} ppg` : `${game.home.ppg} ppg`
+      } else if (game.status.state !== 'pre') {
+        return (type === 'away') ? `${game.away.score}` : `${game.home.score}`
       }
     }
   }
@@ -307,7 +314,7 @@ export default {
   table {
     margin: 0;
 
-    thead th {
+    th {
       padding: 2px;
       text-align: center;
       background: #fafafa;
@@ -328,7 +335,7 @@ export default {
       }
 
     }
-    tbody td {
+    td {
       padding: 2px;
       text-align: center;
       font-size: .85rem;
