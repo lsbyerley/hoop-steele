@@ -511,6 +511,7 @@ const teams = [
   { id: 2754, location: "Youngstown State", abbrev: "YSU", kpTeamName: "Youngstown St." },
   { id: 2755, location: "Grambling", abbrev: "GRAM", kpTeamName: "Grambling St." },
   { id: 2803, location: "Bryant", abbrev: "BRY" },
+  { id: 2856, location: "California Baptist", abbrev: "CBU", kpTeamName: "Cal Baptist" },
   { id: 2870, location: "Fort Wayne", abbrev: "IPFW" },
   { id: 2885, location: "NJIT", abbrev: "NJIT" },
   { id: 2908, location: "South Carolina Upstate", abbrev: "UPST", kpTeamName: "USC Upstate" },

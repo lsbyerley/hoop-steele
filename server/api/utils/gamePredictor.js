@@ -19,7 +19,7 @@ function cumulativeDistribution(x, mean, standardDeviation) {
 
 function gamePredictor(neutralSite, awayTeamRating, homeTeamRating, averageTempo, averageEfficiency) {
 
-  const homeCourtAdvantage = 3.5 //Ken Pomeroy purportedly uses 3.75 points for home court advantage
+  const homeCourtAdvantage = 3.5 //Ken Pomeroy purportedly uses 3.5 points for home court advantage
   const standardDeviation = 11 //Ken Pomeroy purportedly uses 11 points for the standard deviation
   const D1AverageTempo = averageTempo
   const D1AverageEfficiency = averageEfficiency
