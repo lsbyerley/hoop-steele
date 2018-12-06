@@ -4,7 +4,7 @@ import VueAnalytics from 'vue-analytics'
 //import store from './store'
 //import router from './router'
 
-const isProd = process.env.NODE_ENV === 'prod'
+const isProd = process.env.NODE_ENV === 'production'
 
 Vue.config.productionTip = false
 
