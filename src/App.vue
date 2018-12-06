@@ -64,6 +64,9 @@ export default {
   },
   mounted() {
     this.getData()
+    // manually tracking page view
+    // if/when vue-router is used, remove this
+    this.$ga.page('/')
   },
   data() {
     return {
