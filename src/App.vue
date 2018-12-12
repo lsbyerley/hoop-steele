@@ -2,19 +2,18 @@
   <div id="app-wrapper" :class="{ 'show-nav': showNav }">
     <div id="app-canvas">
       <div id="app-menu">
-        <a href="#" class="toggle-nav" @click="showNav = !showNav">Toggle Nav</a>
-        <h2>The Menu</h2>
+        <div class="sidebar">
+          <div class="exit" @click="showNav = false"></div>
+          <h3 class="sidebar-category">Total Games: {{ preGames.length }}</h3>
+          <p>Want to see anything else here?<br>Maybe a team search?<br>Taking suggestions!</p>
+        </div>
       </div>
       <nav class="nav">
         <div class="nav-container">
           <div class="nav-logo">
             <a href="/">SteeleHoops</a>
           </div>
-          <!--<ul class="nav-links">
-            <li>
-              <a href="#" @click="showNav = !showNav">Nav</a>
-            </li>
-          </ul>-->
+          <a class="mobile-menu-toggle" @click="showNav = !showNav"></a>
         </div>
       </nav>
       <main class="main">

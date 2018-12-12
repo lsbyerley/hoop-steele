@@ -94,18 +94,18 @@
             <tbody>
               <tr>
                 <td>Rank</td>
-                <td>{{ game.away.kenPom.rank }}</td>
-                <td>{{ game.home.kenPom.rank }}</td>
+                <td>{{ game.away.kenPom.rank }}<sup>{{ ordinalSuffix(game.away.kenPom.rank) }}</sup></td>
+                <td>{{ game.home.kenPom.rank }}<sup>{{ ordinalSuffix(game.home.kenPom.rank) }}</sup></td>
               </tr>
               <tr>
                 <td>Offense</td>
-                <td>{{ game.away.kenPom.adjORank }}</td>
-                <td>{{ game.home.kenPom.adjORank }}</td>
+                <td>{{ game.away.kenPom.adjORank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjORank) }}</sup></td>
+                <td>{{ game.home.kenPom.adjORank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjORank) }}</sup></td>
               </tr>
               <tr>
                 <td>Defense</td>
-                <td>{{ game.away.kenPom.adjDRank }}</td>
-                <td>{{ game.home.kenPom.adjDRank }}</td>
+                <td>{{ game.away.kenPom.adjDRank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjDRank) }}</sup></td>
+                <td>{{ game.home.kenPom.adjDRank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjDRank) }}</sup></td>
               </tr>
               <tr>
                 <td>Tempo</td>
@@ -149,6 +149,20 @@ export default {
       } else if (game.status.state !== 'pre') {
         return (type === 'away') ? `${game.away.score}` : `${game.home.score}`
       }
+    },
+    ordinalSuffix(i) {
+      var j = i % 10,
+          k = i % 100;
+      if (j == 1 && k != 11) {
+        return "st";
+      }
+      if (j == 2 && k != 12) {
+        return "nd";
+      }
+      if (j == 3 && k != 13) {
+        return "rd";
+      }
+      return "th";
     }
   }
 }

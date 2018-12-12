@@ -62,8 +62,42 @@ body {
   position: absolute;
   top: 0;
   left: -300px;
-  background: #428bca;
-  padding: 15px;
+  background: #ddd;
+  border-right: 1px solid #ccc;
+
+  .sidebar {
+    position: relative;
+
+    .sidebar-category {
+      border-bottom: 1px solid #ccc;
+      background: none;
+
+      &:hover {
+        cursor: inherit;
+        opacity: inherit;
+      }
+    }
+  }
+
+  .exit {
+    color: #777;
+    font-size: 1.25rem;
+    font-family: 'EZBold', sans-serif;
+    position: absolute;
+    right: 10px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #fff;
+    top: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: #333;
+    }
+
+    &:after {
+      content: '✖';
+    }
+  }
 }
 
 nav.nav {
@@ -75,7 +109,11 @@ nav.nav {
   }
 
   .nav-container {
-    margin: 0;
+    max-width: 100%;
+
+    .mobile-menu-toggle {
+      cursor: pointer;
+    }
   }
 }
 
