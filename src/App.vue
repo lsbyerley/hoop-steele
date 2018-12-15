@@ -4,7 +4,21 @@
       <div id="app-menu">
         <div class="sidebar">
           <div class="exit" @click="showNav = false"></div>
-          <h3 class="sidebar-category">Total Games: {{ preGames.length }}</h3>
+          <h3 class="sidebar-category">Total Games: {{ games.length }}</h3>
+
+          <fieldset>
+            <legend>Games Sort</legend>
+            <div class="form-control">
+              <label><input type="radio" name="sortType" value="shFactor" v-model="sortType">SHFactor</label>
+            </div>
+            <div class="form-control">
+              <label><input type="radio" name="sortType" value="totalDiff" v-model="sortType">Total Diff</label>
+            </div>
+            <div class="form-control">
+              <label><input type="radio" name="sortType" value="spreadDiff" v-model="sortType">Spread Diff</label>
+            </div>
+          </fieldset>
+
           <p>Want to see anything else here?<br>Maybe a team search?<br>Taking suggestions!</p>
         </div>
       </div>
@@ -29,8 +43,8 @@
                 <!--<button class="button-primary" @click="handleReload">Try Again?</button>-->
               </div>
             </div>
-            <div class="col col-sm-12" v-for="game in preGames">
-              <Game :key="game.id" :game="game" />
+            <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
+              <Game :game="game" />
             </div>
           </div>
         </div>
@@ -69,20 +83,35 @@ export default {
   },
   data() {
     return {
+      sortType: 'shFactor',
+      sortTypes: ['totalDiff', 'spreadDiff', 'shFactor'],
       showNav: false,
-      preGames: [],
+      games: [],
       inpostGames: [],
       nonMatches: [],
       gamesDate: '',
       dataLoading: true,
-      errMsg: 'There was an error, contact your boy'
+      errMsg: 'There was an error, sorry pal'
     };
   },
   computed: {
-    showNoPreGames() {
-      return (!this.dataLoading && this.preGames.length === 0)
+    sortedGames() {
+      return this.games.sort((a, b) => {
+        var aVal = a[this.sortType]
+        var bVal = b[this.sortType]
+        if (aVal > bVal) {
+          return -1;
+        }
+        if (aVal < bVal) {
+          return 1;
+        }
+        return 0;
+      })
     },
-    showNoinpostGames() {
+    showNoPreGames() {
+      return (!this.dataLoading && this.games.length === 0)
+    },
+    showNoInPostGames() {
       return (!this.dataLoading && this.inpostGames.length === 0)
     }
   },
@@ -93,11 +122,11 @@ export default {
         const host = process.env.API_HOST
         const res = await axios.get(`${host}/api/games`)
         this.gamesDate = res.data.date
-        this.preGames = res.data.preGames
+        this.games = res.data.games
         this.inpostGames = res.data.inpostGames
         this.nonMatches = res.data.nonMatches
         this.dataLoading = false
-        if (this.preGames.length === 0) {
+        if (this.games.length === 0) {
           this.errMsg = 'Either there\'s no games with odds (yet), or no games today'
         }
       } catch(e) {

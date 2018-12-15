@@ -34,16 +34,16 @@ async function getTeamRatings() {
       "adjDRank": $(tds[8]).find('.seed').text().trim(),
       "adjT": tempo,
       "adjTRank": $(tds[10]).find('.seed').text().trim(),
-      "luck": $(tds[11]).text().trim(),
-      "luckRank": $(tds[12]).find('.seed').text().trim(),
-      "sosAdjEM": $(tds[13]).text().trim(),
-      "sosAdjEMRank": $(tds[14]).find('.seed').text().trim(),
-      "sosOppO": $(tds[15]).text().trim(),
-      "sosOppORank": $(tds[16]).find('.seed').text().trim(),
-      "sosOppD": $(tds[17]).text().trim(),
-      "sosOppDRank": $(tds[18]).find('.seed').text().trim(),
-      "nonConfAdjEM": $(tds[19]).text().trim(),
-      "nonConfAdjEMRank": $(tds[20]).find('.seed').text().trim()
+      //"luck": $(tds[11]).text().trim(),
+      //"luckRank": $(tds[12]).find('.seed').text().trim(),
+      //"sosAdjEM": $(tds[13]).text().trim(),
+      //"sosAdjEMRank": $(tds[14]).find('.seed').text().trim(),
+      //"sosOppO": $(tds[15]).text().trim(),
+      //"sosOppORank": $(tds[16]).find('.seed').text().trim(),
+      //"sosOppD": $(tds[17]).text().trim(),
+      //"sosOppDRank": $(tds[18]).find('.seed').text().trim(),
+      //"nonConfAdjEM": $(tds[19]).text().trim(),
+      //"nonConfAdjEMRank": $(tds[20]).find('.seed').text().trim()
     };
     totalTeams += 1;
     totalTempo = totalTempo + tempo;

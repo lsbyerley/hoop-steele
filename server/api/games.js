@@ -4,7 +4,6 @@ const dayjs = require('dayjs')
 const axios = require('axios')
 const _get = require('lodash/get')
 const round = require('lodash/round')
-const orderBy = require('lodash/orderBy')
 const getTeamRatings = require('./utils/teamRatings')
 const gamePredictor = require('./utils/gamePredictor')
 const util = require('./utils/util')
@@ -35,7 +34,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     const teamRatings = await getTeamRatings()
     //const odds = await util.getOdds()
 
-    let preGames = [], inpostGames = [], noOdds = [], nonMatches = [];
+    let games = [], inpostGames = [], noOdds = [], nonMatches = [];
     let gamesData = _get(gamesRes, 'data.events')
 
     if (gamesData) {
@@ -132,7 +131,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
 
         if (status.state === "pre" && addPre) {
           console.log('PREGAME -', g.startTime, g.status.state, g.away.abbrev, g.home.abbrev)
-          preGames.push(g)
+          games.push(g)
         } else if (status.state === "pre" && !addPre) {
           noOdds.push(g)
         } else if (status.state === "in" || status.state === "post") {
@@ -142,18 +141,16 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
       })
     }
 
-    preGames = orderBy(preGames, ['shFactor'], ['desc'])
-
-    console.log('GamesCheck-', 'Pre:', preGames.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
+    console.log('GamesCheck-', 'Pre:', games.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
 
     return res.status(200).json({
       url,
       date: dayjs(gamesDate).format('dddd MMMM D'),
-      totalPre: (preGames.length),
+      totalGames: (games.length),
       totalInPost: (inpostGames.length),
       totalNoOdds: (noOdds.length),
       nonMatches,
-      preGames,
+      games: games,
       noOdds,
       inpostGames
     })
