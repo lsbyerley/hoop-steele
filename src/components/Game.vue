@@ -16,7 +16,7 @@
               </a>
               <img class="team-logo" :src="game.away.logo">
               <div class="team-record">({{ game.away.totalRecord }}, {{ game.away.ahRecord }} Away)</div>
-              <!--<div class="score">{{ scoreValue(game, 'away') }}</div>-->
+              <div class="score">{{ scoreValue(game, 'away') }}</div>
             </div>
             <div class="col team home">
               <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id" target="_blank">
@@ -25,7 +25,7 @@
               </a>
               <img class="team-logo" :src="game.home.logo">
               <div class="team-record">({{ game.home.totalRecord }}, {{ game.home.ahRecord }} Home)</div>
-              <!--<div class="score">{{ scoreValue(game, 'home') }}</div>-->
+              <div class="score">{{ scoreValue(game, 'home') }}</div>
             </div>
           </div>
         </div>
@@ -145,7 +145,7 @@ export default {
     },
     scoreValue(game, type) {
       if (game.status.state === 'pre' && game.away.ppg && game.home.ppg) {
-        return (type === 'away') ? `${game.away.ppg} ppg` : `${game.home.ppg} ppg`
+        return (type === 'away') ? `${game.away.ppg} PPG` : `${game.home.ppg} PPG`
       } else if (game.status.state !== 'pre') {
         return (type === 'away') ? `${game.away.score}` : `${game.home.score}`
       }
@@ -261,7 +261,7 @@ export default {
         font-size: .75rem;
       }
       .score {
-        font-size: 2rem;
+        font-size: .75rem;
       }
     }
 
@@ -278,10 +278,7 @@ export default {
           width: 3rem;
         }
         .team-record {
-          font-size: .5rem;
-        }
-        .score {
-          font-size: 2rem;
+          font-size: .65rem;
         }
       }
 

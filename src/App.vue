@@ -55,7 +55,7 @@
             <div class="col col-sm-12">
               <div class="footer-text">
                 <p>Degenerates rejoice</p>
-                <p>All stats and formulas used on this page were retrieved from public pages.</p>
+                <p>All stats used on this page were retrieved from public pages.</p>
               </div>
             </div>
           </div>
