@@ -5,20 +5,30 @@
         <div class="sidebar">
           <div class="exit" @click="showNav = false"></div>
           <h3 class="sidebar-category">Total Games: {{ games.length }}</h3>
-
           <fieldset>
             <legend>Games Sort</legend>
             <div class="form-control">
-              <label><input type="radio" name="sortType" value="shFactor" v-model="sortType">SHFactor</label>
+              <label for="shFactor">
+                <input type="radio" name="sortType" value="shFactor" v-model="sortType">
+                SHFactor
+              </label>
             </div>
             <div class="form-control">
-              <label><input type="radio" name="sortType" value="totalDiff" v-model="sortType">Total Diff</label>
+              <label for="totalDiff"><input type="radio" name="sortType" value="totalDiff" v-model="sortType">
+                Total Diff
+              </label>
             </div>
             <div class="form-control">
-              <label><input type="radio" name="sortType" value="spreadDiff" v-model="sortType">Spread Diff</label>
+              <label for="spreadDiff"><input type="radio" name="sortType" value="spreadDiff" v-model="sortType">
+                Spread Diff
+              </label>
+            </div>
+            <div class="form-control">
+              <label for="kpDiff"><input type="radio" name="sortType" value="kpDiff" v-model="sortType">
+                KenPom Diff
+              </label>
             </div>
           </fieldset>
-
           <p>Want to see anything else here?<br>Maybe a team search?<br>Taking suggestions!</p>
         </div>
       </div>
@@ -84,7 +94,7 @@ export default {
   data() {
     return {
       sortType: 'shFactor',
-      sortTypes: ['totalDiff', 'spreadDiff', 'shFactor'],
+      sortTypes: ['totalDiff', 'spreadDiff', 'shFactor', 'kpDiff'],
       showNav: false,
       games: [],
       inpostGames: [],

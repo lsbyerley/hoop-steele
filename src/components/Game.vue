@@ -10,7 +10,7 @@
           <div class="row matchup">
             <div v-if="game.neutralSite" class="neutral-tag">Neutral Site</div>
             <div class="col team visitor">
-              <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id" target="_blank">
+              <a class="team-name" :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id" target="_blank" rel="noopener noreferrer">
                 <span v-if="game.away.rank">{{ game.away.rank }}</span>
                 {{ game.away.shortName }}
               </a>
@@ -19,7 +19,7 @@
               <div class="score">{{ scoreValue(game, 'away') }}</div>
             </div>
             <div class="col team home">
-              <a class="team-name" :href="'http://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id" target="_blank">
+              <a class="team-name" :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id" target="_blank" rel="noopener noreferrer">
                 <span v-if="game.home.rank">{{ game.home.rank }}</span>
                 {{ game.home.shortName }}
               </a>

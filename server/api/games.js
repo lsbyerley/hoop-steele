@@ -18,9 +18,10 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
 
 	try{
 
-    //TODO: if its past midnight and games are still going, use the previous day
+    //TODO: NCAA tourney support (group 100)
+    let groups = 50;
     const paramDate = req.params.date
-    let gamesDate = dayjs().format('YYYYMMDD')
+    let gamesDate = dayjs().format('YYYYMMDD');
     if (paramDate && paramDate.length === 8) {
       if (dayjs(paramDate).isValid()) {
         gamesDate = paramDate
@@ -28,7 +29,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     }
 
     const apiBase = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
-    const apiParams = `lang=en&region=us&calendartype=blacklist&limit=300&tz=America%2FNew_York&groups=50`
+    const apiParams = `lang=en&region=us&calendartype=blacklist&limit=300&tz=America%2FNew_York&groups=${groups}`
     const url = `${apiBase}?${apiParams}&dates=${gamesDate}`
     const gamesRes = await axios.get(url)
     const teamRatings = await getTeamRatings()
@@ -64,9 +65,10 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
           return tr.team === homeTeam.name
         })
 
-        let prediction;
+        let prediction, kpDiff = 0;
         if (awayTeam.kenPom && homeTeam.kenPom) {
           prediction = gamePredictor(neutralSite, awayTeam.kenPom, homeTeam.kenPom, teamRatings.avgTempo, teamRatings.avgEfficiency)
+          kpDiff = Math.abs(awayTeam.kenPom.rank - homeTeam.kenPom.rank);
         }
 
         if (!awayTeam.kenPom) {
@@ -86,7 +88,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
           addPre = true;
 
           if (vegasTotal && vegasTotal > 0) {
-            totalDiff = (vegasTotal > prediction.total) ? vegasTotal - prediction.total : prediction.total - vegasTotal
+            totalDiff = Math.abs(vegasTotal - prediction.total)
             totalDiff = round(totalDiff, 1)
           }
 
@@ -126,6 +128,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
           prediction,
           totalDiff,
           spreadDiff,
+          kpDiff,
           shFactor,
         }
 
