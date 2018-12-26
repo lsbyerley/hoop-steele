@@ -79,7 +79,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
         }
 
         let totalDiff = 0,
-          spreadDiff = 0,
+          lineDiff = 0,
           shFactor = 0,
           addPre = false;
 
@@ -105,16 +105,18 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
             }
 
             let shSpread = (prediction.awayLine > 0) ? prediction.awayLine : prediction.homeLine
-            spreadDiff = (vegasSpread > shSpread) ? vegasSpread - shSpread : shSpread - vegasSpread
-            spreadDiff = round(spreadDiff, '1')
+            lineDiff = (vegasSpread > shSpread) ? vegasSpread - shSpread : shSpread - vegasSpread
+            //lineDiff = Math.abs(vegasSpread - shSpread)
+            lineDiff = round(lineDiff, '1')
           }
 
-          shFactor = spreadDiff + totalDiff
+          shFactor = lineDiff + totalDiff
           shFactor = round(shFactor, '1')
         }
 
         let g = {
           id: game.id,
+          date: _get(game, 'competitions[0].date'),
           startTime,
           neutralSite,
           note,
@@ -127,7 +129,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
           },
           prediction,
           totalDiff,
-          spreadDiff,
+          lineDiff,
           kpDiff,
           shFactor,
         }

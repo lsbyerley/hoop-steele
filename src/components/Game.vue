@@ -42,7 +42,7 @@
               </div>
               <div class="col odds diff">
                 <div class="title">Diff</div>
-                <div class="value">{{ game.spreadDiff }}</div>
+                <div class="value">{{ game.lineDiff }}</div>
               </div>
               <div class="col odds">
                 <div class="title">V-Total</div>

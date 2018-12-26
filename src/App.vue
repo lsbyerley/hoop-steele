@@ -19,13 +19,18 @@
               </label>
             </div>
             <div class="form-control">
-              <label for="spreadDiff"><input type="radio" name="sortType" value="spreadDiff" v-model="sortType">
-                Spread Diff
+              <label for="lineDiff"><input type="radio" name="sortType" value="lineDiff" v-model="sortType">
+                Line Diff
               </label>
             </div>
             <div class="form-control">
               <label for="kpDiff"><input type="radio" name="sortType" value="kpDiff" v-model="sortType">
                 KenPom Diff
+              </label>
+            </div>
+            <div class="form-control">
+              <label for="date"><input type="radio" name="sortType" value="date" v-model="sortType">
+                Date
               </label>
             </div>
           </fieldset>
@@ -34,10 +39,10 @@
       </div>
       <nav class="nav">
         <div class="nav-container">
+          <a class="mobile-menu-toggle" @click="showNav = !showNav"></a>
           <div class="nav-logo">
             <a href="/">SteeleHoops</a>
           </div>
-          <a class="mobile-menu-toggle" @click="showNav = !showNav"></a>
         </div>
       </nav>
       <main class="main">
@@ -50,7 +55,6 @@
             <div class="col col-sm-12" v-if="showNoPreGames">
               <div class="alert alert-info align-center">
                 <p>{{ errMsg }}</p>
-                <!--<button class="button-primary" @click="handleReload">Try Again?</button>-->
               </div>
             </div>
             <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
@@ -94,7 +98,7 @@ export default {
   data() {
     return {
       sortType: 'shFactor',
-      sortTypes: ['totalDiff', 'spreadDiff', 'shFactor', 'kpDiff'],
+      sortTypes: ['totalDiff', 'lineDiff', 'shFactor', 'kpDiff', 'date'],
       showNav: false,
       games: [],
       inpostGames: [],
@@ -107,14 +111,19 @@ export default {
   computed: {
     sortedGames() {
       return this.games.sort((a, b) => {
-        var aVal = a[this.sortType]
-        var bVal = b[this.sortType]
-        if (aVal > bVal) {
-          return -1;
+        let aVal = a[this.sortType]
+        let bVal = b[this.sortType]
+
+        if (this.sortType === 'date') {
+          aVal = new Date(aVal)
+          bVal = new Date(bVal)
+          if (aVal < bVal) { return -1 }
+          if (aVal > bVal) { return 1 }
+          return 0;
         }
-        if (aVal < bVal) {
-          return 1;
-        }
+
+        if (aVal > bVal) { return -1 }
+        if (aVal < bVal) { return 1 }
         return 0;
       })
     },
@@ -143,10 +152,6 @@ export default {
         this.errMsg = 'There\'s an error in the api, contact the admin'
         this.dataLoading = false
       }
-    },
-    handleReload() {
-      console.log('reloading!')
-      this.getData()
     }
   }
 };
