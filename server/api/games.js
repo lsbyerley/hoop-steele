@@ -24,6 +24,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     let gamesDate = dayjs().format('YYYYMMDD');
     if (paramDate && paramDate.length === 8) {
       if (dayjs(paramDate).isValid()) {
+        console.log('paramdate', paramDate)
         gamesDate = paramDate
       }
     }
@@ -35,7 +36,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     const teamRatings = await getTeamRatings()
     //const odds = await util.getOdds()
 
-    let games = [], inpostGames = [], noOdds = [], nonMatches = [];
+    let games = [], inpostGames = [], noOdds = [], nonMatches = [], confs = ['All'];
     let gamesData = _get(gamesRes, 'data.events')
 
     if (gamesData) {
@@ -135,8 +136,16 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
         }
 
         if (status.state === "pre" && addPre) {
-          console.log('PREGAME -', g.startTime, g.status.state, g.away.abbrev, g.home.abbrev)
+          //console.log('PREGAME -', g.startTime, g.status.state, g.away.abbrev, g.home.abbrev)
           games.push(g)
+          if (awayTeam.kenPom && homeTeam.kenPom) {
+            if (awayTeam.kenPom.conf && !confs.includes(awayTeam.kenPom.conf)) {
+              confs.push(awayTeam.kenPom.conf)
+            }
+            if (homeTeam.kenPom.conf && !confs.includes(homeTeam.kenPom.conf)) {
+              confs.push(homeTeam.kenPom.conf)
+            }
+          }
         } else if (status.state === "pre" && !addPre) {
           noOdds.push(g)
         } else if (status.state === "in" || status.state === "post") {
@@ -146,11 +155,12 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
       })
     }
 
-    console.log('GamesCheck-', 'Pre:', games.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
+    //console.log('GamesCheck-', 'Pre:', games.length, 'Time:', dayjs().format('YYYYMMDD hh:mm A'))
 
     return res.status(200).json({
       url,
-      date: dayjs(gamesDate).format('dddd MMMM D'),
+      date: dayjs(gamesDate).format('MMMM D, YYYY'),
+      confs,
       totalGames: (games.length),
       totalInPost: (inpostGames.length),
       totalNoOdds: (noOdds.length),
@@ -161,6 +171,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     })
 
 	} catch (err) {
+    console.error(err)
 		return res.status(500).json({ error: 'error in the external games fetch' })
 	}
 

@@ -5,6 +5,16 @@
         <div class="sidebar">
           <div class="exit" @click="showNav = false"></div>
           <h3 class="sidebar-category">Total Games: {{ games.length }}</h3>
+          <!--<fieldset>
+            <legend>Game Date</legend>
+
+          </fieldset>-->
+          <fieldset>
+            <legend>Conferences</legend>
+              <select name="confs" value="confs" v-model="conf">
+                <option v-for="conf in confs" v-bind:value="conf">{{ conf }}</option>
+              </select>
+          </fieldset>
           <fieldset>
             <legend>Games Sort</legend>
             <div class="form-control">
@@ -58,7 +68,7 @@
               </div>
             </div>
             <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
-              <Game :game="game" />
+              <Game :game="game" :sort-type="sortType" />
             </div>
           </div>
         </div>
@@ -97,9 +107,11 @@ export default {
   },
   data() {
     return {
-      sortType: 'shFactor',
+      sortType: 'kpDiff',
       sortTypes: ['totalDiff', 'lineDiff', 'shFactor', 'kpDiff', 'date'],
       showNav: false,
+      conf: 'All',
+      confs: [],
       games: [],
       inpostGames: [],
       nonMatches: [],
@@ -126,6 +138,13 @@ export default {
         if (aVal < bVal) { return 1 }
         return 0;
       })
+      .filter((game) => {
+        if (this.conf !== 'All') {
+          return game.away.kenPom.conf === this.conf || game.home.kenPom.conf === this.conf
+        } else {
+          return true
+        }
+      })
     },
     showNoPreGames() {
       return (!this.dataLoading && this.games.length === 0)
@@ -144,6 +163,7 @@ export default {
         this.games = res.data.games
         this.inpostGames = res.data.inpostGames
         this.nonMatches = res.data.nonMatches
+        this.confs = res.data.confs
         this.dataLoading = false
         if (this.games.length === 0) {
           this.errMsg = 'Either there\'s no games with odds (yet), or no games today'

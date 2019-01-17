@@ -2,7 +2,7 @@
   <div class="panel game">
     <div class="panel-head">
       <div class="panel-title left">{{ game.status.detail }}</div>
-      <div class="panel-title right">SHFactor: {{ game.shFactor }}</div>
+      <div class="panel-title right">{{ sortTypeString() }}</div>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -100,12 +100,17 @@
               <tr>
                 <td>Offense</td>
                 <td>{{ game.away.kenPom.adjORank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjORank) }}</sup></td>
-                <td>{{ game.home.kenPom.adjORank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjORank) }}</sup></td>
+                <td>{{ game.home.kenPom.adjORank }}<sup>{{ ordinalSuffix(game.home.kenPom.adjORank) }}</sup></td>
               </tr>
               <tr>
                 <td>Defense</td>
                 <td>{{ game.away.kenPom.adjDRank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjDRank) }}</sup></td>
-                <td>{{ game.home.kenPom.adjDRank }}<sup>{{ ordinalSuffix(game.away.kenPom.adjDRank) }}</sup></td>
+                <td>{{ game.home.kenPom.adjDRank }}<sup>{{ ordinalSuffix(game.home.kenPom.adjDRank) }}</sup></td>
+              </tr>
+              <tr>
+                <td>SOS</td>
+                <td>{{ game.away.kenPom.sosAdjEMRank }}<sup>{{ ordinalSuffix(game.away.kenPom.sosAdjEMRank) }}</sup></td>
+                <td>{{ game.home.kenPom.sosAdjEMRank }}<sup>{{ ordinalSuffix(game.home.kenPom.sosAdjEMRank) }}</sup></td>
               </tr>
               <tr>
                 <td>Tempo</td>
@@ -127,12 +132,23 @@
 export default {
   name: 'Game',
   props: {
+    sortType: {
+      type: String,
+      default: ''
+    },
     game: {
       type: Object,
       default: {}
     }
   },
   methods: {
+    sortTypeString() {
+      if (this.sortType === 'date') {
+        return 'Sort: Game Date'
+      } else {
+        return `${this.sortType}: ${this.game[this.sortType]}`
+      }
+    },
     shLine(game) {
       let aline = (game.prediction) ? game.prediction.awayLine : '-'
       let hline = (game.prediction) ? game.prediction.homeLine : '-'

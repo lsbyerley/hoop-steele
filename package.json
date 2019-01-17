@@ -9,7 +9,8 @@
     "dev": "concurrently --kill-others 'npm run client:dev' 'npm run server:dev' || true",
     "client:prod": "parcel build index.html",
     "server:prod": "node ./server/app.js",
-    "build": "npm run client:prod & npm run server:prod || true",
+    "build": "npm run client:prod",
+    "serve": "npm run server:prod",
     "prebuild": "rm -rf dist"
   },
   "author": "lsbyerley@gmail.com",
@@ -30,6 +31,7 @@
     "vue-analytics": "^5.16.1"
   },
   "devDependencies": {
+    "autoprefixer": "^9.4.4",
     "@babel/core": "^7.1.2",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@vue/component-compiler-utils": "^2.3.0",
