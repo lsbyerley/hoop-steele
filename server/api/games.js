@@ -24,7 +24,6 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     let gamesDate = dayjs().format('YYYYMMDD');
     if (paramDate && paramDate.length === 8) {
       if (dayjs(paramDate).isValid()) {
-        console.log('paramdate', paramDate)
         gamesDate = paramDate
       }
     }
