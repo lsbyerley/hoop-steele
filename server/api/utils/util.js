@@ -22,6 +22,7 @@ function normalizeTeam(obj) {
   }
 
   let totalRecord = '',
+      vsConfRecord = '',
       ahRecord = '';
   let records = _get(obj, 'records')
   if (records) {
@@ -30,6 +31,12 @@ function normalizeTeam(obj) {
     })
     if (tr) {
       totalRecord = _get(tr, 'summary')
+    }
+    let vc = records.find((r) => {
+      return r.type === 'vsconf'
+    })
+    if (vc) {
+      vsConfRecord = _get(vc, 'summary')
     }
     if (_get(obj, 'homeAway') === 'away') {
       let ah = records.find((a) => {
@@ -70,6 +77,7 @@ function normalizeTeam(obj) {
     score: _get(obj, 'score'),
     rank,
     totalRecord,
+    vsConfRecord,
     ahRecord,
     ppg,
   }

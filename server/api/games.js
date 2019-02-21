@@ -6,6 +6,7 @@ const _get = require('lodash/get')
 const round = require('lodash/round')
 const getTeamRatings = require('./utils/teamRatings')
 const gamePredictor = require('./utils/gamePredictor')
+const getTeamStats = require('./utils/teamStats')
 const util = require('./utils/util')
 const isDev = process.env.ENV === 'dev'
 
@@ -33,9 +34,11 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     const url = `${apiBase}?${apiParams}&dates=${gamesDate}`
     const gamesRes = await axios.get(url)
     const teamRatings = await getTeamRatings()
+    //const teamStats = await getTeamStats()
     //const odds = await util.getOdds()
 
     let games = [], inpostGames = [], noOdds = [], nonMatches = [], confs = ['All'];
+    let gamesWithStats = 0;
     let gamesData = _get(gamesRes, 'data.events')
 
     if (gamesData) {
@@ -61,9 +64,21 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
           return tr.team === awayTeam.name
         })
 
+        /*awayTeam.stats = teamStats.find((ts) => {
+          return ts.team === awayTeam.shortName || ts.team === awayTeam.name
+        })*/
+
         homeTeam.kenPom = teamRatings.ratings.find((tr) => {
           return tr.team === homeTeam.name
         })
+
+        /*homeTeam.stats = teamStats.find((ts) => {
+          return ts.team === homeTeam.shortName || ts.team === homeTeam.name
+        })*/
+
+        /*if (awayTeam.stats && homeTeam.stats) {
+          gamesWithStats++
+        }*/
 
         let prediction, kpDiff = 0;
         if (awayTeam.kenPom && homeTeam.kenPom) {
@@ -166,7 +181,8 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
       nonMatches,
       games: games,
       noOdds,
-      inpostGames
+      inpostGames,
+      gamesWithStats
     })
 
 	} catch (err) {
