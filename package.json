@@ -26,6 +26,7 @@
     "express": "^4.16.4",
     "lodash": "^4.17.11",
     "memory-cache": "^0.2.0",
+    "mongoose": "^5.4.14",
     "mustard-ui": "0.0.8",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.1"

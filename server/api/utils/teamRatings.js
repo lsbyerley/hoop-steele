@@ -1,12 +1,77 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const dayjs = require('dayjs')
+const connectToDatabase = require('../../db');
+const RatingsModel = require('../../models/Ratings');
+const minutesExpire = 60
 
 async function getTeamRatings() {
 
-  const url = 'https://kenpom.com';
-  const statsRes = await axios.get(url);
+  const ratingsDocId = '5c70474991be4f7d4943bb43'
 
-  const $ = cheerio.load(statsRes.data)
+  try {
+    await connectToDatabase()
+
+    const ratingsDoc = await RatingsModel.findById(ratingsDocId)
+    if (!ratingsDoc)
+      return {}
+      
+		let ratingsUpdatedDate = dayjs(ratingsDoc.updated)
+		let minutesOld = dayjs().diff(ratingsUpdatedDate, 'minute')
+		if (minutesOld > minutesExpire) {
+			console.log('outdated! getting new ratings..')
+
+			const ratings = await scrape()
+			let updated = new Date()
+			let updatedReadable = dayjs(updated).format('M/D/YYYY h:m a')
+			let updatedRatings = await RatingsModel.findOneAndUpdate(ratingsDocId, {
+        title: 'KenPomRatings',
+				updated,
+				updatedReadable,
+				data: JSON.stringify(ratings)
+			})
+			return JSON.parse(updatedRatings.data)
+
+		} else {
+			console.log('returning ratings from db..')
+			return JSON.parse(ratingsDoc.data)
+		}
+
+  } catch(err) {
+    console.log('ERROR', err)
+    return {}
+  }
+
+}
+
+/*
+// If we need to create a new ratings document again
+let ratings = await scrape()
+let updated = new Date()
+let updatedReadable = dayjs(updated).format('M/D/YYYY h:m a')
+let createInfo = {
+  title: 'KenPomRatings',
+  updated,
+  updatedReadable,
+  data: JSON.stringify(ratings)
+}
+RatingsModel.create(createInfo)
+  .then((s) => {
+    console.log('created!',s._id)
+
+    //return JSON.parse()
+  })
+  .catch((err) => {
+    console.log('not created', err)
+  })
+*/
+
+async function scrape() {
+
+  const url = 'https://kenpom.com';
+  const ratingsRes = await axios.get(url);
+
+  const $ = cheerio.load(ratingsRes.data)
   const ratings = $('table#ratings-table tbody tr')
   let teamRatings = [];
   let totalTeams = 0;
@@ -16,7 +81,7 @@ async function getTeamRatings() {
   ratings.each((i, el) => {
     const tds = $(el).children();
 
-    //USE toFixed() FOR DISPLAYYING AFTER PARSING
+    //USE toFixed() FOR DISPLAYING AFTER PARSING
 
     const offensiveEfficiency = parseFloat( $(tds[5]).text().trim() )
     const defensiveEfficiency = parseFloat( $(tds[7]).text().trim() )

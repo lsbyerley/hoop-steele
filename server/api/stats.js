@@ -1,8 +1,7 @@
 const router = require('express').Router()
 const cors = require('cors')
 const getTeamStats = require('./utils/teamStats')
-
-var corsOptions = process.env.isDev ? {
+const corsOptions = process.env.isDev ? {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 } : {}
