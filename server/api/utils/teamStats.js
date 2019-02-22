@@ -1,7 +1,70 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
+const dayjs = require('dayjs')
+const connectToDatabase = require('../../db');
+const StatsModel = require('../../models/Stats');
+const minutesExpire = 60
 
 async function getTeamStats() {
+
+  const statsDocId = '5c702544f351a945e64d0e7c'
+
+  try {
+    await connectToDatabase()
+
+    const statsDoc = await StatsModel.findById(statsDocId)
+    if (!statsDoc)
+      return []
+
+		let statsUpdatedDate = dayjs(statsDoc.updated)
+		let minutesOld = dayjs().diff(statsUpdatedDate, 'minute')
+		if (minutesOld > minutesExpire) {
+			console.log('outdated! getting new stats..')
+
+			const teamStats = await scrape()
+			let updated = new Date()
+			let updatedReadable = dayjs(updated).format('M/D/YYYY h:m a')
+			let updatedStats = await StatsModel.findOneAndUpdate(statsDocId, {
+        title: 'AdvancedTeamStats',
+				updated,
+				updatedReadable,
+				data: JSON.stringify(teamStats)
+			})
+			return JSON.parse(updatedStats.data)
+
+		} else {
+			console.log('returning stats from db..')
+			return JSON.parse(statsDoc.data)
+		}
+
+  } catch(err) {
+    console.log('ERROR', err)
+    return []
+  }
+
+}
+
+/*
+// If we need to create a new stats document again
+let teamStats = await scrape()
+let updated = new Date()
+let updatedReadable = dayjs(updated).format('M/D/YYYY h:m a')
+let createInfo = {
+  title: 'AdvancedTeamStats',
+  updated,
+  updatedReadable,
+  data: JSON.stringify(teamStats)
+}
+StatsModel.create(createInfo)
+  .then((s) => {
+    console.log('created!',s._id)
+  })
+  .catch((err) => {
+    console.log('not created', err)
+  })
+*/
+
+async function scrape() {
 
   const url = 'https://www.sports-reference.com/cbb/seasons/2019-advanced-school-stats.html'
   const statsRes = await axios.get(url)

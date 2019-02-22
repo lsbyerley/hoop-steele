@@ -60,17 +60,17 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
         let awayTeam = (teamOne.homeAway === "away") ? util.normalizeTeam(teamOne) : util.normalizeTeam(teamTwo)
         let homeTeam = (teamTwo.homeAway === "home") ? util.normalizeTeam(teamTwo) : util.normalizeTeam(teamOne)
 
-        awayTeam.kenPom = teamRatings.ratings.find((tr) => {
+        awayTeam.kenPom = (teamRatings.ratings) ? teamRatings.ratings.find((tr) => {
           return tr.team === awayTeam.name
-        })
+        }) : null;
 
         /*awayTeam.stats = teamStats.find((ts) => {
           return ts.team === awayTeam.shortName || ts.team === awayTeam.name
         })*/
 
-        homeTeam.kenPom = teamRatings.ratings.find((tr) => {
+        homeTeam.kenPom = (teamRatings.ratings) ? teamRatings.ratings.find((tr) => {
           return tr.team === homeTeam.name
-        })
+        }) : null;
 
         /*homeTeam.stats = teamStats.find((ts) => {
           return ts.team === homeTeam.shortName || ts.team === homeTeam.name
