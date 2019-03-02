@@ -38,9 +38,14 @@
                 KenPom Diff
               </label>
             </div>
-            <div class="form-control">
+            <!--<div class="form-control">
               <label for="date"><input type="radio" name="sortType" value="date" v-model="sortType">
                 Date
+              </label>
+            </div>-->
+            <div class="form-control">
+              <label for="date"><input type="radio" name="sortType" value="winPerc" v-model="sortType">
+                Win%
               </label>
             </div>
           </fieldset>
@@ -108,7 +113,7 @@ export default {
   data() {
     return {
       sortType: 'kpDiff',
-      sortTypes: ['totalDiff', 'lineDiff', 'shFactor', 'kpDiff', 'date'],
+      sortTypes: ['totalDiff', 'lineDiff', 'shFactor', 'kpDiff', 'date', 'winPerc'],
       showNav: false,
       conf: 'All',
       confs: [],
@@ -132,6 +137,16 @@ export default {
           if (aVal < bVal) { return -1 }
           if (aVal > bVal) { return 1 }
           return 0;
+
+        } else if (this.sortType === 'winPerc') {
+          aVal = parseFloat(a.prediction.awayWinPerc) > parseFloat(a.prediction.homeWinPerc)
+          ? parseFloat(a.prediction.awayWinPerc)
+          : parseFloat(a.prediction.homeWinPerc)
+
+          bVal = parseFloat(b.prediction.awayWinPerc) > parseFloat(b.prediction.homeWinPerc)
+          ? parseFloat(b.prediction.awayWinPerc)
+          : parseFloat(b.prediction.homeWinPerc)
+
         }
 
         if (aVal > bVal) { return -1 }

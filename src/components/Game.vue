@@ -145,6 +145,12 @@ export default {
     sortTypeString() {
       if (this.sortType === 'date') {
         return 'Sort: Game Date'
+      } else if (this.sortType === 'winPerc') {
+        let winPerc = parseFloat(this.game.prediction.awayWinPerc) > parseFloat(this.game.prediction.homeWinPerc)
+        ? this.game.prediction.awayWinPerc
+        : this.game.prediction.homeWinPerc
+
+        return `Sort: Win% - ${winPerc}`
       } else {
         return `${this.sortType}: ${this.game[this.sortType]}`
       }
