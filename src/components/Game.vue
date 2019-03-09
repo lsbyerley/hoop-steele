@@ -15,7 +15,7 @@
                 {{ game.away.shortName }}
               </a>
               <img class="team-logo" :src="game.away.logo">
-              <div class="team-record">({{ game.away.totalRecord }}, {{ game.away.ahRecord }} Away)</div>
+              <div class="team-record">({{ game.away.totalRecord }}, {{ teamRecord(game,'away') }})</div>
               <div class="score">{{ scoreValue(game, 'away') }}</div>
             </div>
             <div class="col team home">
@@ -24,7 +24,7 @@
                 {{ game.home.shortName }}
               </a>
               <img class="team-logo" :src="game.home.logo">
-              <div class="team-record">({{ game.home.totalRecord }}, {{ game.home.ahRecord }} Home)</div>
+              <div class="team-record">({{ game.home.totalRecord }}, {{ teamRecord(game, 'home') }})</div>
               <div class="score">{{ scoreValue(game, 'home') }}</div>
             </div>
           </div>
@@ -142,6 +142,15 @@ export default {
     }
   },
   methods: {
+    teamRecord(game, team) {
+      let ahRecord = (team === 'away') ? game.away.ahRecord : game.home.ahRecord;
+      let vsConf = (team === 'away') ? game.away.vsConfRecord : game.home.vsConfRecord;
+      if (vsConf && vsConf != '' && vsConf != '0-0') {
+        return `${vsConf} ${game.away.kenPom.conf}`
+      } else {
+        return `${ahRecord} ${team}`
+      }
+    },
     sortTypeString() {
       if (this.sortType === 'date') {
         return 'Sort: Game Date'
