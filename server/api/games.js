@@ -19,8 +19,7 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
 
 	try{
 
-    //TODO: NCAA tourney support (group 100)
-    let groups = 50;
+    let groups = 52;
     const paramDate = req.params.date
     let gamesDate = dayjs().format('YYYYMMDD');
     if (paramDate && paramDate.length === 8) {
