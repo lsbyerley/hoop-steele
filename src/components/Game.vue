@@ -145,8 +145,9 @@ export default {
     teamRecord(game, team) {
       let ahRecord = (team === 'away') ? game.away.ahRecord : game.home.ahRecord;
       let vsConf = (team === 'away') ? game.away.vsConfRecord : game.home.vsConfRecord;
+      let conf = (team === 'away') ? game.away.kenPom.conf : game.home.kenPom.conf;
       if (vsConf && vsConf != '' && vsConf != '0-0') {
-        return `${vsConf} ${game.away.kenPom.conf}`
+        return `${vsConf} ${conf}`
       } else {
         return `${ahRecord} ${team}`
       }
