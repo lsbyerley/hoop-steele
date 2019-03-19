@@ -114,8 +114,8 @@
               </tr>
               <tr>
                 <td>Tempo</td>
-                <td>{{ game.away.kenPom.adjT }}</td>
-                <td>{{ game.home.kenPom.adjT }}</td>
+                <td>{{ ordinalSuffix(game.away.kenPom.adjTRank) }}</td>
+                <td>{{ ordinalSuffix(game.home.kenPom.adjTRank) }}</td>
               </tr>
             </tbody>
           </table>
