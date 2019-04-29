@@ -1,0 +1,1311 @@
+{
+    "ResponseTime": "2019-03-28T05:47:35Z",
+    "OddsType": "american",
+    "Leagues": [
+        {
+            "LeagueId": 493,
+            "SportId": 4,
+            "IsLive": false,
+            "HasLiveLines": false,
+            "Events": [
+                {
+                    "EventId": 967849821,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:00:00Z",
+                    "Cutoff": "2019-03-28T23:00:00Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -115,
+                        "UnderPrice": -115,
+                        "Min": 132
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 659,
+                            "Name": "Loyola Marymount",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": 4
+                            },
+                            "MoneyLine": 152,
+                            "TeamTotals": {
+                                "OverPrice": -114,
+                                "UnderPrice": -116,
+                                "Min": 64
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 660,
+                            "Name": "South Florida",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -110,
+                                "Min": -4
+                            },
+                            "MoneyLine": -187,
+                            "TeamTotals": {
+                                "OverPrice": -116,
+                                "UnderPrice": -114,
+                                "Min": 68.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967849821,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:00:00Z",
+                    "Cutoff": "2019-03-28T22:59:23Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -110,
+                        "Min": 62
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 659,
+                            "Name": "Loyola Marymount",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -107,
+                                "Min": 2
+                            },
+                            "MoneyLine": 133,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 30.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 660,
+                            "Name": "South Florida",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -113,
+                                "Min": -2
+                            },
+                            "MoneyLine": -163,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 32
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968137691,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:00:00Z",
+                    "Cutoff": "2019-03-28T23:00:00Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -115,
+                        "UnderPrice": -115,
+                        "Min": 154
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 663,
+                            "Name": "Hampton",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 3
+                            },
+                            "MoneyLine": 132,
+                            "TeamTotals": {
+                                "OverPrice": -114,
+                                "UnderPrice": -106,
+                                "Min": 75.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 664,
+                            "Name": "NJIT",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -3
+                            },
+                            "MoneyLine": -155,
+                            "TeamTotals": {
+                                "OverPrice": -114,
+                                "UnderPrice": -106,
+                                "Min": 78.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968137691,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:00:00Z",
+                    "Cutoff": "2019-03-28T22:59:33Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -110,
+                        "Min": 73
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 663,
+                            "Name": "Hampton",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 1.5
+                            },
+                            "MoneyLine": 121,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 36
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 664,
+                            "Name": "NJIT",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -1.5
+                            },
+                            "MoneyLine": -147,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 37
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967217927,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:09:00Z",
+                    "Cutoff": "2019-03-28T23:09:00Z",
+                    "HoursAndMinutes": "16.09",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -108,
+                        "UnderPrice": -110,
+                        "Min": 147
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 655,
+                            "Name": "Florida State",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": 7.5
+                            },
+                            "MoneyLine": 276,
+                            "TeamTotals": {
+                                "OverPrice": 100,
+                                "UnderPrice": -121,
+                                "Min": 70.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 656,
+                            "Name": "Gonzaga",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -7.5
+                            },
+                            "MoneyLine": -340,
+                            "TeamTotals": {
+                                "OverPrice": -113,
+                                "UnderPrice": -107,
+                                "Min": 77.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967217927,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:09:00Z",
+                    "Cutoff": "2019-03-28T23:08:39Z",
+                    "HoursAndMinutes": "16.09",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 68.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 655,
+                            "Name": "Florida State",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -104,
+                                "Min": 4
+                            },
+                            "MoneyLine": 185,
+                            "TeamTotals": {
+                                "OverPrice": 111,
+                                "UnderPrice": -135,
+                                "Min": 33.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 656,
+                            "Name": "Gonzaga",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -4
+                            },
+                            "MoneyLine": -220,
+                            "TeamTotals": {
+                                "OverPrice": -109,
+                                "UnderPrice": -111,
+                                "Min": 37
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967385965,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:29:00Z",
+                    "Cutoff": "2019-03-28T23:28:56Z",
+                    "HoursAndMinutes": "16.29",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 67.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 651,
+                            "Name": "Purdue",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 0.5
+                            },
+                            "MoneyLine": 105,
+                            "TeamTotals": {
+                                "OverPrice": 124,
+                                "UnderPrice": -150,
+                                "Min": 72.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 652,
+                            "Name": "Tennessee",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -0.5
+                            },
+                            "MoneyLine": -123,
+                            "TeamTotals": {
+                                "OverPrice": -113,
+                                "UnderPrice": -107,
+                                "Min": 34.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967385965,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T16:29:00Z",
+                    "Cutoff": "2019-03-28T23:29:00Z",
+                    "HoursAndMinutes": "16.29",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 146.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 651,
+                            "Name": "Purdue",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 1.5
+                            },
+                            "MoneyLine": 116,
+                            "TeamTotals": {
+                                "OverPrice": -102,
+                                "UnderPrice": -119,
+                                "Min": 73
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 652,
+                            "Name": "Tennessee",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -1.5
+                            },
+                            "MoneyLine": -136,
+                            "TeamTotals": {
+                                "OverPrice": -127,
+                                "UnderPrice": 105,
+                                "Min": 73.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968137692,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T17:00:00Z",
+                    "Cutoff": "2019-03-29T00:00:00Z",
+                    "HoursAndMinutes": "17.00",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -115,
+                        "UnderPrice": -115,
+                        "Min": 171
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 665,
+                            "Name": "Texas Southern",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 8
+                            },
+                            "MoneyLine": 294,
+                            "TeamTotals": {
+                                "OverPrice": -114,
+                                "UnderPrice": -106,
+                                "Min": 81.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 666,
+                            "Name": "UL - Monroe",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -8
+                            },
+                            "MoneyLine": -365,
+                            "TeamTotals": {
+                                "OverPrice": -114,
+                                "UnderPrice": -106,
+                                "Min": 89.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968137692,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T17:00:00Z",
+                    "Cutoff": "2019-03-28T23:59:53Z",
+                    "HoursAndMinutes": "17.00",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -110,
+                        "Min": 81.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 665,
+                            "Name": "Texas Southern",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -110,
+                                "Min": 4.5
+                            },
+                            "MoneyLine": 195,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 38.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 666,
+                            "Name": "UL - Monroe",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -110,
+                                "Min": -4.5
+                            },
+                            "MoneyLine": -243,
+                            "TeamTotals": {
+                                "OverPrice": -112,
+                                "UnderPrice": -108,
+                                "Min": 43
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967504267,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T18:39:00Z",
+                    "Cutoff": "2019-03-29T01:39:00Z",
+                    "HoursAndMinutes": "18.39",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -108,
+                        "UnderPrice": -110,
+                        "Min": 125.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 657,
+                            "Name": "Texas Tech",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": 1.5
+                            },
+                            "MoneyLine": 107,
+                            "TeamTotals": {
+                                "OverPrice": -104,
+                                "UnderPrice": -116,
+                                "Min": 62.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 658,
+                            "Name": "Michigan",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -1.5
+                            },
+                            "MoneyLine": -125,
+                            "TeamTotals": {
+                                "OverPrice": 103,
+                                "UnderPrice": -125,
+                                "Min": 64.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967504267,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T18:39:00Z",
+                    "Cutoff": "2019-03-29T01:38:57Z",
+                    "HoursAndMinutes": "18.39",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 58.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 657,
+                            "Name": "Texas Tech",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -104,
+                                "Min": 0.5
+                            },
+                            "MoneyLine": 108,
+                            "TeamTotals": {
+                                "OverPrice": -105,
+                                "UnderPrice": -115,
+                                "Min": 29.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 658,
+                            "Name": "Michigan",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -0.5
+                            },
+                            "MoneyLine": -126,
+                            "TeamTotals": {
+                                "OverPrice": -103,
+                                "UnderPrice": -117,
+                                "Min": 30
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967536357,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T18:57:00Z",
+                    "Cutoff": "2019-03-29T01:56:56Z",
+                    "HoursAndMinutes": "18.57",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 53.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 653,
+                            "Name": "Oregon",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -110,
+                                "Min": 4.5
+                            },
+                            "MoneyLine": 196,
+                            "TeamTotals": {
+                                "OverPrice": 115,
+                                "UnderPrice": -139,
+                                "Min": 26
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 654,
+                            "Name": "Virginia",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": -4.5
+                            },
+                            "MoneyLine": -234,
+                            "TeamTotals": {
+                                "OverPrice": -118,
+                                "UnderPrice": -103,
+                                "Min": 29.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967536357,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-28T18:57:00Z",
+                    "Cutoff": "2019-03-29T01:57:00Z",
+                    "HoursAndMinutes": "18.57",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -109,
+                        "UnderPrice": -109,
+                        "Min": 119.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 653,
+                            "Name": "Oregon",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 8.5
+                            },
+                            "MoneyLine": 333,
+                            "TeamTotals": {
+                                "OverPrice": -102,
+                                "UnderPrice": -119,
+                                "Min": 56
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 654,
+                            "Name": "Virginia",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": -8.5
+                            },
+                            "MoneyLine": -420,
+                            "TeamTotals": {
+                                "OverPrice": -132,
+                                "UnderPrice": 109,
+                                "Min": 63.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968140998,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:00:00Z",
+                    "Cutoff": "2019-03-29T22:59:07Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -115,
+                        "UnderPrice": -115,
+                        "Min": 74
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 675,
+                            "Name": "CS Bakersfield",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -106,
+                                "Min": 3
+                            },
+                            "MoneyLine": 159,
+                            "TeamTotals": {
+                                "OverPrice": -115,
+                                "UnderPrice": -115,
+                                "Min": 35
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 676,
+                            "Name": "Wisc Green Bay",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -114,
+                                "Min": -3
+                            },
+                            "MoneyLine": -195,
+                            "TeamTotals": {
+                                "OverPrice": -115,
+                                "UnderPrice": -115,
+                                "Min": 38.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 968140998,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:00:00Z",
+                    "Cutoff": "2019-03-29T23:00:00Z",
+                    "HoursAndMinutes": "16.00",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 0,
+                    "Totals": {
+                        "OverPrice": -115,
+                        "UnderPrice": -115,
+                        "Min": 156
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 675,
+                            "Name": "CS Bakersfield",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 6
+                            },
+                            "MoneyLine": 212,
+                            "TeamTotals": {
+                                "OverPrice": -110,
+                                "UnderPrice": -110,
+                                "Min": 75
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 676,
+                            "Name": "Wisc Green Bay",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": -6
+                            },
+                            "MoneyLine": -255,
+                            "TeamTotals": {
+                                "OverPrice": -110,
+                                "UnderPrice": -110,
+                                "Min": 81
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967218995,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:09:00Z",
+                    "Cutoff": "2019-03-29T23:09:00Z",
+                    "HoursAndMinutes": "16.09",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -111,
+                        "UnderPrice": -107,
+                        "Min": 148
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 667,
+                            "Name": "LSU",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 6
+                            },
+                            "MoneyLine": 240,
+                            "TeamTotals": {
+                                "OverPrice": 102,
+                                "UnderPrice": -124,
+                                "Min": 72.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 668,
+                            "Name": "Michigan State",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -6
+                            },
+                            "MoneyLine": -292,
+                            "TeamTotals": {
+                                "OverPrice": 102,
+                                "UnderPrice": -123,
+                                "Min": 78.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967218995,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:09:00Z",
+                    "Cutoff": "2019-03-29T23:08:20Z",
+                    "HoursAndMinutes": "16.09",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -114,
+                        "UnderPrice": -116,
+                        "Min": 69.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 667,
+                            "Name": "LSU",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 3
+                            },
+                            "MoneyLine": 161,
+                            "TeamTotals": {
+                                "OverPrice": 105,
+                                "UnderPrice": -140,
+                                "Min": 34
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 668,
+                            "Name": "Michigan State",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -118,
+                                "Min": -3
+                            },
+                            "MoneyLine": -198,
+                            "TeamTotals": {
+                                "OverPrice": -101,
+                                "UnderPrice": -131,
+                                "Min": 37
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967469025,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:29:00Z",
+                    "Cutoff": "2019-03-29T23:29:00Z",
+                    "HoursAndMinutes": "16.29",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 163.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 673,
+                            "Name": "Auburn",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -107,
+                                "Min": 5
+                            },
+                            "MoneyLine": 189,
+                            "TeamTotals": {
+                                "OverPrice": -122,
+                                "UnderPrice": 101,
+                                "Min": 78
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 674,
+                            "Name": "North Carolina",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -107,
+                                "Min": -5
+                            },
+                            "MoneyLine": -225,
+                            "TeamTotals": {
+                                "OverPrice": -136,
+                                "UnderPrice": 112,
+                                "Min": 83
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967469025,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T16:29:00Z",
+                    "Cutoff": "2019-03-29T23:28:37Z",
+                    "HoursAndMinutes": "16.29",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -124,
+                        "UnderPrice": -107,
+                        "Min": 76.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 673,
+                            "Name": "Auburn",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -108,
+                                "Min": 2.5
+                            },
+                            "MoneyLine": 142,
+                            "TeamTotals": {
+                                "OverPrice": -126,
+                                "UnderPrice": -105,
+                                "Min": 37.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 674,
+                            "Name": "North Carolina",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -2.5
+                            },
+                            "MoneyLine": -174,
+                            "TeamTotals": {
+                                "OverPrice": -137,
+                                "UnderPrice": 103,
+                                "Min": 39.5
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967516631,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T18:39:00Z",
+                    "Cutoff": "2019-03-30T01:38:58Z",
+                    "HoursAndMinutes": "18.39",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -111,
+                        "UnderPrice": -119,
+                        "Min": 68
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 669,
+                            "Name": "Virginia Tech",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -113,
+                                "Min": 4
+                            },
+                            "MoneyLine": 179,
+                            "TeamTotals": {
+                                "OverPrice": -115,
+                                "UnderPrice": -115,
+                                "Min": 32.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 670,
+                            "Name": "Duke",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -107,
+                                "Min": -4
+                            },
+                            "MoneyLine": -222,
+                            "TeamTotals": {
+                                "OverPrice": -108,
+                                "UnderPrice": -122,
+                                "Min": 36
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967516631,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T18:39:00Z",
+                    "Cutoff": "2019-03-30T01:39:00Z",
+                    "HoursAndMinutes": "18.39",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -110,
+                        "UnderPrice": -108,
+                        "Min": 144
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 669,
+                            "Name": "Virginia Tech",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 7
+                            },
+                            "MoneyLine": 272,
+                            "TeamTotals": {
+                                "OverPrice": -107,
+                                "UnderPrice": -113,
+                                "Min": 69
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 670,
+                            "Name": "Duke",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -7
+                            },
+                            "MoneyLine": -334,
+                            "TeamTotals": {
+                                "OverPrice": -107,
+                                "UnderPrice": -114,
+                                "Min": 76
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967533776,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T18:57:00Z",
+                    "Cutoff": "2019-03-30T01:56:08Z",
+                    "HoursAndMinutes": "18.57",
+                    "PeriodNumber": 1,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -106,
+                        "UnderPrice": -125,
+                        "Min": 63.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 671,
+                            "Name": "Houston",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 1
+                            },
+                            "MoneyLine": 120,
+                            "TeamTotals": {
+                                "OverPrice": 102,
+                                "UnderPrice": -134,
+                                "Min": 31.5
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 672,
+                            "Name": "Kentucky",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -119,
+                                "Min": -1
+                            },
+                            "MoneyLine": -145,
+                            "TeamTotals": {
+                                "OverPrice": -113,
+                                "UnderPrice": -117,
+                                "Min": 32
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                },
+                {
+                    "EventId": 967533776,
+                    "LeagueId": 493,
+                    "SaveTime": "2019-03-28T12:42:30Z",
+                    "DateAndTime": "2019-03-29T18:57:00Z",
+                    "Cutoff": "2019-03-30T01:57:00Z",
+                    "HoursAndMinutes": "18.57",
+                    "PeriodNumber": 0,
+                    "IsLive": false,
+                    "IsOffline": false,
+                    "LiveStatus": 2,
+                    "Totals": {
+                        "OverPrice": -107,
+                        "UnderPrice": -112,
+                        "Min": 134.5
+                    },
+                    "IsHandicapEmpty": false,
+                    "IsMoneyLineEmpty": false,
+                    "IsTeamTotalsEmpty": false,
+                    "Participants": [
+                        {
+                            "Id": 671,
+                            "Name": "Houston",
+                            "Type": "Team1",
+                            "Handicap": {
+                                "Price": -102,
+                                "Min": 2.5
+                            },
+                            "MoneyLine": 134,
+                            "TeamTotals": {
+                                "OverPrice": 102,
+                                "UnderPrice": -123,
+                                "Min": 67
+                            },
+                            "IsDraw": false
+                        },
+                        {
+                            "Id": 672,
+                            "Name": "Kentucky",
+                            "Type": "Team2",
+                            "Handicap": {
+                                "Price": -112,
+                                "Min": -2.5
+                            },
+                            "MoneyLine": -157,
+                            "TeamTotals": {
+                                "OverPrice": -105,
+                                "UnderPrice": -115,
+                                "Min": 69
+                            },
+                            "IsDraw": false
+                        }
+                    ]
+                }
+            ],
+            "EventCount": 0
+        }
+    ]
+}
