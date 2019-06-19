@@ -23,10 +23,8 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     let groups = 52;
     const paramDate = req.params.date
     let gamesDate = dayjs().format('YYYYMMDD');
-    if (paramDate && paramDate.length === 8) {
-      if (dayjs(paramDate).isValid()) {
-        gamesDate = paramDate
-      }
+    if (paramDate && paramDate.length === 8 && dayjs(paramDate).isValid()) {
+      gamesDate = paramDate
     }
 
     const apiBase = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
