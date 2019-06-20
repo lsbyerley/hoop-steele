@@ -11,6 +11,8 @@ const util = require('./utils/util')
 const getOdds = require('./utils/odds')
 const isDev = process.env.ENV === 'dev'
 
+const useTestGames = true;
+
 var corsOptions = isDev ? {
   origin: 'http://localhost:1234',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -30,14 +32,22 @@ router.get('/games/:date*?', cors(corsOptions), async (req, res) => {
     const apiBase = 'http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard'
     const apiParams = `lang=en&region=us&calendartype=blacklist&limit=300&tz=America%2FNew_York&groups=${groups}`
     const url = `${apiBase}?${apiParams}&dates=${gamesDate}`
-    const gamesRes = await axios.get(url)
+    let gamesData;
+
+    if (useTestGames) {
+      const testgames = require('./data/games-test-res.json')
+      gamesData = _get(testgames, 'events');
+    } else {
+      const gamesRes = await axios.get(url);
+      gamesData = _get(gamesRes, 'data.events');
+    }
+
     const teamRatings = await getTeamRatings()
     //const teamStats = await getTeamStats()
     const oddsRes = await getOdds()
 
     let games = [], inpostGames = [], noOdds = [], nonMatches = [], confs = ['All'];
     let gamesWithStats = 0;
-    let gamesData = _get(gamesRes, 'data.events')
 
     if (gamesData) {
       gamesData.forEach((game, i) => {
