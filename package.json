@@ -2,45 +2,34 @@
   "name": "steele-hoops",
   "version": "2.0.0",
   "description": "Uses stats gathered from the web to predict college basketball games",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "client:dev": "parcel index.html",
-    "server:dev": "nodemon ./server/app.js --watch ./server",
-    "dev": "concurrently --kill-others 'npm run client:dev' 'npm run server:dev' || true",
+    "dev": "npm run client:dev",
     "client:prod": "parcel build index.html",
-    "server:prod": "node ./server/app.js",
     "build": "npm run client:prod",
-    "serve": "npm run server:prod",
     "prebuild": "rm -rf dist"
   },
   "author": "lsbyerley@gmail.com",
   "license": "ISC",
   "browserslist": "> 0.25%, not dead",
   "dependencies": {
-    "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.2",
-    "compression": "^1.7.3",
-    "cors": "^2.8.5",
-    "dayjs": "^1.7.7",
+    "axios": "^0.18.1",
+    "dayjs": "^1.8.14",
     "dotenv": "^6.1.0",
-    "express": "^4.16.4",
     "lodash": "^4.17.11",
-    "memory-cache": "^0.2.0",
-    "mongoose": "^5.4.14",
     "mustard-ui": "0.0.8",
-    "vue": "^2.5.17",
-    "vue-analytics": "^5.16.1"
+    "vue": "^2.6.10",
+    "vue-analytics": "^5.17.0"
   },
   "devDependencies": {
-    "autoprefixer": "^9.4.4",
-    "@babel/core": "^7.1.2",
-    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
     "@vue/component-compiler-utils": "^2.3.0",
-    "concurrently": "^4.0.1",
-    "nodemon": "^1.18.7",
-    "parcel-bundler": "^1.10.3",
-    "sass": "^1.14.3",
+    "autoprefixer": "^9.6.0",
+    "parcel-bundler": "^1.12.3",
+    "sass": "^1.21.0",
     "vue-hot-reload-api": "^2.3.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.10"
   }
 }
