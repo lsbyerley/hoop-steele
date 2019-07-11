@@ -105,7 +105,10 @@ export default {
     Game
   },
   mounted() {
-    this.getData()
+    let queryString = window.location.search;
+    let params = new URLSearchParams(queryString);
+    let date = params.get('date');
+    this.getData(date)
     // manually tracking page view
     // if/when vue-router is used, remove this
     this.$ga.page('/')
@@ -169,11 +172,12 @@ export default {
     }
   },
   methods: {
-    async getData() {
+    async getData(date) {
       this.dataLoading = true
       try {
         const host = process.env.API_HOST
-        const res = await axios.get(`${host}/api/games`)
+        const url = date ? `${host}/api/games/${date}` : `${host}/api/games`
+        const res = await axios.get(url)
         this.gamesDate = res.data.date
         this.games = res.data.games
         this.inpostGames = res.data.inpostGames
