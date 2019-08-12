@@ -17,7 +17,7 @@
     "axios": "^0.18.1",
     "dayjs": "^1.8.14",
     "dotenv": "^6.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "mustard-ui": "0.0.8",
     "vue": "^2.6.10",
     "vue-analytics": "^5.17.0"
