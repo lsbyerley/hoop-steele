@@ -246,7 +246,7 @@ export default {
 
 @media (max-width: $game-breakpoint) {
   .section {
-    padding: 1rem;
+    padding: .5rem;
   }
   .games-date {
     font-size: 1rem;

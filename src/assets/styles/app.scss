@@ -137,16 +137,17 @@ footer.footer {
   }
 }
 
-.games-wrap {
-  //background:#f9f9f9;
-}
-
 .tabs {
   //margin: 15px 0 4px;
 
   .tab {
     cursor: pointer;
     padding: 1rem 3rem;
+
+    @media (max-width: $bp-small) {
+      padding: 1rem 1.5rem;
+      font-size: 14px;
+    }
 
     &.active {
       background: #f9f9f9;
