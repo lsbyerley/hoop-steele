@@ -136,3 +136,23 @@ footer.footer {
     border-top: 1px solid #9e9e9e;
   }
 }
+
+.games-wrap {
+  //background:#f9f9f9;
+}
+
+.tabs {
+  //margin: 15px 0 4px;
+
+  .tab {
+    cursor: pointer;
+    padding: 1rem 3rem;
+
+    &.active {
+      background: #f9f9f9;
+    }
+    &.disabled {
+      cursor: not-allowed;
+    }
+  }
+}
