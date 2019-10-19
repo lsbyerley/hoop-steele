@@ -12,7 +12,7 @@
           <fieldset>
             <legend>Conferences</legend>
               <select name="confs" value="confs" v-model="conf">
-                <option v-for="conf in confs" v-bind:value="conf">{{ conf }}</option>
+                <option :key="conf" v-for="conf in confs" v-bind:value="conf">{{ conf }}</option>
               </select>
           </fieldset>
           <fieldset>
@@ -61,22 +61,49 @@
         </div>
       </nav>
       <main class="main">
+
         <div class="section">
+          <ul class="tabs">
+            <li><a class="tab" :class="tabClass('pregames')" href="#" @click="tabClick('pregames')">PreGames ({{ games.length }})</a></li>
+            <li><a class="tab" :class="tabClass('halftime')" href="#" @click="tabClick('halftime')">Halftime ({{ htGames.length }})</a></li>
+          </ul>
+
           <h1 class="h5 games-date">{{ gamesDate }}</h1>
-          <div class="progress-bar striped animated" v-if="this.dataLoading">
-            <span class="progress-bar-blue" style="width: 100%;"></span>
-          </div>
-          <div class="row">
-            <div class="col col-sm-12" v-if="showNoPreGames">
-              <div class="alert alert-info align-center">
-                <p>{{ errMsg }}</p>
+
+          <div class="games-wrap">
+            <div class="progress-bar striped animated" v-if="this.dataLoading">
+              <span class="progress-bar-blue" style="width: 100%;"></span>
+            </div>
+
+            <div class="pregames" ref="pregames-section" v-show="this.activeTab === 'pregames'">
+              <div class="row">
+                <div class="col col-sm-12" v-if="showNoPreGames">
+                  <div class="alert alert-info align-center">
+                    <p>{{ errMsg }}</p>
+                  </div>
+                </div>
+                <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
+                  <Game :game="game" :sort-type="sortType" />
+                </div>
               </div>
             </div>
-            <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
-              <Game :game="game" :sort-type="sortType" />
+
+            <div class="htgames" ref="halftime-section" v-show="this.activeTab === 'halftime'">
+              <div class="row">
+                <div class="col col-sm-12" v-if="htGames.length === 0">
+                  <div class="alert alert-info align-center">
+                    <p>There are no games at halftime right now.</p>
+                  </div>
+                </div>
+                <div class="col col-sm-12 col-md-6" v-for="game in htGames" :key="game.id">
+                  <HalftimeGame :game="game" :sort-type="sortType" />
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
+
       </main>
       <footer class="footer">
         <div class="container">
@@ -98,11 +125,13 @@
 <script>
 import axios from 'axios'
 import Game from './components/Game'
+import HalftimeGame from './components/HalftimeGame'
 
 export default {
   name: 'App',
   components: {
-    Game
+    Game,
+    HalftimeGame
   },
   mounted() {
     let queryString = window.location.search;
@@ -115,12 +144,15 @@ export default {
   },
   data() {
     return {
+      tabs: ['pregames', 'halftime'],
+      activeTab: 'pregames',
       sortType: 'kpDiff',
       sortTypes: ['totalDiff', 'lineDiff', 'shFactor', 'kpDiff', 'date', 'winPerc'],
       showNav: false,
       conf: 'All',
       confs: [],
       games: [],
+      htGames: [],
       inpostGames: [],
       nonMatches: [],
       gamesDate: '',
@@ -172,6 +204,14 @@ export default {
     }
   },
   methods: {
+    tabClass(tab) {
+      return (tab === this.activeTab) ? 'active' : ''
+    },
+    tabClick(tabType, event) {
+      if (this.activeTab !== tabType) {
+        this.activeTab = tabType
+      }
+    },
     async getData(date) {
       this.dataLoading = true
       try {
@@ -180,6 +220,7 @@ export default {
         const res = await axios.get(url)
         this.gamesDate = res.data.date
         this.games = res.data.games
+        this.htGames = res.data.htGames
         this.inpostGames = res.data.inpostGames
         this.nonMatches = res.data.nonMatches
         this.confs = res.data.confs
