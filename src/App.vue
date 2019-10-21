@@ -64,8 +64,8 @@
 
         <div class="section">
           <ul class="tabs">
-            <li><a class="tab" :class="tabClass('pregames')" href="#" @click="tabClick('pregames')">PreGames ({{ games.length }})</a></li>
-            <li><a class="tab" :class="tabClass('halftime')" href="#" @click="tabClick('halftime')">Halftime ({{ htGames.length }})</a></li>
+            <li><a class="tab" :class="tabClass('pregames')" href="#" @click="tabClick('pregames', $event)">PreGames ({{ games.length }})</a></li>
+            <li><a class="tab" :class="tabClass('halftime')" href="#" @click="tabClick('halftime', $event)">Halftime ({{ htGames.length }})</a></li>
           </ul>
 
           <h1 class="h5 games-date">{{ gamesDate }}</h1>
@@ -208,6 +208,7 @@ export default {
       return (tab === this.activeTab) ? 'active' : ''
     },
     tabClick(tabType, event) {
+      event.preventDefault()
       if (this.activeTab !== tabType) {
         this.activeTab = tabType
       }
