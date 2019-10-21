@@ -211,6 +211,11 @@ export default {
       event.preventDefault()
       if (this.activeTab !== tabType) {
         this.activeTab = tabType
+        this.$ga.event({
+          eventCategory: 'Tab',
+          eventAction: 'click',
+          eventLabel: tabType
+        })
       }
     },
     async getData(date) {
