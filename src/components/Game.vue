@@ -15,7 +15,7 @@
                 {{ game.away.shortName }}
               </a>
               <img class="team-logo" :src="game.away.logo">
-              <div class="team-record">({{ game.away.totalRecord }}, {{ teamRecord(game,'away') }})</div>
+              <div class="team-record">{{ teamRecord('away') }}</div>
               <div class="score">{{ scoreValue(game, 'away') }}</div>
             </div>
             <div class="col team home">
@@ -24,7 +24,7 @@
                 {{ game.home.shortName }}
               </a>
               <img class="team-logo" :src="game.home.logo">
-              <div class="team-record">({{ game.home.totalRecord }}, {{ teamRecord(game, 'home') }})</div>
+              <div class="team-record">{{ teamRecord('home') }}</div>
               <div class="score">{{ scoreValue(game, 'home') }}</div>
             </div>
           </div>
@@ -142,15 +142,22 @@ export default {
     }
   },
   methods: {
-    teamRecord(game, team) {
-      let ahRecord = (team === 'away') ? game.away.ahRecord : game.home.ahRecord;
-      let vsConf = (team === 'away') ? game.away.vsConfRecord : game.home.vsConfRecord;
-      let conf = (team === 'away') ? game.away.kenPom.conf : game.home.kenPom.conf;
-      if (vsConf && vsConf != '' && vsConf != '0-0') {
-        return `${vsConf} ${conf}`
+    teamRecord(homeAway) {
+
+      const team = this.game[homeAway]
+      let totalRecord = team.totalRecord;
+      let ahRecord = team.ahRecord;
+      let vsConf = team.vsConfRecord;
+      let conf = (team.kenPom.conf) ? team.kenPom.conf : ''
+
+      if (totalRecord && conf && vsConfRecord) {
+        return `(${totalRecord}, ${vsConfRecord} ${conf})`
+      } else if (totalRecord && ahRecord) {
+        return `${totalRecord}, ${ahRecord} ${homeAway}`
       } else {
-        return `${ahRecord} ${team}`
+        return ''
       }
+
     },
     sortTypeString() {
       if (this.sortType === 'date') {
