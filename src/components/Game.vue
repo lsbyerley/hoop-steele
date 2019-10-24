@@ -147,7 +147,7 @@ export default {
       const team = this.game[homeAway]
       let totalRecord = team.totalRecord;
       let ahRecord = team.ahRecord;
-      let vsConf = team.vsConfRecord;
+      let vsConfRecord = team.vsConfRecord;
       let conf = (team.kenPom.conf) ? team.kenPom.conf : ''
 
       if (totalRecord && conf && vsConfRecord) {
