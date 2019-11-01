@@ -24,7 +24,7 @@
             </td>
             <td>{{ game.away.score }}</td>
             <td>{{ game.away.threePtMade }} - {{ game.away.threePtAtt }}</td>
-            <td>{{ game.away.stats.surplusThrees }}</td>
+            <td>{{ surplusThrees('away') }}</td>
           </tr>
           <tr>
             <td class="team">
@@ -36,7 +36,7 @@
             </td>
             <td>{{ game.home.score }}</td>
             <td>{{ game.home.threePtMade }} - {{ game.home.threePtAtt }}</td>
-            <td>{{ game.home.stats.surplusThrees }}</td>
+            <td>{{ surplusThrees('home') }}</td>
           </tr>
         </tbody>
       </table>
@@ -74,23 +74,21 @@ export default {
     }
   },
   methods: {
-    calculateAction(game) {
-      let halftimeAction = game.halftimeAction
-      return halftimeAction
-    },
-    teamRecord(game, team) {
-      let ahRecord = (team === 'away') ? game.away.ahRecord : game.home.ahRecord;
-      let vsConf = (team === 'away') ? game.away.vsConfRecord : game.home.vsConfRecord;
-      let conf = (team === 'away') ? game.away.kenPom.conf : game.home.kenPom.conf;
-      if (vsConf && vsConf != '' && vsConf != '0-0') {
-        return `${vsConf} ${conf}`
-      } else {
-        return `${ahRecord} ${team}`
+    surplusThrees(homeAway) {
+      const team = this.game[homeAway]
+      if (team.stats && team.stats.surplusThrees) {
+        return team.stats.surplusThrees
       }
+      return '-'
     },
-    scoreValue(game, type) {
-      return (type === 'away') ? `${game.away.score}` : `${game.home.score}`
-    },
+    calculateAction() {
+      //TODO: color type of text based on action type
+      let halftimeAction = this.game.halftimeAction
+      if (halftimeAction) {
+        return halftimeAction
+      }
+      return '-'
+    }
   }
 }
 </script>
