@@ -123,6 +123,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs'
 import axios from 'axios'
 import Game from './components/Game'
 import HalftimeGame from './components/HalftimeGame'
@@ -136,8 +137,11 @@ export default {
   mounted() {
     let queryString = window.location.search;
     let params = new URLSearchParams(queryString);
-    let date = params.get('date');
-    this.getData(date)
+    let dateParam = params.get('date');
+
+    console.log('test date', dayjs().format('YYYYMMDD h:mm a')))
+
+    this.getData(dateParam)
     // manually tracking page view
     // if/when vue-router is used, remove this
     this.$ga.page('/')
