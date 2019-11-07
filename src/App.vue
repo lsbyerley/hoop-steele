@@ -138,9 +138,9 @@ export default {
     let queryString = window.location.search;
     let params = new URLSearchParams(queryString);
     let dateParam = params.get('date');
-
-    console.log('test date', dayjs().format('YYYYMMDD h:mm a'))
-
+    if (!dateParam) {
+      dateParam = dayjs().format('YYYYMMDD')
+    }
     this.getData(dateParam)
     // manually tracking page view
     // if/when vue-router is used, remove this
