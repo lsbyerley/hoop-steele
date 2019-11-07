@@ -139,7 +139,7 @@ export default {
     let params = new URLSearchParams(queryString);
     let dateParam = params.get('date');
 
-    console.log('test date', dayjs().format('YYYYMMDD h:mm a')))
+    console.log('test date', dayjs().format('YYYYMMDD h:mm a'))
 
     this.getData(dateParam)
     // manually tracking page view
