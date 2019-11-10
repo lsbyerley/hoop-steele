@@ -75,28 +75,37 @@
               <span class="progress-bar-blue" style="width: 100%;"></span>
             </div>
 
-            <div class="pregames" ref="pregames-section" v-show="this.activeTab === 'pregames'">
+            
+            <div class="pregames" ref="pregames-section" v-if="this.activeTab === 'pregames'">
               <div class="row">
-                <div class="col col-sm-12" v-if="showNoPreGames">
-                  <div class="alert alert-info align-center">
-                    <p>{{ errMsg }}</p>
+                <transition name="fade" appear>
+                  <div class="col col-sm-12" v-if="showNoPreGames">
+                    <div class="alert alert-info align-center">
+                      <p>{{ errMsg }}</p>
+                    </div>
                   </div>
-                </div>
+                </transition>
                 <div class="col col-sm-12" v-for="game in sortedGames" :key="game.id">
-                  <Game :game="game" :sort-type="sortType" />
+                  <transition name="fade" appear>
+                    <Game :game="game" :sort-type="sortType" />
+                  </transition>
                 </div>
               </div>
             </div>
 
-            <div class="htgames" ref="halftime-section" v-show="this.activeTab === 'halftime'">
+            <div class="htgames" ref="halftime-section" v-if="this.activeTab === 'halftime'">
               <div class="row">
-                <div class="col col-sm-12" v-if="htGames.length === 0">
-                  <div class="alert alert-info align-center">
-                    <p>There are no games at halftime right now.</p>
+                <transition name="fade" appear>
+                  <div class="col col-sm-12" v-if="htGames.length === 0">
+                    <div class="alert alert-info align-center">
+                      <p>There are no games at halftime right now.</p>
+                    </div>
                   </div>
-                </div>
+                </transition>
                 <div class="col col-sm-12 col-md-6" v-for="game in htGames" :key="game.id">
-                  <HalftimeGame :game="game" :sort-type="sortType" />
+                  <transition name="fade" appear>
+                    <HalftimeGame :game="game" :sort-type="sortType" />
+                  </transition>
                 </div>
               </div>
             </div>
@@ -261,5 +270,19 @@ export default {
   .games-date {
     font-size: 1rem;
   }
+}
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: opacity 1s;
+}
+.fade-leave{
+  /* opacity: 1; */
+}
+.fade-leave-active{
+  transition: opacity .25s;
+  opacity: 0;
 }
 </style>
