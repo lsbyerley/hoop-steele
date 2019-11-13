@@ -11,6 +11,7 @@
           <th></th>
           <th>Score</th>
           <th>3PM-3PA</th>
+          <th>Season%</th>
           <th>Surplus 3s</th>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
             </td>
             <td>{{ game.away.score }}</td>
             <td>{{ game.away.threePtMade }} - {{ game.away.threePtAtt }}</td>
+            <td>{{ game.away.stats.fg3_pct }}</td>
             <td>{{ surplusThrees('away') }}</td>
           </tr>
           <tr>
@@ -36,6 +38,7 @@
             </td>
             <td>{{ game.home.score }}</td>
             <td>{{ game.home.threePtMade }} - {{ game.home.threePtAtt }}</td>
+            <td>{{ game.home.stats.fg3_pct }}</td>
             <td>{{ surplusThrees('home') }}</td>
           </tr>
         </tbody>
