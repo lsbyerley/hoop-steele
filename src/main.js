@@ -9,7 +9,7 @@ const isProd = process.env.NODE_ENV === 'production'
 Vue.config.productionTip = false
 
 Vue.use(VueAnalytics, {
-  id: 'UA-114371448-1',
+  id: 'UA-152719640-2',
   debug: {
     enabled: !isProd,
     sendHitTask: isProd
