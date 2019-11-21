@@ -179,6 +179,9 @@ export default {
         let aVal = a[this.sortType]
         let bVal = b[this.sortType]
 
+        if (aVal === '-') { aVal = 0 }
+        if (bVal === '-') { bVal = 0 } 
+
         if (this.sortType === 'date') {
           aVal = new Date(aVal)
           bVal = new Date(bVal)
