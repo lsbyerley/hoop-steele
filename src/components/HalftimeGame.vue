@@ -79,7 +79,7 @@ export default {
   methods: {
     surplusThrees(homeAway) {
       const team = this.game[homeAway]
-      if (team.stats && team.stats.surplusThrees) {
+      if (team.stats && this.game.hasSurplusThrees) {
         return team.stats.surplusThrees
       }
       return '-'
