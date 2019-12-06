@@ -1,0 +1,5 @@
+# For vue-router history mode
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

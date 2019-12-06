@@ -1,8 +1,22 @@
-# Front End UI for Steele Hoops
+# codesandbox-nuxt
 
-## Local Development
-Clone the repo to your machine and make sure you are on the `develop` branch, then..
+> Nuxt starter for CodeSandBox (used for https://template.nuxtjs.org)
+
+## Build Setup
+
+``` bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn run dev
+
+# build for production and launch server
+$ yarn run build
+$ yarn start
+
+# generate static project
+$ yarn run generate
 ```
-npm install
-npm run dev
-```
+
+For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
