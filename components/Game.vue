@@ -15,16 +15,22 @@
         <div class="flex py-3 justify-start items-center">
           <img class="w-8 sm:w-6 mr-2 self-center" :src="game.away.logo">
           <div class="flex flex-col">
-            <a class="text-sm font-semibold hidden md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.shortName }}</a>
-            <a class="text-sm font-semibold block md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.abbrev }}</a>
+            <div class="flex items-center">
+              <span class="font-semibold mr-1 text-gray-600" v-if="game.away.rank">{{ game.away.rank }}</span>
+              <a class="text-sm font-semibold hidden md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.shortName }}</a>
+              <a class="text-sm font-semibold block md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.abbrev }}</a>
+            </div>
             <p class="text-gray-600 text-xxs">{{ teamRecord('away') }}</p>
           </div>
         </div>
         <div class="flex py-3 justify-start items-center">
           <img class="w-8 sm:w-6 mr-2 self-center" :src="game.home.logo">
           <div class="flex flex-col">
-            <a class="text-sm font-semibold hidden md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank">{{ game.home.shortName }}</a>
-            <a class="text-sm font-semibold block md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank">{{ game.home.abbrev }}</a>
+            <div class="flex items-center">
+              <span class="font-semibold mr-1 text-gray-600" v-if="game.home.rank">{{ game.home.rank }}</span>
+              <a class="text-sm font-semibold hidden md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank">{{ game.home.shortName }}</a>
+              <a class="text-sm font-semibold block md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank">{{ game.home.abbrev }}</a>
+            </div>
             <p class="text-gray-600 text-xxs">{{ teamRecord('home') }}</p>
           </div>
         </div>

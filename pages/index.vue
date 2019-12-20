@@ -5,7 +5,10 @@
       <svg class="fill-current text-gray-700 h-6 w-6 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <path d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"/>
       </svg>
-      <p class="font-bold text-center text-gray-700 text-lg pb-4">{{ date }}</p>
+      <p class="font-bold text-center text-gray-700 text-lg pb-4">{{ displayDate }}</p>
+      <svg @click="refreshGames" class="fill-current text-gray-700 h-6 w-6 ml-2 refresh-icon" :class="{'is-refreshing': refreshing}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M10 3v2a5 5 0 0 0-3.54 8.54l-1.41 1.41A7 7 0 0 1 10 3zm4.95 2.05A7 7 0 0 1 10 17v-2a5 5 0 0 0 3.54-8.54l1.41-1.41zM10 20l-4-4 4-4v8zm0-12V0l4 4-4 4z"/>
+        </svg>
     </div>
     
     <tabs>
@@ -97,22 +100,34 @@ export default {
     if (!gamesDate) {
       gamesDate = dayjs().format('YYYYMMDD')
     }
-    this.getGames(gamesDate)
+    console.log(gamesDate)
+    this.$store.commit('games/setDate', { date: gamesDate })
+    this.getGames()
   },
   computed: {
     ...mapState({
       loading: state => state.games.loading,
+      refreshing: state => state.games.refreshing,
       date: state => state.games.date,
       htGames: state => state.games.halftime,
       conferences: state => state.games.confereces
     }),
     ...mapGetters({
       preGames: 'games/sortedPreGames'
-    })
+    }),
+    displayDate() {
+      if (dayjs(this.date).isValid()) {
+        return dayjs(this.date).format('MMMM D, YYYY')
+      }
+      return this.date
+    }
   },
   methods: {
-    async getGames(gamesDate) {
-      await this.$store.dispatch('games/getGames', { date: gamesDate })
+    async getGames() {
+      await this.$store.dispatch('games/getGames')
+    },
+    async refreshGames() {
+      await this.$store.dispatch('games/refreshGames')
     }
   }
 }

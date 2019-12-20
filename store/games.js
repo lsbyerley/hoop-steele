@@ -7,27 +7,46 @@ export const state = () => ({
   conferences: [],
   loading: false,
   isError: false,
+  refreshing: false,
   sortType: 'kpDiff',
   errorNote: ''
 });
 
 export const actions = {
-  async getGames({ commit }, params) {
+  async getGames({ commit, state }) {
     try {
       commit('setLoading', { loading: true });
-      const gamesPromise = this.$api.games.get(params.date)
+      const gamesPromise = this.$api.games.get(state.date)
       const gamesRes = await gamesPromise;
 
       commit('setData', {
-        date: gamesRes.date,
         pre: gamesRes.games,
         halftime: gamesRes.htGames,
         conferences: gamesRes.confs
       });
       commit('setLoading', { loading: false });
       commit('setError', { error: false });
+      
     } catch (err) {
       commit('setLoading', { loading: false });
+      commit('setError', { isError: true, errorNote: `${err.name}: ${err.message}` });
+    }
+  },
+  async refreshGames({ commit, state }) {
+    try {
+      commit('setRefreshing', { refreshing: true })
+      const gamesPromise = this.$api.games.get(state.date)
+      const gamesRes = await gamesPromise;
+
+      commit('setData', {
+        pre: gamesRes.games,
+        halftime: gamesRes.htGames,
+        conferences: gamesRes.confs
+      });
+      commit('setRefreshing', { refreshing: false })
+
+    } catch(err) {
+      commit('setRefreshing', { refreshing: false })
       commit('setError', { isError: true, errorNote: `${err.name}: ${err.message}` });
     }
   }
@@ -41,8 +60,13 @@ export const mutations = {
     Vue.set(state, 'error', payload.isError);
     Vue.set(state, 'errorNote', payload.errorNote)
   },
+  setRefreshing(state, payload) {
+    Vue.set(state, 'refreshing', payload.refreshing)
+  },
+  setDate(state, payload) {
+    Vue.set(state, 'date', payload.date)
+  },
   setData(state, payload) {
-    Vue.set(state, 'date', payload.date);
     Vue.set(state, 'pre', payload.pre);
     Vue.set(state, 'halftime', payload.halftime);
     Vue.set(state, 'conferences', payload.conferences);
