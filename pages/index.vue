@@ -127,7 +127,9 @@ export default {
       await this.$store.dispatch('games/getGames')
     },
     async refreshGames() {
-      await this.$store.dispatch('games/refreshGames')
+      if (!this.loading) {
+        await this.$store.dispatch('games/refreshGames')
+      }
     }
   }
 }
