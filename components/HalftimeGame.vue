@@ -25,7 +25,8 @@
           <tr :class="surplusDiffClass('away')">
             <td class="flex pl-1 py-2 justify-start items-center">
               <img class="w-4 sm:w-8 mr-2 self-center" :src="game.away.logo">
-              <div class="flex flex-col">
+              <div class="flex items-center">
+                <span class="font-semibold mr-1 text-xxs text-gray-600" v-if="game.away.rank">{{ game.away.rank }}</span>
                 <a class="hidden font-semibold md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.shortName }}</a>
                 <a class="block font-semibold md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.away.id" target="_blank">{{ game.away.abbrev }}</a>
               </div>
@@ -38,7 +39,8 @@
           <tr :class="surplusDiffClass('home')">
             <td class="flex pl-1 py-2 justify-start items-center">
               <img class="w-4 sm:w-8 mr-2 self-center" :src="game.home.logo">
-              <div class="flex flex-col">
+              <div class="flex items-center">
+                <span class="font-semibold mr-1 text-xxs text-gray-600" v-if="game.home.rank">{{ game.home.rank }}</span>
                 <a class="hidden font-semibold md:block" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank" :src="game.home.logo">{{ game.home.shortName }}</a>
                 <a class="block font-semibold md:hidden" :href="'https://www.espn.com/mens-college-basketball/team/_/id/'+game.home.id" target="_blank" :src="game.home.logo">{{ game.home.abbrev }}</a>
               </div>

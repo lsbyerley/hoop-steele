@@ -40,6 +40,27 @@
   }
 }
 
+.refresh-icon {
+  &:hover {
+    cursor: pointer;
+  }
+  &.is-refreshing {
+    animation-duration: 1.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: rotate;
+  }
+}
+
+@keyframes rotate {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	100% {
+		transform: rotateZ(360deg)
+	}
+}
+
 @keyframes animateIn {
   0% {
     opacity: 0;
