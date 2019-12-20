@@ -1,5 +1,4 @@
 <template>
-<transition name="fade" appear>
   <article class="game rounded overflow-hidden shadow-md text-xs">
   
     <header class="flex justify-between bg-gray-800 px-2 py-2">
@@ -122,7 +121,6 @@
     </div>
 
   </article>
-</transition>
 </template>
 
 <script>
