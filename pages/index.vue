@@ -13,7 +13,7 @@
       <tab :name="'pregames'" :value="'PreGames ('+preGames.length+')'"  :selected="true">
         <div v-if="!loading && preGames.length > 0">
           <div class="flex flex-wrap -ml-3 -mr-3">
-            <div class="w-full sm:w-1/2 p-3 elfadein" :style="{'--animation-order': index}" v-for="(game, index) in preGames" :key="game.id">
+            <div class="w-full sm:w-1/2 p-3 limitedfadein" :style="{'--animation-order': index}" v-for="(game, index) in preGames" :key="game.id">
               <Game :game="game" />
             </div>
           </div>
@@ -41,7 +41,7 @@
       <tab :name="'halftime'" :value="'Halftime ('+htGames.length+')'">
         <div v-if="!loading && htGames.length > 0">
           <div class="flex flex-wrap -ml-3 -mr-3">
-            <div class="w-full sm:w-1/2 p-3 elfadein" :style="{'--animation-order': index}" v-for="(game, index) in htGames" :key="game.id">
+            <div class="w-full sm:w-1/2 p-3 limitedfadein" :style="{'--animation-order': index}" v-for="(game, index) in htGames" :key="game.id">
               <HalftimeGame :game="game" />
             </div>
           </div>
