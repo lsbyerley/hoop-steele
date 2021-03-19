@@ -1,20 +1,64 @@
 module.exports = {
+  purge: [
+    './components/**/*.{vue,js}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+  ],
+  darkMode: false, // or 'media' or 'class'
   theme: {
-    container: {
-      center: true
-    },
     extend: {
       fontFamily: {
-        'light': ['EZLight', 'sans-serif'],
-        'medium': ['EZMedium', 'sans-serif'],
-        'semibold': ['EZMedium', 'sans-serif'],
-        'bold': ['EZBold', 'sans-serif']
+        display: ['EZLight', 'sans-serif'],
       },
       fontSize: {
-        xxs: ".5rem"
-      }
-    }
+        xxs: '.5rem',
+      },
+      colors: {
+        'rbi-blue': '#10307f',
+        'rbi-red': '#e50728',
+      },
+      backgroundImage: (theme) => ({
+        'site-bg':
+          "linear-gradient(to top, rgba(175,175,201,0.42), rgba(175,175,201,0.42)), url('/bg.jpg')",
+        'vhl-logo-bg': 'radial-gradient(top,circle farthest-corner,#4c4c4c 0,#000 80%)',
+      }),
+    },
+    fontFamily: {
+      'ez-light': ['EZLight'],
+      'ez-medium': ['EZMedium'],
+      'ez-bold': ['EZBold'],
+    },
   },
-  variants: {},
-  plugins: []
+  variants: {
+    aspectRatio: ['responsive'],
+    extend: {},
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
+    function ({ addBase, addComponents, theme }) {
+      addBase([
+        {
+          '@font-face': {
+            fontFamily: 'EZLight',
+            src: 'url("~assets/fonts/ez-sans-light.woff2") format("woff2")',
+          },
+        },
+        {
+          '@font-face': {
+            fontFamily: 'EZMedium',
+            src: 'url("~assets/fonts/ez-sans-medium.woff2") format("woff2")',
+          },
+        },
+        {
+          '@font-face': {
+            fontFamily: 'EZBold',
+            src: 'url("~assets/fonts/ez-sans-bold.woff2") format("woff2")',
+          },
+        },
+      ]);
+    },
+  ],
 };

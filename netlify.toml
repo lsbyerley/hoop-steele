@@ -1,4 +1,5 @@
-# For vue-router history mode
+[build.environment]
+  NODE_VERSION = "12"
 [[redirects]]
   from = "/*"
   to = "/index.html"
