@@ -11,15 +11,30 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxt/http": "0.3.9",
-    "@nuxtjs/google-analytics": "2.3.0",
-    "dayjs": "1.8.29",
+    "@nuxt/http": "^0.6.4",
+    "@nuxtjs/axios": "5.13.1",
+    "dayjs": "1.10.4",
     "dotenv": "8.2.0",
-    "nuxt": "2.13.3",
-    "nuxt-purgecss": "1.0.0",
-    "postcss-import": "12.0.1",
-    "postcss-nested": "4.2.3",
-    "tailwindcss": "1.4.6",
-    "vue-server-renderer": "2.6.11"
+    "node-sass": "5.0.0",
+    "nuxt": "2.15.3",
+    "sass-loader": "10.1.1",
+    "vuex": "3.6.2"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "3.4.3",
+    "@tailwindcss/aspect-ratio": "0.2.0",
+    "@tailwindcss/postcss7-compat": "2.0.3",
+    "@tailwindcss/typography": "0.4.0",
+    "autoprefixer": "9.8.6",
+    "babel-eslint": "10.1.0",
+    "eslint": "7.22.0",
+    "eslint-friendly-formatter": "4.0.1",
+    "eslint-loader": "4.0.2",
+    "eslint-plugin-vue": "7.7.0",
+    "npm-check-updates": "11.3.0",
+    "postcss": "7.0.35",
+    "prettier": "2.2.1",
+    "pretty-quick": "3.1.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@2.0.3"
   }
 }

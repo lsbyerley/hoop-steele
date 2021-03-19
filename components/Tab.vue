@@ -9,19 +9,17 @@ export default {
   props: {
     name: { required: true },
     value: { required: true },
-    selected: { default: false}
+    selected: { default: false },
   },
   mounted() {
     this.isActive = this.selected;
   },
   data() {
     return {
-      isActive: false
-    }
-  }
-}
+      isActive: false,
+    };
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
