@@ -30,11 +30,6 @@ export default {
   methods: {
     selectTab(selectedTab, e) {
       e.preventDefault();
-      /* this.$ga.event({
-        eventCategory: 'Tab',
-        eventAction: 'click',
-        eventLabel: selectedTab.name
-      }) */
       this.tabs.forEach((tab) => {
         tab.isActive = tab.name == selectedTab.name;
       });
