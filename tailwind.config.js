@@ -22,7 +22,6 @@ module.exports = {
       backgroundImage: (theme) => ({
         'site-bg':
           "linear-gradient(to top, rgba(175,175,201,0.42), rgba(175,175,201,0.42)), url('/bg.jpg')",
-        'vhl-logo-bg': 'radial-gradient(top,circle farthest-corner,#4c4c4c 0,#000 80%)',
       }),
     },
     fontFamily: {

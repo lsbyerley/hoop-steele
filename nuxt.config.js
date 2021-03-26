@@ -46,7 +46,9 @@ export default {
    ** Global CSS
    ** Doc: https://nuxtjs.org/api/configuration-css
    */
-  css: ['~/assets/styles/app.css'],
+  css: [
+    /* '~/assets/styles/app.css' */
+  ],
 
   /*
    ** Plugins to load before mounting the App
@@ -64,21 +66,8 @@ export default {
     '@nuxtjs/axios',
   ],
 
-  buildModules: ['@nuxtjs/tailwindcss'],
-
-  /*
-   ** Build configuration
-   */
-  build: {
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/,
-        });
-      }
-    },
+  buildModules: ['@nuxt/postcss8', '@nuxtjs/tailwindcss'],
+  tailwindcss: {
+    jit: true,
   },
 };

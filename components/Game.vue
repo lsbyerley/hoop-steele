@@ -9,97 +9,71 @@
     </header>
 
     <div class="flex flex-wrap px-2 py-2 md:flex-no-wrap">
-      <section
-        class="flex flex-col content-center justify-center w-1/2 px-1 md:flex-1"
-      >
+      <section class="flex flex-col content-center justify-center w-1/2 px-1 md:flex-1">
         <div class="flex items-center justify-start py-3">
           <img class="self-center w-8 mr-2 sm:w-6" :src="game.away.logo" />
           <div class="flex flex-col">
             <div class="flex items-center">
-              <span
-                class="mr-1 font-semibold text-gray-600"
-                v-if="game.away.rank"
-                >{{ game.away.rank }}</span
-              >
+              <span class="mr-1 font-semibold text-gray-600" v-if="game.away.rank">{{
+                game.away.rank
+              }}</span>
               <a
                 class="hidden text-sm font-semibold md:block"
-                :href="
-                  'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                    game.away.id
-                "
+                :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id"
                 target="_blank"
                 >{{ game.away.shortName }}</a
               >
               <a
                 class="block text-sm font-semibold md:hidden"
-                :href="
-                  'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                    game.away.id
-                "
+                :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id"
                 target="_blank"
                 >{{ game.away.abbrev }}</a
               >
             </div>
-            <p class="text-gray-600 text-xxs">{{ teamRecord("away") }}</p>
+            <p class="text-gray-600 text-xxs">{{ teamRecord('away') }}</p>
           </div>
         </div>
         <div class="flex items-center justify-start py-3">
           <img class="self-center w-8 mr-2 sm:w-6" :src="game.home.logo" />
           <div class="flex flex-col">
             <div class="flex items-center">
-              <span
-                class="mr-1 font-semibold text-gray-600"
-                v-if="game.home.rank"
-                >{{ game.home.rank }}</span
-              >
+              <span class="mr-1 font-semibold text-gray-600" v-if="game.home.rank">{{
+                game.home.rank
+              }}</span>
               <a
                 class="hidden text-sm font-semibold md:block"
-                :href="
-                  'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                    game.home.id
-                "
+                :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id"
                 target="_blank"
                 >{{ game.home.shortName }}</a
               >
               <a
                 class="block text-sm font-semibold md:hidden"
-                :href="
-                  'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                    game.home.id
-                "
+                :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id"
                 target="_blank"
                 >{{ game.home.abbrev }}</a
               >
             </div>
-            <p class="text-gray-600 text-xxs">{{ teamRecord("home") }}</p>
+            <p class="text-gray-600 text-xxs">{{ teamRecord('home') }}</p>
           </div>
         </div>
       </section>
 
-      <section
-        class="flex flex-col content-center justify-center w-1/2 px-4 md:flex-1"
-      >
+      <section class="flex flex-col content-center justify-center w-1/2 px-4 md:flex-1">
         <div class="flex items-center justify-center py-3">
           <p class="w-1/2 mr-2 text-xl font-semibold text-right text-gray-800">
             {{ game.prediction.awayTotal }}
           </p>
-          <p class="w-1/2 text-xs text-left text-gray-500">
-            {{ game.prediction.awayWinPerc }}%
-          </p>
+          <p class="w-1/2 text-xs text-left text-gray-500">{{ game.prediction.awayWinPerc }}%</p>
         </div>
         <div class="flex items-center justify-center py-3">
           <p class="w-1/2 mr-2 text-xl font-semibold text-right text-gray-800">
             {{ game.prediction.homeTotal }}
           </p>
-          <p class="w-1/2 text-xs text-left text-gray-500">
-            {{ game.prediction.homeWinPerc }}%
-          </p>
+          <p class="w-1/2 text-xs text-left text-gray-500">{{ game.prediction.homeWinPerc }}%</p>
         </div>
       </section>
 
-      <section
-        class="flex flex-col content-center justify-center w-full md:w-5/12"
-      >
+      <section class="flex flex-col content-center justify-center w-full md:w-5/12">
         <table
           class="mb-2 bg-gray-100 border-t border-b border-separate border-gray-300 table-fixed"
         >
@@ -124,9 +98,7 @@
             </tr>
           </tbody>
         </table>
-        <table
-          class="bg-gray-100 border-t border-b border-separate border-gray-300 table-fixed"
-        >
+        <table class="bg-gray-100 border-t border-b border-separate border-gray-300 table-fixed">
           <thead>
             <tr>
               <th class="w-1/3 text-gray-600 uppercase text-xxs">V-Total</th>
@@ -152,12 +124,8 @@
     </div>
 
     <div class="border-t border-gray-300">
-      <p
-        class="py-1 font-semibold text-center text-gray-700 uppercase bg-gray-100"
-      >
-        KenPom Ranks
-      </p>
-      <table class="py-2 bg-white border-separate table-auto">
+      <p class="py-1 font-semibold text-center text-gray-700 uppercase bg-gray-100">KenPom Ranks</p>
+      <table class="min-w-full py-2 bg-white border-separate">
         <thead>
           <tr>
             <th class="font-semibold text-gray-600 uppercase text-xxs"></th>
@@ -165,22 +133,16 @@
             <th class="font-semibold text-gray-600 uppercase text-xxs">Off</th>
             <th class="font-semibold text-gray-600 uppercase text-xxs">Def</th>
             <th class="font-semibold text-gray-600 uppercase text-xxs">SoS</th>
-            <th class="font-semibold text-gray-600 uppercase text-xxs">
-              Tempo
-            </th>
+            <th class="font-semibold text-gray-600 uppercase text-xxs">Tempo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>
-              <img
-                class="self-center w-6 ml-auto mr-auto"
-                :src="game.away.logo"
-              />
+              <img class="self-center w-6 ml-auto mr-auto" :src="game.away.logo" />
             </td>
             <td class="text-center">
-              {{ game.away.kenPom.rank
-              }}<sup>{{ ordinalSuffix(game.away.kenPom.rank) }}</sup>
+              {{ game.away.kenPom.rank }}<sup>{{ ordinalSuffix(game.away.kenPom.rank) }}</sup>
             </td>
             <td class="text-center">
               {{ game.away.kenPom.adjORank
@@ -201,14 +163,10 @@
           </tr>
           <tr>
             <td>
-              <img
-                class="self-center w-6 ml-auto mr-auto"
-                :src="game.home.logo"
-              />
+              <img class="self-center w-6 ml-auto mr-auto" :src="game.home.logo" />
             </td>
             <td class="text-center">
-              {{ game.home.kenPom.rank
-              }}<sup>{{ ordinalSuffix(game.home.kenPom.rank) }}</sup>
+              {{ game.home.kenPom.rank }}<sup>{{ ordinalSuffix(game.home.kenPom.rank) }}</sup>
             </td>
             <td class="text-center">
               {{ game.home.kenPom.adjORank
@@ -239,12 +197,12 @@
 
 <script>
 export default {
-  name: "Game",
+  name: 'Game',
   props: {
     game: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   methods: {
     teamRecord(homeAway) {
@@ -252,22 +210,22 @@ export default {
       let totalRecord = team.totalRecord;
       let ahRecord = team.ahRecord;
       let vsConfRecord = team.vsConfRecord;
-      let conf = team.kenPom.conf ? team.kenPom.conf : "";
+      let conf = team.kenPom.conf ? team.kenPom.conf : '';
 
       if (totalRecord && conf && vsConfRecord) {
         return `(${totalRecord}, ${vsConfRecord} ${conf})`;
       } else if (totalRecord && ahRecord) {
         return `${totalRecord}, ${ahRecord} ${homeAway}`;
       } else {
-        return "";
+        return '';
       }
     },
     shLine() {
-      let aline = this.game.prediction ? this.game.prediction.awayLine : "-";
-      let hline = this.game.prediction ? this.game.prediction.homeLine : "-";
+      let aline = this.game.prediction ? this.game.prediction.awayLine : '-';
+      let hline = this.game.prediction ? this.game.prediction.homeLine : '-';
 
       if (aline === 0 && hline === 0) {
-        return "even";
+        return 'even';
       } else {
         if (aline > 0) {
           return `${this.game.away.abbrev} ${hline}`;
@@ -280,17 +238,17 @@ export default {
       var j = i % 10,
         k = i % 100;
       if (j == 1 && k != 11) {
-        return "st";
+        return 'st';
       }
       if (j == 2 && k != 12) {
-        return "nd";
+        return 'nd';
       }
       if (j == 3 && k != 13) {
-        return "rd";
+        return 'rd';
       }
-      return "th";
-    }
-  }
+      return 'th';
+    },
+  },
 };
 </script>
 

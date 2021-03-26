@@ -9,16 +9,14 @@
     </header>
 
     <section class="flex px-2 py-2">
-      <table class="table-fixed">
+      <table class="min-w-full">
         <thead>
           <tr>
             <th></th>
             <th class="text-gray-600 uppercase text-xxs md:text-xs">Score</th>
             <th class="text-gray-600 uppercase text-xxs md:text-xs">3PM-3PA</th>
             <th class="text-gray-600 uppercase text-xxs md:text-xs">Season%</th>
-            <th class="text-gray-600 uppercase text-xxs md:text-xs">
-              Surplus 3s
-            </th>
+            <th class="text-gray-600 uppercase text-xxs md:text-xs">Surplus 3s</th>
           </tr>
         </thead>
         <tbody>
@@ -26,26 +24,18 @@
             <td class="flex items-center justify-start py-2 pl-1">
               <img class="self-center w-4 mr-2 sm:w-8" :src="game.away.logo" />
               <div class="flex items-center">
-                <span
-                  class="mr-1 font-semibold text-gray-600 text-xxs"
-                  v-if="game.away.rank"
-                  >{{ game.away.rank }}</span
-                >
+                <span class="mr-1 font-semibold text-gray-600 text-xxs" v-if="game.away.rank">{{
+                  game.away.rank
+                }}</span>
                 <a
                   class="hidden font-semibold md:block"
-                  :href="
-                    'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                      game.away.id
-                  "
+                  :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id"
                   target="_blank"
                   >{{ game.away.shortName }}</a
                 >
                 <a
                   class="block font-semibold md:hidden"
-                  :href="
-                    'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                      game.away.id
-                  "
+                  :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.away.id"
                   target="_blank"
                   >{{ game.away.abbrev }}</a
                 >
@@ -68,27 +58,19 @@
             <td class="flex items-center justify-start py-2 pl-1">
               <img class="self-center w-4 mr-2 sm:w-8" :src="game.home.logo" />
               <div class="flex items-center">
-                <span
-                  class="mr-1 font-semibold text-gray-600 text-xxs"
-                  v-if="game.home.rank"
-                  >{{ game.home.rank }}</span
-                >
+                <span class="mr-1 font-semibold text-gray-600 text-xxs" v-if="game.home.rank">{{
+                  game.home.rank
+                }}</span>
                 <a
                   class="hidden font-semibold md:block"
-                  :href="
-                    'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                      game.home.id
-                  "
+                  :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id"
                   target="_blank"
                   :src="game.home.logo"
                   >{{ game.home.shortName }}</a
                 >
                 <a
                   class="block font-semibold md:hidden"
-                  :href="
-                    'https://www.espn.com/mens-college-basketball/team/_/id/' +
-                      game.home.id
-                  "
+                  :href="'https://www.espn.com/mens-college-basketball/team/_/id/' + game.home.id"
                   target="_blank"
                   :src="game.home.logo"
                   >{{ game.home.abbrev }}</a
@@ -114,26 +96,20 @@
 
     <section class="flex items-center justify-center text-gray-700 bg-gray-100">
       <div class="flex-1 w-1/3 px-1 py-2 text-center">
-        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">
-          Scoring Margin
-        </h6>
+        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">Scoring Margin</h6>
         <p class="text-sm font-semibold text-gray-800">
           {{ Math.abs(game.away.score - game.home.score) }}
         </p>
       </div>
       <div class="flex-1 w-1/3 px-1 py-2 text-center">
-        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">
-          Surplus Diff
-        </h6>
+        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">Surplus Diff</h6>
         <p class="text-sm font-semibold text-gray-800">
           {{ game.surplusThreeDiff }}
         </p>
       </div>
       <div class="flex-1 w-1/3 px-1 py-2 text-center">
-        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">
-          Action
-        </h6>
-        <p style="min-height:21px;">
+        <h6 class="mb-2 font-medium uppercase text-xxs md:text-xs">Action</h6>
+        <p style="min-height: 21px">
           <svg
             class="w-5 m-auto text-green-800 fill-current"
             v-if="game.halftimeAction === 'yes-bet'"
@@ -162,29 +138,26 @@
 
 <script>
 export default {
-  name: "Game",
+  name: 'Game',
   props: {
     game: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   methods: {
     surplusDiffClass(ah) {
       let result = false;
       let team = this.game[ah];
-      if (
-        this.game.halftimeAction === "yes-bet" &&
-        this.game.surplusTeam === ah
-      ) {
+      if (this.game.halftimeAction === 'yes-bet' && this.game.surplusTeam === ah) {
         result = true;
       }
 
       return {
-        "bg-yellow-300": result
+        'bg-yellow-200 bg-opacity-75': result,
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
